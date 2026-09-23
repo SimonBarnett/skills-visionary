@@ -31,6 +31,23 @@ Whether an FR vision pack is `docs/vision.md` append vs
 `docs/feature-request-<slug>-vision.md`. Prefer a section in the FR
 markdown plus mocks when UI, unless the worker has a cleaner split.
 
+## Success
+
+| id | metric | target | how measured | fail-when |
+|----|--------|--------|--------------|-----------|
+| S1 | Visionary runs on feature requests | 100% of FRs on SimonBarnett repos | `.grok/skills/visionary/SKILL.md` and `docs/functional-spec.md` A3; `python tools/validate-vision-pack.py` on FR pack before park | Skill or spec still says FRs skip visionary |
+| S2 | FR path does not create a repo | 0 new repos per FR | `bob-spec-intake` FR path; no `gh repo create` in FR flow | FR runs `gh repo create` |
+
+LOCKED
+
+## Shape
+
+Primary: service
+
+Skill-pack and intake rule change only. No new website or app.
+
+LOCKED
+
 ## Acceptance
 
 | ID | Gate |

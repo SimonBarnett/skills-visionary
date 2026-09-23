@@ -41,3 +41,18 @@ def test_partial_success_fails():
 
 def test_png_only_mocks_fail():
     assert run_validator(FIXTURES / "positive.md", FIXTURES / "mocks-png-only") == 1
+
+
+def test_poetry_fixture_fails():
+    assert run_validator(FIXTURES / "negative-poetry.md", FIXTURES / "mocks-good") == 1
+
+
+def test_parked_fr_packs_pass():
+    docs = ROOT / "docs"
+    mocks = docs / "mocks"
+    for name in (
+        "feature-request-vision-pack-gate-ci-2026-09-23.md",
+        "feature-request-visionary-also-on-fr-2026-09-23.md",
+        "feature-request-vision-gate-poetry-fr-packs-2026-09-23.md",
+    ):
+        assert run_validator(docs / name, mocks) == 0

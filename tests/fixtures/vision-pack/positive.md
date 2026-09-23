@@ -10,7 +10,7 @@ LOCKED
 
 | id | metric | target | how measured | fail-when |
 |----|--------|--------|--------------|-----------|
-| S1 | Example metric | 100% | automated test | never |
+| S1 | Example metric | 100% | `pytest tests/ -q` | never |
 
 ## Shape
 

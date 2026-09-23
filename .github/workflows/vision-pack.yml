@@ -13,7 +13,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate product vision pack
-        run: python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
+      - name: Validate product and in-scope FR vision packs
+        run: |
+          python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
+          for f in docs/feature-request-*.md; do
+            python tools/validate-vision-pack.py "$f" --mocks-dir docs/mocks
+          done
+          python tools/validate-vision-pack.py tests/fixtures/vision-pack/positive.md \
+            --mocks-dir tests/fixtures/vision-pack/mocks-good
       - name: pytest
         run: pip install pytest && pytest tests/ -q

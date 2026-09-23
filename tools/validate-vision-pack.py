@@ -10,6 +10,35 @@ from pathlib import Path
 
 PRIMARY_SHAPES = ("service", "website", "app")
 REQUIRED_MOCKS = ("home", "empty", "error")
+POETRY_PHRASES = (
+    "users will love it",
+    "users love it",
+    "a lot",
+    "feelings",
+)
+OBSERVABLE_HOW_PATTERNS = (
+    r"`[^`]+`",
+    r"\bpython\b",
+    r"\bpytest\b",
+    r"\bpip\b",
+    r"\bworkflow\b",
+    r"\.github",
+    r"GitHub Actions",
+    r"\bGHA\b",
+    r"\bCI\b",
+    r"docs/",
+    r"tests/",
+    r"tools/",
+    r"README",
+    r"\bvalidator\b",
+    r"\bfixture",
+    r"file content",
+    r"\bexit\s+[01]\b",
+    r"\b\d+%\b",
+    r"\b\d+\s+of\b",
+    r"/",
+    r"\\",
+)
 
 
 def section(text: str, name: str) -> str:
@@ -43,6 +72,13 @@ def shape_locked_primary(shape: str) -> str | None:
             return m.group(1).lower()
         m = re.match(
             r"^\s*Primary(?:\s*\(one\))?:\s*\*\*(service|website|app)\*\*\s*$",
+            line,
+            re.IGNORECASE,
+        )
+        if m:
+            return m.group(1).lower()
+        m = re.match(
+            r"^\s*Reuse repo primary:\s*\*\*(service|website|app)\*\*",
             line,
             re.IGNORECASE,
         )
@@ -93,6 +129,27 @@ def success_is_unknown(success: str) -> bool:
     return False
 
 
+def field_has_poetry(text: str) -> bool:
+    lowered = text.strip().lower()
+    return any(phrase in lowered for phrase in POETRY_PHRASES)
+
+
+def how_measured_observable(how: str) -> bool:
+    how = how.strip()
+    if not how:
+        return False
+    for pattern in OBSERVABLE_HOW_PATTERNS:
+        if re.search(pattern, how, re.IGNORECASE):
+            return True
+    return False
+
+
+def row_is_measurable(metric: str, target: str, how: str) -> bool:
+    if field_has_poetry(metric) or field_has_poetry(target) or field_has_poetry(how):
+        return False
+    return how_measured_observable(how)
+
+
 def parse_success_rows(success: str) -> list[tuple[str, str, str, str]]:
     rows: list[tuple[str, str, str, str]] = []
     for line in success.splitlines():
@@ -122,12 +179,25 @@ def validate_success(success: str, errors: list[str]) -> bool:
         for r in rows
         if all(field and not re.match(r"^-+$", field) for field in r)
     ]
-    if complete:
+    if not complete:
+        errors.append(
+            "success: add a complete table row (metric, target, how measured, fail-when) "
+            "or mark Success UNKNOWN"
+        )
+        return False
+    measurable = [r for r in complete if row_is_measurable(*r[:3])]
+    if measurable:
         return True
-    errors.append(
-        "success: add a complete table row (metric, target, how measured, fail-when) "
-        "or mark Success UNKNOWN"
-    )
+    if any(field_has_poetry(m) or field_has_poetry(t) or field_has_poetry(h) for m, t, h, _ in complete):
+        errors.append(
+            "success: poetry is not measurable (metric/target/how-measured must cite "
+            "a command, path, workflow, or count)"
+        )
+    else:
+        errors.append(
+            "success: how-measured must cite an observable check "
+            "(command, path, workflow, or count)"
+        )
     return False
 
 
@@ -150,7 +220,9 @@ def validate_mocks(mocks_dir: Path, errors: list[str]) -> bool:
     return True
 
 
-def validate_pack(vision_path: Path, mocks_dir: Path) -> list[str]:
+def validate_pack(vision_path: Path, mocks_dir: Path, historical: bool = False) -> list[str]:
+    if historical:
+        return []
     errors: list[str] = []
     text = vision_path.read_text(encoding="utf-8")
     shape_sec = section(text, "Shape")
@@ -181,6 +253,11 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="Directory with home/empty/error HTML (default: sibling mocks/)",
     )
+    parser.add_argument(
+        "--historical",
+        action="store_true",
+        help="Skip validation for archived packs (explicit exclude; default is fail)",
+    )
     args = parser.parse_args(argv)
     vision_path = args.vision_md
     if not vision_path.is_file():
@@ -188,13 +265,16 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     mocks_dir = args.mocks_dir if args.mocks_dir else default_mocks_dir(vision_path)
 
-    errors = validate_pack(vision_path, mocks_dir)
+    errors = validate_pack(vision_path, mocks_dir, historical=args.historical)
     if errors:
         print(f"validate-vision-pack: FAIL {vision_path}", file=sys.stderr)
         for err in errors:
             print(f"  - {err}", file=sys.stderr)
         return 1
-    print(f"validate-vision-pack: OK {vision_path}")
+    if args.historical:
+        print(f"validate-vision-pack: OK (historical) {vision_path}")
+    else:
+        print(f"validate-vision-pack: OK {vision_path}")
     return 0
 
 

@@ -4,9 +4,10 @@ Skill: `visionary`. New-product intake for this repo.
 
 ## Objective
 
-Every new SimonBarnett product starts with a scored long-term plan
-(shape, stack, architecture, HTML mocks) before anyone parks a ticket
-or dispatches a build.
+Every new SimonBarnett product and every feature request on an existing
+repo starts with a scored long-term plan (shape, stack, architecture,
+HTML mocks when there is a UI) before anyone parks a ticket or dispatches
+a build.
 
 LOCKED
 
@@ -14,7 +15,7 @@ LOCKED
 
 | id | metric | target | how measured | fail-when |
 |----|--------|--------|--------------|-----------|
-| S1 | New-product parks include a vision pack | 100% of new SimonBarnett product repos | `python tools/validate-vision-pack.py docs/vision.md` exits 0 locally; GitHub Actions `vision-pack` workflow on this repo; `bob-spec-intake` must run the same command before park/dispatch | A new product repo parks `functional-spec` only and dispatches |
+| S1 | Parks include a passing vision pack | 100% of new products and FRs on SimonBarnett repos | `python tools/validate-vision-pack.py` on the pack exits 0 locally; GitHub Actions `vision-pack` workflow on this repo (product + in-scope FR packs); `bob-spec-intake` must run the same command before park/dispatch | A new product parks `functional-spec` only and dispatches, or an FR parks/dispatches without a vision pack that exits 0 |
 | S2 | Mocks are HTML wireframes | Key + empty + error | `docs/mocks/*.html` present; no generated PNG mocks | Intake ships PNG-only or skips empty/error |
 | S3 | Harvest home is this repo | Learnings land on a PR here | `.grok/skills/harvest-skills-visionary` used; no playbook-only in `~/.grok` | Visionary playbook edited only on agentic_build or home disk |
 

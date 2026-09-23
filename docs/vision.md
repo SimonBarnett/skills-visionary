@@ -14,7 +14,7 @@ LOCKED
 
 | id | metric | target | how measured | fail-when |
 |----|--------|--------|--------------|-----------|
-| S1 | New-product parks include a vision pack | 100% of new SimonBarnett product repos | `docs/vision.md` exists with shape + at least one success row (or Success is UNKNOWN) before `bob-job-loop` | A new product repo parks `functional-spec` only and dispatches |
+| S1 | New-product parks include a vision pack | 100% of new SimonBarnett product repos | `python tools/validate-vision-pack.py docs/vision.md` exits 0 locally; GitHub Actions `vision-pack` workflow on this repo; `bob-spec-intake` must run the same command before park/dispatch | A new product repo parks `functional-spec` only and dispatches |
 | S2 | Mocks are HTML wireframes | Key + empty + error | `docs/mocks/*.html` present; no generated PNG mocks | Intake ships PNG-only or skips empty/error |
 | S3 | Harvest home is this repo | Learnings land on a PR here | `.grok/skills/harvest-skills-visionary` used; no playbook-only in `~/.grok` | Visionary playbook edited only on agentic_build or home disk |
 

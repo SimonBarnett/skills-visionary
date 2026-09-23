@@ -46,9 +46,10 @@ Who talks to what. Phase 0 only.
 
 ```
 brief --> visionary (high-reasoning seat)
-       --> docs/vision.md + docs/mocks/*.html
-       --> bob-spec-intake
-       --> public repo + webhook + Cursor app
+       --> docs/vision.md + docs/mocks/*.html   [new product]
+       --> FR markdown success + mocks          [feature request]
+       --> bob-spec-intake (no repo create on FR)
+       --> public repo + webhook + Cursor app   [new product only]
        --> FR issue --> bob-job-loop
 design-uat later reads mocks + brief (does not stamp UAT here)
 harvest-skills-visionary PRs learnings back to this repo

@@ -4,10 +4,11 @@ description: >
   High-reasoning long-term strategy at new-product repo intake and feature
   requests on an existing repo. Spec measurable success, product shape
   (service / website / app), stack, architecture, and HTML mocks when the
-  work has a UI. Use when creating a new product repo, repo intake, parking
-  or dispatching a feature request, big picture, full scope, or /visionary.
-  Required before bob-spec-intake parks a new product or commits/dispatches
-  an FR.
+  work has a UI. After an approved new-product plan, orchestrate git setup
+  via plan-git-from-plan (create repo, Bob webhooks, permit PRs) without
+  installing the full agentic_build pack. Use when creating a new product
+  repo, repo intake, TipForm Plan→Grok/Cursor, parking or dispatching a
+  feature request, big picture, full scope, or /visionary.
 ---
 
 # Visionary (new product and feature requests)
@@ -17,19 +18,19 @@ ticket. Opinionated. Measurable. Refuse to start the build until
 **shape** and **success metrics** are LOCKED or marked UNKNOWN.
 
 High-reasoning / plan-mode only. Do not hand this to a cheap Composer
-PR worker. The intake seat writes the vision pack, then
-`bob-spec-intake` parks or dispatches.
+PR worker. TipForm **Plan** seats load **this pack only**
+(`skills-visionary`) — not the full IRC/build packs.
 
 ## Before anything else
 
-Refuse dispatch (`bob-job-loop` / `bob-build-dispatch`) until:
+Refuse park / git-create / dispatch until:
 
 - Shape is LOCKED (service | website | app) or UNKNOWN
 - At least one success row has metric, target, how-measured, fail-when
   (or the whole Success section is UNKNOWN)
 - `python tools/validate-vision-pack.py <vision.md> [--mocks-dir <dir>]`
   exits 0 (repo copy: `tools/validate-vision-pack.py`; CI: `vision-pack`
-  workflow). `bob-spec-intake` must run this before park/dispatch.
+  workflow).
 
 Poetry is not a target. If you cannot score it later, it is UNKNOWN.
 
@@ -48,9 +49,6 @@ Copy `docs/templates/vision.md` and fill it in this session **before**
    `docs/feature-request-<slug>-vision.md` is OK if cleaner.
 4. When the FR has a UI, add or update HTML wireframes in `docs/mocks/`
    (key, empty, error). No generated PNGs.
-
-`bob-spec-intake` runs this step **before** committing the FR doc,
-opening the issue, or dispatching.
 
 ## Decide (LOCKED or explicit UNKNOWN)
 
@@ -90,29 +88,39 @@ kebab-case (`home.html`, `empty.html`, `error.html`).
 Later visual UAT is `design-uat` against these mocks + the brief.
 Do not stamp UAT here.
 
-## Park (after the pack is written)
+## After the pack is approved (Plan seats)
 
-`bob-spec-intake` **New product**:
+### New product → `plan-git-from-plan`
 
-1. Create the public repo (webhook + Cursor app — those skills).
-2. Commit `docs/vision.md`, `docs/mocks/*.html`, and
-   `docs/functional-spec.md` (LOCKED pulled from vision).
-3. FR issue linking those paths. Then dispatch unless park-only.
+Self-contained git setup harvested into this pack (do **not** require
+installing all of `agentic_build`):
 
-`bob-spec-intake` **Feature request**:
+1. `plan-create-repo` — public `gh repo create` under SimonBarnett.
+2. `plan-bob-webhooks` — GitHub → `https://irc.ntsa.uk/bob/v1/git`
+   (never `/bob/v1/report`; that digest URL is documented only).
+3. `plan-enable-prs` — forking on, no blocking ruleset, Cursor GitHub
+   App All repositories so `cursor[bot]` can push/PR.
+4. Commit vision pack + open FR issue. Plan seats stop here unless a
+   build seat is intentionally next.
+
+Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
+
+### Feature request
 
 1. Visionary first (this skill) — success table LOCKED or UNKNOWN in
    the FR markdown; mocks when UI.
-2. Commit `docs/feature-request-<slug>-YYYY-MM-DD.md` (and mocks).
-3. Open the GitHub issue; then `bob-job-loop` unless park-only.
-
-Do not duplicate webhook, Cursor-app, or public-PR rules here.
+2. Commit `docs/feature-request-<slug>-YYYY-MM-DD.md` (and mocks) on
+   the **existing** target repo.
+3. Open the GitHub issue. Build dispatch (`bob-job-loop`) is a build-seat
+   concern — Plan seats do not install that pack.
 
 ## Do not
 
-- Start park/dispatch with no vision pack (new product or FR).
+- Start park/create with no vision pack (new product or FR).
 - `gh repo create` on a feature-request path.
 - Invent instance URLs, secrets, or review PDFs.
 - Stamp UAT.
 - Add `cursoragent` or `cursor[bot]` as a collaborator.
+- Install full `agentic_build` / `agentic_irc` onto Plan seats just to
+  create a repo or set webhooks — use `plan-*` skills in this pack.
 - Split architecture or stack into a second skill (sections of this one).

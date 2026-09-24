@@ -49,15 +49,19 @@ Who talks to what. Phase 0 only.
 brief --> visionary (high-reasoning seat)
        --> docs/vision.md + docs/mocks/*.html   [new product]
        --> FR markdown success + mocks          [feature request]
-       --> bob-spec-intake (no repo create on FR)
-       --> public repo + webhook + Cursor app   [new product only]
+       --> plan-git-from-plan (Plan seats; no full build pack)
+       --> public repo + Bob git webhook + permit PRs  [new product only]
+       --> FR commit on existing repo                  [FR; no create]
        --> FR issue --> bob-job-loop
 design-uat later reads mocks + brief (does not stamp UAT here)
 harvest-skills-visionary PRs learnings back to this repo
 ```
 
-Trust: no secrets, no instance URLs. agentic_build `bob-spec-intake`
-owns park/create/webhook. This repo owns the visionary playbook.
+Trust: no secrets, no instance URLs. This pack owns the visionary
+playbook **and** Plan-seat git setup (`plan-git-from-plan` /
+`plan-create-repo` / `plan-bob-webhooks` / `plan-enable-prs`),
+harvested from agentic_build so Plan seats do not install the full
+build pack. Fleet build/IRC jobs stay in their packs.
 
 LOCKED
 
@@ -65,9 +69,9 @@ LOCKED
 
 | id | file | state |
 |----|------|-------|
-| M1 | docs/mocks/home.html | primary — vision pack filled |
-| M2 | docs/mocks/empty.html | empty — refuse dispatch |
-| M3 | docs/mocks/error.html | error — poetry / unmeasurable |
+| M1 | docs/mocks/home.html | primary Ã¢â‚¬â€ vision pack filled |
+| M2 | docs/mocks/empty.html | empty Ã¢â‚¬â€ refuse dispatch |
+| M3 | docs/mocks/error.html | error Ã¢â‚¬â€ poetry / unmeasurable |
 
 ## LOCKED
 

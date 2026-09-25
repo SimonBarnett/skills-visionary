@@ -11,6 +11,18 @@ github: https://github.com/SimonBarnett/skills-visionary
 
 # Harvest agent skills (honesty box)
 
+## AUTOMATIC harvest (CAST IRON - no waiting)
+
+**You MUST ALWAYS harvest new or changed skills to the relevant home
+repo AUTOMATICALLY in the same turn you learn or fix them.**
+
+Do not ask permission. Do not defer to "later", hourly checks, or Bob.
+Do not leave a playbook only in chat, `~/.grok/skills`, or a temp dir.
+Map domain -> home repo (table below) and open the **branch + PR** (or
+`harvest:` / `FR:` issue if PR is blocked) before you end the turn.
+
+Empty harvest only when nothing new and nothing broken.
+
 ## Home GitHub (required on every harvest skill)
 
 **This skill's home:** `https://github.com/SimonBarnett/skills-visionary`
@@ -23,9 +35,10 @@ frontmatter `github:` MUST name the public repo that owns that book.
 | IRC wire, Jeeves, talk seats, SEAL, moot, file, dumb, Ergo, Watch-Bobiverse | `SimonBarnett/agentic_irc` | `.grok/skills/harvest-agent-skills/SKILL.md` |
 | Fleet / build / MRB / Bob jobs / TipForm | `SimonBarnett/agentic_build` | `.grok/skills/harvest-agent-skills/SKILL.md` |
 | MUD / Discworld | `SimonBarnett/mud-skill` | `.grok/skills/harvest-agent-skills/SKILL.md` |
-| Visionary / new-product strategy | `SimonBarnett/skills-visionary` | `.grok/skills/harvest-agent-skills/SKILL.md` |
+| Visionary / new-product strategy / Plan git helpers | `SimonBarnett/skills-visionary` | `.grok/skills/harvest-agent-skills/SKILL.md` |
 | Design UAT | `SimonBarnett/bob-design-uat` | `.grok/skills/harvest-agent-skills/SKILL.md` |
 | Club Madeira Awin connector | `SimonBarnett/club-madeira-awin-connector` | `.grok/skills/harvest-agent-skills/SKILL.md` |
+| Club Madeira affiliate onboarding (dual gate, GUID, DNS TXT) | `SimonBarnett/club-madeira-onboarding` | `.grok/skills/harvest-agent-skills/SKILL.md` |
 | IRC client-as-skill | `SimonBarnett/irc-skill` | that repo's harvest skill (if present) |
 | Other skill products | that public repo | `.grok/skills/harvest-agent-skills/SKILL.md` |
 
@@ -35,8 +48,7 @@ frontmatter `github:` MUST name the public repo that owns that book.
 
 This is an honesty box. Using any skill from this book binds you to return
 what you learned, what broke, and what is missing. Silence after a useful
-session is a breach of the bargain. Do not wait for an hourly task, a
-reminder, or Bob to dismiss you.
+session is a breach of the bargain.
 
 ### You MUST report back to the home GitHub when any of these are true
 
@@ -46,14 +58,17 @@ reminder, or Bob to dismiss you.
 3. You hit a **bug**, gap, or missing tool that a deterministic script should
    own.
 4. You invented a workaround that should become a skill or a code change.
+5. You **created a new skill** or skill book surface in-session.
 
 ### How to report (strict order - no main pushes)
 
 1. **Skill harvest / playbook / fix with write access** -> branch + **pull
-   request** against the home repo. Never `git push origin main` for harvest.
+   request** against the home repo **in this turn**. Never `git push origin main`
+   for harvest.
 2. **If the PR cannot be opened** (no permission, API fail, fork blocked) ->
    open a **GitHub issue** on the home repo titled `harvest:` or `FR:` and
-   paste the intended PR title, branch name, file list, and full body.
+   paste the intended PR title, branch name, file list, and full body **in
+   this turn**.
 3. **Bugs / feature requests without a ready patch** -> GitHub **issue** or
    **FR** on the home repo (use that repo's FR/issue templates if present).
 4. Empty harvest (nothing new, nothing broken): **no commit, no empty PR**.
@@ -99,6 +114,9 @@ is not a single incident report.
 - Claim ready for human UAT from a harvest alone.
 - Start unrelated product jobs under the harvest label.
 - Spend tokens reasoning through a path a script already encodes.
+- **End the turn** with a new/fixed skill only in chat, temp, or `~/.grok`
+  without a home-repo PR or `harvest:` issue.
+- Ask the human whether to harvest when the honesty box already fires.
 
 ## Inclusion rule
 

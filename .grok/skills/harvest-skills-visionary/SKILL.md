@@ -10,14 +10,22 @@ description: >
 # Harvest skills-visionary
 
 Remote: `https://github.com/SimonBarnett/skills-visionary`.
-Local clone `C:\ai\skills-visionary`.
+Local clone: `D:\ai\skills-visionary` or `C:\ai\skills-visionary`.
 
-This repo owns the visionary playbook. Fleet/build jobs stay
-`agentic_build` `harvest-agent-skills`. IRC stays `agentic_irc`.
+This repo owns the visionary playbook and Plan-seat `plan-*` helpers.
+Fleet/build jobs stay `agentic_build` `harvest-agent-skills`. IRC stays
+`agentic_irc`. Club Madeira onboarding stays
+`SimonBarnett/club-madeira-onboarding`.
+
+## AUTOMATIC
+
+**ALWAYS** harvest new or changed visionary / plan-git playbooks to this
+repo **in the same turn** (branch + PR). Do not ask. Do not wait.
+Honesty box: foundation `.grok/skills/harvest-agent-skills`.
 
 If you learn a repeatable visionary rule (trigger, measurable success,
-shape/stack/mocks), edit `.grok/skills/visionary/SKILL.md` now, note
-`docs/skill-harvest-log.md`, commit on a branch, open a PR. Do not
+shape/stack/mocks, plan-git webhook/PR path), edit the skill **now**,
+append `docs/skill-harvest-log.md`, commit on a branch, open a PR. Do not
 push `origin/main`. Do not leave the playbook only in `~/.grok/skills`.
 
 Empty harvest: no commit. Do not stamp UAT.

@@ -54,6 +54,15 @@ gh repo clone SimonBarnett/<name> D:\ai\<name>
 
 ## Same-turn follow-ups (required)
 
+**Immediately after `gh repo create`, before clone/commit/push/issue:**
+
+```
+python tools/bob_git_hook.py SimonBarnett/<name>
+```
+
+must exit 0 (skill `plan-bob-webhooks`, Gate). Events before the hook
+are never delivered, so Jeeves stays silent about the new repo and its FR issue.
+
 After create, in the **same turn**:
 
 1. `plan-bob-webhooks` — git hook to Bob.
@@ -62,6 +71,8 @@ After create, in the **same turn**:
 Do not invent instance URLs or secrets. Do not stamp UAT.
 
 ## Do not
+
+- `gh repo create --push` / `--source` with commits before the hook is verified.
 
 - `gh repo create` on a feature-request path (existing target repo).
 - Create private by default (Plan → public products).

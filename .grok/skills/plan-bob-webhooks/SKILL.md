@@ -29,6 +29,56 @@ issues, or channel.
 Source of truth for reportUrl in the build pack:
 `agentic_build/config/bobiverse.json` → `"reportUrl": "https://irc.ntsa.uk/bob/v1/report"`.
 
+## Gate: hook BEFORE any push or issue (required)
+
+Tracks FR **#19** (and closes the club-madeira-onboarding miss): Plan
+must leave a new repo fully wired into Bob Fleet before any issue or PR.
+
+GitHub never backfills: anything pushed or opened before the hook exists
+is never delivered, so Jeeves never announces it and the FR issue never
+reaches the unaccepted queue. (club-madeira-onboarding 25/09: repo 08:03:30Z,
+first commit 08:03:43Z, issue #1 08:04:00Z, hook 08:04:21Z, so repo and
+issue #1 were silent on `#bobiverse`.)
+
+Run this right after `gh repo create`, before the first push, and
+before `gh issue create`:
+
+```
+python tools/bob_git_hook.py SimonBarnett/<name>
+```
+
+It is the single source of truth for the hook and exits 0 only when:
+
+1. The hook matches the fleet config **exactly** (creates it if absent, PATCHes
+   drift, never adds a second one, leaves unrelated hooks alone):
+   url `https://irc.ntsa.uk/bob/v1/git`, `content_type` `json`,
+   `insecure_ssl` `0`, events `issues`,`pull_request`,`push`, active.
+2. A `ping` delivery returned **2xx** (the receiver answers 204).
+3. Items opened before the hook existed are replayed as `opened` events
+   (automatic when this run created the hook; else `--replay-missed`).
+4. Jeeves' `GIT ping SimonBarnett/<name>` (and each replayed
+   `GIT issues|pull_request ... opened #N`) line is seen in
+   `~/.agentic-irc-bobiverse/irc.log`, or the replayed item is in the
+   digest unaccepted queue.
+
+Exit 1 = hook or ping failed; exit 2 = Jeeves announce not seen. Either
+way, **webhook setup is NOT done**. Do not tell the human it is, and do
+not push or open the issue yet.
+
+Fix for a repo that was already set up late (after the fact):
+
+```
+python tools/bob_git_hook.py SimonBarnett/<name> --replay-missed
+```
+
+## Secret handling
+
+Fleet hooks (agentic_build, agentic_irc, AgentMonitor, skills-visionary)
+carry **no** webhook secret; the `/bob/v1/git` receiver does not check
+HMAC. Match that. `--secret-file <path>` exists only for a future signed
+receiver. The value is read from the file and never printed. Never type
+a secret on a command line, in chat, in git, or in an issue.
+
 ## Events
 
 `push`, `pull_request`, `issues`. JSON body. `insecure_ssl` = `0`
@@ -68,16 +118,19 @@ second hook. Leave other hooks (Amplify, etc.) in place.
 
 ## Check
 
-- Hook `config.url` is `https://irc.ntsa.uk/bob/v1/git`
-- `insecure_ssl` is `0`
-- Create sends a `ping`; delivery `status_code` 204 is OK
-- GET `https://irc.ntsa.uk/bob/v1/git` is 405 (POST only)
+`python tools/bob_git_hook.py SimonBarnett/<name>` is the check (see Gate).
+Manual spot-checks:
 
 ```
 gh api repos/SimonBarnett/<name>/hooks/<id>/deliveries --jq '.[0] | {event,status,status_code}'
 ```
 
+- GET `https://irc.ntsa.uk/bob/v1/git` is 405 (POST only)
+
 ## Do not
+
+- Push, commit to the remote, or open an issue/PR before `bob_git_hook.py` exits 0.
+- Declare setup done on a 2xx ping alone; the Jeeves announce is required too.
 
 - Point GitHub at `/bob/v1/report`.
 - Put hook secrets in git.

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -54,5 +55,15 @@ def test_parked_fr_packs_pass():
         "feature-request-vision-pack-gate-ci-2026-09-23.md",
         "feature-request-visionary-also-on-fr-2026-09-23.md",
         "feature-request-vision-gate-poetry-fr-packs-2026-09-23.md",
+        "feature-request-plan-bob-webhooks-before-first-issue-2026-09-25.md",
     ):
         assert run_validator(docs / name, mocks) == 0
+
+
+def test_pr18_fr_pack_has_shape_and_success():
+    """MRB: PR#18 FR doc must satisfy vision-pack CI (was missing Shape/Success)."""
+    path = ROOT / "docs" / "feature-request-plan-bob-webhooks-before-first-issue-2026-09-25.md"
+    text = path.read_text(encoding="utf-8")
+    assert re.search(r"^##\s+Shape\s*$", text, re.MULTILINE)
+    assert re.search(r"^##\s+Success\s*$", text, re.MULTILINE)
+    assert run_validator(path, ROOT / "docs" / "mocks") == 0

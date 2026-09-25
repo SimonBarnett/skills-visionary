@@ -43,6 +43,9 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
 2. **Bob git webhook** — skill `plan-bob-webhooks`.
    Hook URL `https://irc.ntsa.uk/bob/v1/git` only.
    Digest `https://irc.ntsa.uk/bob/v1/report` is not a GitHub hook.
+   **Gate:** `python tools/bob_git_hook.py SimonBarnett/<name>` must exit 0
+   (exact hook config, ping 2xx, Jeeves `GIT ping` seen) **before step 4**.
+   No push and no issue until it does. Anything earlier is never delivered.
 
 3. **Permit PRs** — skill `plan-enable-prs`.
    Forking on; no blocking ruleset; Cursor GitHub App All repositories
@@ -59,7 +62,12 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
      agentic_build). AUTOMATIC harvest of later learnings is PR-only.
 
 5. Open a GitHub issue titled from the spec, body linking those paths,
-   label `feature-request`. Push. Tell the human the issue URL + SHA.
+   label `feature-request` (`gh label create feature-request --force`
+   first; a new repo has no such label and `gh issue create --label` fails).
+   Push. Confirm Jeeves announced `GIT issues SimonBarnett/<name> opened #N`
+   on `#bobiverse` (`~/.agentic-irc-bobiverse/irc.log`). If not, run
+   `python tools/bob_git_hook.py SimonBarnett/<name> --replay-missed`.
+   Tell the human the issue URL + SHA + the Jeeves line.
 
 6. **Stop for Plan seats.** Do not run `bob-job-loop` /
    `bob-build-dispatch` unless a build seat with the build pack is
@@ -75,8 +83,8 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
 # 1 create
 gh repo create SimonBarnett/<name> --public --description "<objective>"
 
-# 2 webhook (UTF-8 no BOM)
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\New-BobGitWebhook.ps1 -Repo SimonBarnett/<name>
+# 2 webhook + verify (gate: before ANY push/issue)
+python tools/bob_git_hook.py SimonBarnett/<name>
 
 # 3 Cursor app pages (Simon clicks All repositories if needed)
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\Grant-CursorGitHubApp.ps1

@@ -1,5 +1,6 @@
 # Create (or skip) the Bob git webhook on a SimonBarnett repo.
-# Skill: plan-bob-webhooks. Hook target is /bob/v1/git — never /bob/v1/report.
+# Skill: plan-bob-webhooks. Hook target is /bob/v1/git - never /bob/v1/report.
+# ASCII-only file (no em-dash / smart quotes) so Windows PowerShell 5.1 parses cleanly.
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
@@ -13,7 +14,7 @@ if ($Repo -notmatch '/') { $Repo = "SimonBarnett/$Repo" }
 
 $existing = gh api "repos/$Repo/hooks" --jq '.[].config.url' 2>$null
 if ($existing -split "`n" | Where-Object { $_ -eq $HookUrl }) {
-    Write-Host "OK: $HookUrl already on $Repo — skip create."
+    Write-Host "OK: $HookUrl already on $Repo - skip create."
     exit 0
 }
 

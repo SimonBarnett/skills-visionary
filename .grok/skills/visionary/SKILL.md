@@ -114,6 +114,15 @@ Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
 3. Open the GitHub issue. Build dispatch (`bob-job-loop`) is a build-seat
    concern — Plan seats do not install that pack.
 
+## Harvest (AUTOMATIC)
+
+When this session creates or changes a skill playbook, **always** run
+honesty-box harvest to the **relevant home repo in the same turn**
+(branch + PR; never harvest push to `main`). Foundation:
+`harvest-agent-skills`. Visionary/plan-git learnings ->
+`SimonBarnett/skills-visionary`. New product skill books -> that product
+repo's `harvest-agent-skills` twin. Do not ask permission; do not defer.
+
 ## Do not
 
 - Start park/create with no vision pack (new product or FR).
@@ -124,3 +133,4 @@ Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
 - Install full `agentic_build` / `agentic_irc` onto Plan seats just to
   create a repo or set webhooks — use `plan-*` skills in this pack.
 - Split architecture or stack into a second skill (sections of this one).
+- End a turn with new skills only in chat/temp/`~/.grok` and no home PR.

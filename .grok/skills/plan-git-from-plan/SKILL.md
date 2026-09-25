@@ -53,8 +53,10 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
    - `docs/vision.md`
    - `docs/mocks/*.html` (when UI)
    - `docs/functional-spec.md` (LOCKED pulled from vision)
-   - If the product is a skill pack: harvest skill foundation
-     (`.grok/skills/harvest-<repo>/SKILL.md`)
+   - If the product is a skill pack: **honesty box foundation**
+     `.grok/skills/harvest-agent-skills/SKILL.md` with frontmatter
+     `github:` set to **this new product repo** (same pattern as
+     agentic_build). AUTOMATIC harvest of later learnings is PR-only.
 
 5. Open a GitHub issue titled from the spec, body linking those paths,
    label `feature-request`. Push. Tell the human the issue URL + SHA.

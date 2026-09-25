@@ -70,13 +70,22 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\Grant-CursorGitHubApp.
 
 ### New repo same turn
 
-After create + `plan-bob-webhooks`:
+After create + `plan-bob-webhooks` (gate exit 0):
 
 1. Confirm Cursor app is still **All repositories**. If "Only select
    repositories", add this repo now or switch to All.
 2. Do not set interaction limits. Do not add a ruleset that blocks
    `cursor/*` branches or outside collaborators opening PRs.
 3. Leave forking on.
+4. Ensure merge buttons work (default allow merge commit / squash /
+   rebase — do not disable all three via API).
+5. Create the `feature-request` label **before** the first issue
+   (new repos have no labels; `gh issue create --label feature-request`
+   fails otherwise):
+
+```
+gh label create feature-request --repo SimonBarnett/<name> --color 0E8A16 --description "Feature request / MRB home" --force
+```
 
 ### If All repositories is already set and Cursor still 403s
 
@@ -93,11 +102,22 @@ Do **not** prefer https://github.com/apps/cursor/installations/new
 when Cursor is already installed (can replace Selected-repos and drop
 existing repos).
 
+## Same-turn order (with plan-git-from-plan)
+
+After `gh repo create` and **after** `python tools/bob_git_hook.py …`
+exits 0 (skill `plan-bob-webhooks`), run this skill before the first
+push and before opening the FR issue. Do not open issues/PRs while the
+repo still blocks forks or while Cursor is on Selected-repos only.
+
+Create the `feature-request` label before the first issue
+(`gh label create feature-request --force` — a brand-new repo has no
+labels, so `gh issue create --label feature-request` fails otherwise).
+
 ## Real check
 
 **Real test:** Cursor Web / Cloud Agent push no longer 403s as
 `cursor[bot]`. Local `gh pr create` as SimonBarnett does **not** prove
-the app grant.
+the app grant. A human fork-PR still opens without a collaborator invite.
 
 ## Do not
 

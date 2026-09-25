@@ -211,10 +211,15 @@ def test_skills_permit_prs_and_feature_request_label_before_issue():
     hooks = (ROOT / ".grok/skills/plan-bob-webhooks/SKILL.md").read_text(encoding="utf-8")
 
     assert "plan-enable-prs" in orch
-    assert orch.index("bob_git_hook.py") < orch.index("plan-enable-prs") or (
-        orch.index("Bob git webhook") < orch.index("Permit PRs")
+    # Strict order in the numbered checklist (not frontmatter index games).
+    steps = [ln for ln in orch.splitlines() if ln.strip()[:1].isdigit() and ". **" in ln]
+    step_blob = "\n".join(steps)
+    assert "Bob git webhook" in step_blob
+    assert "Permit PRs" in step_blob
+    assert "First commit" in step_blob
+    assert step_blob.index("Bob git webhook") < step_blob.index("Permit PRs") < step_blob.index(
+        "First commit"
     )
-    assert orch.index("Permit PRs") < orch.index("First commit")
     assert "feature-request" in orch
     assert "gh label create feature-request" in orch
     assert "Confirm Jeeves announced" in orch or "GIT issues" in orch
@@ -227,3 +232,120 @@ def test_skills_permit_prs_and_feature_request_label_before_issue():
     assert "plan-enable-prs" in create
     assert "bob_git_hook.py" in create
     assert "exit 0" in hooks or "exits 0" in hooks
+
+
+# --- MRB hostile additions (skills-visionary#18) ---
+
+
+def test_mrb_inactive_hook_is_drift_and_patched():
+    dead = dict(FLEET, active=False)
+    assert "active" in bgh.hook_drift(dead)
+    gh = FakeGh(hooks=[dead])
+    hook, created = bgh.ensure_hook(REPO, gh)
+    assert not created
+    assert hook.get("active") is True
+    assert bgh.hook_drift(hook) == []
+
+
+def test_mrb_announce_needle_matches_jeeves_line_shapes():
+    assert bgh.announce_needle("ping", REPO) == f"GIT ping {REPO}"
+    assert bgh.announce_needle("issues", REPO, 1) == f"GIT issues {REPO} opened #1"
+    assert bgh.announce_needle("pull_request", REPO, 18) == (
+        f"GIT pull_request {REPO} opened #18"
+    )
+
+
+def test_mrb_main_bare_repo_name_gets_simonbarnett_prefix(tmp_path):
+    log = tmp_path / "irc.log"
+    log.write_text(
+        f":Jeeves!~u@h PRIVMSG #bobiverse :GIT ping {REPO} Encourage flow. by SimonBarnett\n",
+        encoding="utf-8",
+    )
+    gh = FakeGh(hooks=[dict(FLEET)])
+    rc = bgh.main(
+        ["club-madeira-onboarding", "--irc-log", str(log), "--timeout", "0", "--no-replay"],
+        gh=gh,
+        post=lambda *a: 204,
+    )
+    assert rc == 0
+    assert any(f"repos/{REPO}/hooks" in c[0][0] for c in gh.calls)
+
+
+def test_mrb_main_fails_when_ping_never_2xx(tmp_path):
+    log = tmp_path / "irc.log"
+    log.write_text(
+        f":Jeeves!~u@h PRIVMSG #bobiverse :GIT ping {REPO} Encourage flow. by SimonBarnett\n",
+        encoding="utf-8",
+    )
+    gh = FakeGh(hooks=[dict(FLEET)], deliveries=[{"id": 1, "event": "ping", "status_code": 500}])
+    assert bgh.main([REPO, "--irc-log", str(log), "--timeout", "0"], gh=gh, post=lambda *a: 204) == 1
+
+
+def test_mrb_main_fails_when_replay_post_not_2xx(tmp_path):
+    log = tmp_path / "irc.log"
+    log.write_text(
+        f":Jeeves!~u@h PRIVMSG #bobiverse :GIT ping {REPO} Encourage flow. by SimonBarnett\n",
+        encoding="utf-8",
+    )
+    gh = FakeGh(
+        hooks=[dict(FLEET)],
+        issues=[{"number": 1, "state": "open", "created_at": "2026-09-25T08:04:00Z", "user": {"login": "S"}}],
+    )
+    assert bgh.main(
+        [REPO, "--replay-missed", "--irc-log", str(log), "--timeout", "0"],
+        gh=gh,
+        post=lambda *a: 500,
+    ) == 1
+
+
+def test_mrb_create_path_auto_replays_pre_hook_issue(tmp_path):
+    """When ensure_hook creates the hook, main must replay missed opens without --replay-missed."""
+    log = tmp_path / "irc.log"
+    log.write_text(
+        f":Jeeves!~u@h PRIVMSG #bobiverse :GIT ping {REPO} Encourage flow. by SimonBarnett\n"
+        f":Jeeves!~u@h PRIVMSG #bobiverse :GIT issues {REPO} opened #1 Phase 0 by SimonBarnett\n",
+        encoding="utf-8",
+    )
+    gh = FakeGh(
+        hooks=[],
+        issues=[{"number": 1, "state": "open", "created_at": "2026-09-25T08:04:00Z", "user": {"login": "S"}}],
+    )
+    # created_at on POST-built hook is missing → missed_items compare may treat all as missed
+    posted = []
+    rc = bgh.main(
+        [REPO, "--irc-log", str(log), "--timeout", "0"],
+        gh=gh,
+        post=lambda u, b, h: posted.append(h["X-GitHub-Event"]) or 204,
+    )
+    assert rc == 0
+    assert "issues" in posted
+
+
+def test_mrb_digest_fallback_clears_replay_missing_only(tmp_path, monkeypatch):
+    log = tmp_path / "irc.log"
+    log.write_text(
+        f":Jeeves!~u@h PRIVMSG #bobiverse :GIT ping {REPO} Encourage flow. by SimonBarnett\n",
+        encoding="utf-8",
+    )
+    gh = FakeGh(
+        hooks=[dict(FLEET)],
+        issues=[{"number": 1, "state": "open", "created_at": "2026-09-25T08:04:00Z", "user": {"login": "S"}}],
+    )
+    monkeypatch.setattr(
+        bgh,
+        "fetch_digest",
+        lambda url=None: {"queue": {"unaccepted": [{"repo": REPO, "id": "#1"}]}},
+    )
+    rc = bgh.main(
+        [REPO, "--replay-missed", "--irc-log", str(log), "--timeout", "0"],
+        gh=gh,
+        post=lambda *a: 204,
+    )
+    assert rc == 0
+
+
+def test_mrb_fleet_create_body_never_includes_secret_key():
+    body = bgh.fleet_hook_body()
+    assert "secret" not in body["config"]
+    with_secret = bgh.fleet_hook_body(secret="x")
+    assert with_secret["config"]["secret"] == "x"

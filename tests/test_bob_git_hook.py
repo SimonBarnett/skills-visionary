@@ -185,3 +185,45 @@ def test_skills_gate_first_push_on_verified_hook():
     assert orch.index("bob_git_hook.py") < orch.index("First commit")
     assert "before any push" in hooks.lower() or "before the first push" in hooks.lower()
     assert "--replay-missed" in hooks
+
+
+def test_fr19_plan_enable_prs_and_label_before_issue():
+    """skills-visionary#19: allow PRs + feature-request label before first issue."""
+    enable = (ROOT / ".grok/skills/plan-enable-prs/SKILL.md").read_text(encoding="utf-8")
+    orch = (ROOT / ".grok/skills/plan-git-from-plan/SKILL.md").read_text(encoding="utf-8")
+    assert "feature-request" in enable
+    assert "gh label create feature-request" in enable
+    assert "forking" in enable.lower()
+    assert "feature-request" in orch
+    assert "gh label create feature-request" in orch
+    fr = ROOT / "docs/feature-request-plan-bob-webhooks-before-first-issue-2026-09-25.md"
+    assert fr.is_file()
+    body = fr.read_text(encoding="utf-8")
+    assert "#19" in body and "bob_git_hook.py" in body
+    assert "A5" in body  # Jeeves announce acceptance row
+
+
+def test_skills_permit_prs_and_feature_request_label_before_issue():
+    """#19: Plan wires PR path + feature-request label; issue only after hook gate."""
+    orch = (ROOT / ".grok/skills/plan-git-from-plan/SKILL.md").read_text(encoding="utf-8")
+    enable = (ROOT / ".grok/skills/plan-enable-prs/SKILL.md").read_text(encoding="utf-8")
+    create = (ROOT / ".grok/skills/plan-create-repo/SKILL.md").read_text(encoding="utf-8")
+    hooks = (ROOT / ".grok/skills/plan-bob-webhooks/SKILL.md").read_text(encoding="utf-8")
+
+    assert "plan-enable-prs" in orch
+    assert orch.index("bob_git_hook.py") < orch.index("plan-enable-prs") or (
+        orch.index("Bob git webhook") < orch.index("Permit PRs")
+    )
+    assert orch.index("Permit PRs") < orch.index("First commit")
+    assert "feature-request" in orch
+    assert "gh label create feature-request" in orch
+    assert "Confirm Jeeves announced" in orch or "GIT issues" in orch
+    assert "--replay-missed" in orch
+
+    assert "forking on" in enable.lower()
+    assert "cursor" in enable.lower()
+    assert "do not" in enable.lower() and "ruleset" in enable.lower()
+
+    assert "plan-enable-prs" in create
+    assert "bob_git_hook.py" in create
+    assert "exit 0" in hooks or "exits 0" in hooks

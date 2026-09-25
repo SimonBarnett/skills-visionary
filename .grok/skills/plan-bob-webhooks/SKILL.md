@@ -31,6 +31,9 @@ Source of truth for reportUrl in the build pack:
 
 ## Gate: hook BEFORE any push or issue (required)
 
+Tracks FR **#19** (and closes the club-madeira-onboarding miss): Plan
+must leave a new repo fully wired into Bob Fleet before any issue or PR.
+
 GitHub never backfills: anything pushed or opened before the hook exists
 is never delivered, so Jeeves never announces it and the FR issue never
 reaches the unaccepted queue. (club-madeira-onboarding 25/09: repo 08:03:30Z,

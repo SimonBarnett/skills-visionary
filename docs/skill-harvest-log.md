@@ -28,6 +28,15 @@ relevant home repo in the same turn (branch+PR). Documented on
 `tools/New-BobGitWebhook.ps1` em-dash / non-ASCII that broke Windows
 PowerShell 5.1 parse.
 
+## 2026-10-08 - Plan-seat xlsx inputs (moved from bobiverse#3046)
+
+`visionary`: new "Plan-seat inputs" section. Copy a network-drive xlsx
+into `work\plan-*` and export with openpyxl; never Excel COM on mapped
+drives. Re-filed here from SimonBarnett/bobiverse#3046 (honesty-box
+intake routed a Plan-seat lesson to bobiverse). The installed Plan folder
+copy is already on bobiverse main in `bob/agents/plan/AGENTS.md`
+(bobiverse#3049).
+
 ## 2026-10-08 - Plan seats harvest how-to-plan only (bobiverse#3432)
 
 `harvest-skills-visionary`, `visionary`, `harvest-agent-skills`: Plan

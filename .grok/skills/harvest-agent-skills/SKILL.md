@@ -97,6 +97,12 @@ exists, run it; do not re-derive the procedure in chat.
 A candidate is useful only if it is **repeatable**, has a clear trigger, and
 is not a single incident report.
 
+**Plan seats harvest how-to-plan only.** A plan's own content
+(requirements, designs, architecture or product decisions, FR/issue lists)
+is never a skill lesson: it lives in the plan folder and the product repo's
+vision/FR docs. Only reusable planning process, pitfalls and repo-setup
+steps are harvested here (bobiverse#3097).
+
 ## Write
 
 1. Edit or add `.grok/skills/<name>/SKILL.md` (`name` + `description`;

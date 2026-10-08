@@ -36,3 +36,12 @@ drives. Re-filed here from SimonBarnett/bobiverse#3046 (honesty-box
 intake routed a Plan-seat lesson to bobiverse). The installed Plan folder
 copy is already on bobiverse main in `bob/agents/plan/AGENTS.md`
 (bobiverse#3049).
+
+## 2026-10-08 - Plan seats harvest how-to-plan only (bobiverse#3432)
+
+`harvest-skills-visionary`, `visionary`, `harvest-agent-skills`: Plan
+harvests carry only reusable how-to-plan lessons, never plan content
+(test case bobiverse#3097). `visionary`: new "Plan-seat repo hygiene"
+section with planning lessons moved from misfiled bobiverse harvests
+#3335, #3340/#3341, #3344, #3350, #3389/#3390. Plan-content harvests
+#3347, #3349 and #3097 were closed as plan content, not lessons.

@@ -114,6 +114,35 @@ Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
 3. Open the GitHub issue. Build dispatch (`bob-job-loop`) is a build-seat
    concern — Plan seats do not install that pack.
 
+## Plan-seat inputs (workbooks on network drives)
+
+When a plan needs data from an xlsx on a mapped or network drive (for
+example `M:\`), copy the workbook into this plan's own
+`work\plan-<yyyyMMdd-HHmmss>\` folder first (`Copy-Item`), then export
+each sheet to CSV with `openpyxl` (`load_workbook(<local copy>,
+data_only=True)` plus one `csv.writer` per sheet; `pip install openpyxl`
+if it is missing). Do not drive Excel COM (`Workbooks.Open` / `SaveAs`)
+against mapped-drive paths: it hangs with no output (seen: 5+ minutes on
+a 14-sheet workbook, while openpyxl on the local copy finished in
+seconds). Exported CSVs belong to the product or customer repo that owns
+the data, never to this skill book. No secrets in exports or commits.
+
+## Plan-seat repo hygiene (harvested 2026-10-08)
+
+- Gap analysis against an existing product repo: if the local clone is
+  dirty or not on main, `git fetch` then `git worktree add --detach
+  <plan>\repo origin/main` and compare the vision Success table to that
+  tree. Never ff-pull or reset over a dirty checkout.
+- Filing an approved FR pack: only after the operator approves filing,
+  open one GitHub issue per small FR draft (Goal / Deliverables /
+  Testable), never one omnibus; keep a draft-code -> issue-number map in
+  the plan folder.
+- Parking FR docs: copy the drafts into a clean worktree from
+  `origin/main` (not the dirty local clone), commit docs only, reference
+  the implementation issues with `Refs #N` (never `Closes`), push a
+  branch, `gh pr create`. Merge the docs-only park PR only when the
+  operator asks; the code FRs stay open.
+
 ## Harvest (AUTOMATIC)
 
 When this session creates or changes a skill playbook, **always** run
@@ -122,6 +151,11 @@ honesty-box harvest to the **relevant home repo in the same turn**
 `harvest-agent-skills`. Visionary/plan-git learnings ->
 `SimonBarnett/skills-visionary`. New product skill books -> that product
 repo's `harvest-agent-skills` twin. Do not ask permission; do not defer.
+
+Harvest **how-to-plan lessons only** (process, pitfalls, repo-setup
+steps). The plan itself - requirements, designs, architecture or product
+decisions, FR/issue lists - is never a harvest: it goes in the vision
+pack / FR markdown / issues of the product repo (bobiverse#3097).
 
 ## Do not
 

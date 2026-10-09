@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- After a parked Phase, operator commercial clarifications become an additive docs amend with new small FRs (Refs not Closes); close only the mocks-park issue after merge.

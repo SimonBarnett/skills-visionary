@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- When product open issues are 0 after a closed stay-dark provider wave, Plan gap analysis targets vision UNKNOWN + parked drains + per-account enable docs — draft small FRs first and file one slice at a time (anti-omnibus); use detached origin/main worktree when the product clone is dirty/behind

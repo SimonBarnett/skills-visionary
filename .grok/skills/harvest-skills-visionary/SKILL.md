@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- For an AWS-installable release gap on a Node CDK service: inventory stack for Bucket/Secrets/VPC/DLQ/CI/deploy docs and verify every Code.fromAsset path can resolve shared/ and runtime deps (@aws-sdk, mssql) inside the zip — then file many small Goal/Deliverables/Testable FRs, not one omnibus deploy ticket

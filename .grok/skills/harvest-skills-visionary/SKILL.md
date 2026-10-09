@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- Post-installable waves: file one enable FR per stay-dark provider (never bulk-enable), plus separate small FR slices for Creators-behind-flag, WAFv2 associate, and multi-region strategy docs before second-region CDK

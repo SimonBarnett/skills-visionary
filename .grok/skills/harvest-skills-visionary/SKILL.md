@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- Market-hold park: docs gate + per-id disable FRs + immediately close open enable issues/PRs for hold ids; never delete provider folders; docs PR uses Closes only for the docs FR and Refs for disable FRs

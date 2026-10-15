@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- skills-visionary harvest tips must never teach admin-merge; Ubuntu validate red on test_fr19_ps51 is ambient env-only — arm --auto --squash only (FR #3948) and keep soft-skip FR #52

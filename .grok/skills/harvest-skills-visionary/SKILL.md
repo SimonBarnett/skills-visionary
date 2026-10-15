@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- skills-visionary CI validate red on Ubuntu for test_fr19_ps51 is env-only (no powershell.exe) and matches main — confirm local pytest green then admin-merge; file soft-skip FR

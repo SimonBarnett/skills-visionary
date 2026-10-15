@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- lesson(harvest-skills-visionary): Plan-seat market-hold product park tips MOVED to product harvest-agent-skills when that book already carries the disable/close-enable playbook; do not land a-search ops in skills-visionary

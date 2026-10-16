@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- Plan-skill pytest on ubuntu-latest: keep ASCII/content asserts always; soft-skip PowerShell Parser::ParseFile via find_powershell()+pytest.skip when powershell/pwsh missing — do not move the whole job to windows-latest for one env check

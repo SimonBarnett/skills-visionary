@@ -1,4 +1,4 @@
-﻿"""MRB #17: New-BobGitWebhook.ps1 must parse under Windows PowerShell 5.1 (ASCII-only)."""
+"""MRB #17: New-BobGitWebhook.ps1 must parse under Windows PowerShell 5.1 (ASCII-only)."""
 from __future__ import annotations
 
 import re
@@ -6,7 +6,15 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+import pytest
+
+_TESTS = Path(__file__).resolve().parent
+if str(_TESTS) not in sys.path:
+    sys.path.insert(0, str(_TESTS))
+
+from ps_runtime import find_powershell  # noqa: E402
+
+ROOT = _TESTS.parent
 SCRIPT = ROOT / "tools" / "New-BobGitWebhook.ps1"
 
 
@@ -27,12 +35,10 @@ def test_webhook_helper_has_no_em_dash_or_smart_quotes():
 
 
 def test_webhook_helper_parses_under_windows_powershell():
-    """Parser-only check (no network). Prefer powershell.exe (5.1) when present."""
-    ps = "powershell.exe"
-    try:
-        subprocess.run([ps, "-NoProfile", "-Command", "$PSVersionTable.PSVersion.Major"], check=True, capture_output=True)
-    except (FileNotFoundError, subprocess.CalledProcessError):
-        ps = "pwsh"
+    """Parser-only check (no network). Soft-skip when powershell/pwsh absent (FR #52)."""
+    ps = find_powershell()
+    if ps is None:
+        pytest.skip("powershell/pwsh not on PATH (Linux CI); ASCII checks cover content")
     cmd = (
         "$e=$null; $t=$null; "
         "[void][System.Management.Automation.Language.Parser]::ParseFile("

@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- For a-search FR gap analysis when C:\ai\a-search is dirty or behind, git fetch then worktree add --detach under plan/work/plan-*/repo from origin/main before comparing Success rows; keep FR drafts unfiled until human approve (anti-omnibus).

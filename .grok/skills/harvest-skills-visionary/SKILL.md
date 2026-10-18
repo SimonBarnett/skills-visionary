@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- After ComponentsPiece-style approve: file one GitHub issue per small FR, open docs-only park PR with Refs (not Closes), merge the docs PR, close only the mocks/park slice issue; leave implementation FRs open.

@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- Second installable-release pass should re-check product stubs still returning empty payloads (/selftest), optional runtime deps (jose) not in package.json/stage, shared package files[] vs real dirs, API CORS/access logs, S3/SQS encryption defaults, and queue visibility vs Lambda timeout

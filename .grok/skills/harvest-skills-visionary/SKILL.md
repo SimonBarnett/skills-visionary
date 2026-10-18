@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- For a-search Phase-3 docs park: branch from detached origin/main worktree under plan/work/plan-*/repo, docs-only commit, push, gh pr create with Refs not Closes for implementation issues

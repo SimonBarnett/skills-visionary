@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- When the operator explicitly says create all Phase-3 FRs, file many small Goal/Deliverables/Testable issues in one turn (one GitHub issue per FR) and close the park-process pointer with Refs — that satisfies anti-omnibus without leaving the backlog unfiled

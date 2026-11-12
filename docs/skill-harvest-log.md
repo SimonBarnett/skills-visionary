@@ -45,3 +45,9 @@ harvests carry only reusable how-to-plan lessons, never plan content
 section with planning lessons moved from misfiled bobiverse harvests
 #3335, #3340/#3341, #3344, #3350, #3389/#3390. Plan-content harvests
 #3347, #3349 and #3097 were closed as plan content, not lessons.
+
+## 2026-11-12 - private-host page is not host-only code
+
+`visionary` Plan-seat repo hygiene: when `web_fetch` refuses a private
+address, confirm the implementation with `git show origin/main` or the
+operator's merged PR list before treating the UI as host-only config.

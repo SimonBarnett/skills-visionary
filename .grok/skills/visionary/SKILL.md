@@ -142,6 +142,14 @@ the data, never to this skill book. No secrets in exports or commits.
   the implementation issues with `Refs #N` (never `Closes`), push a
   branch, `gh pr create`. Merge the docs-only park PR only when the
   operator asks; the code FRs stay open.
+- When `docs/fr/ISSUED.tsv` already indexes an older pack, write the new
+  index at `docs/fr/<slug>/ISSUED.tsv`. Do not replace the root file.
+- When a per-machine installer offers a per-user CLI, and two CLIs can
+  install the same executable name, lock detection by install directory
+  in the success table. The yes path runs in the interactive user
+  session. Do not run that installer from a deferred system custom
+  action: it cannot prompt, and it writes the system profile. A silent
+  install does not download.
 
 ## Harvest (AUTOMATIC)
 

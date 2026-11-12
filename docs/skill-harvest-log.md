@@ -45,3 +45,11 @@ harvests carry only reusable how-to-plan lessons, never plan content
 section with planning lessons moved from misfiled bobiverse harvests
 #3335, #3340/#3341, #3344, #3350, #3389/#3390. Plan-content harvests
 #3347, #3349 and #3097 were closed as plan content, not lessons.
+
+## 2026-11-12 - re-query filed issues before the status reply
+
+`visionary` Plan-seat repo hygiene: after a feature-request batch is
+filed, read each issue state again before telling the operator the
+slices are still open. Workers can merge the first slices in that
+window. A docs park that uses `Refs` does not keep those issues open
+once their own implementation pull requests merge.

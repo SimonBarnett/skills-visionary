@@ -142,6 +142,10 @@ the data, never to this skill book. No secrets in exports or commits.
   the implementation issues with `Refs #N` (never `Closes`), push a
   branch, `gh pr create`. Merge the docs-only park PR only when the
   operator asks; the code FRs stay open.
+- Before the status reply, re-query each filed issue. A still-open line
+  written at create time goes stale when workers merge the first slices
+  in that window. `Refs` on the docs park does not keep an issue open
+  after its own implementation PR merges.
 
 ## Harvest (AUTOMATIC)
 

@@ -45,3 +45,12 @@ harvests carry only reusable how-to-plan lessons, never plan content
 section with planning lessons moved from misfiled bobiverse harvests
 #3335, #3340/#3341, #3344, #3350, #3389/#3390. Plan-content harvests
 #3347, #3349 and #3097 were closed as plan content, not lessons.
+
+## 2026-11-12 - per-user CLI detect-by-path; do not replace ISSUED.tsv
+
+`visionary` Plan-seat repo hygiene: a new pack's issue index goes under
+`docs/fr/<slug>/ISSUED.tsv` when the root file already indexes an older
+pack. A per-machine installer that offers a per-user CLI detects
+same-named executables by install directory, prompts in the interactive
+user session, and does not run that installer from a deferred system
+custom action. Intake `in_5de6482911f24606` filed the CLI half first.

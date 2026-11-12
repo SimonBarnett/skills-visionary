@@ -142,6 +142,10 @@ the data, never to this skill book. No secrets in exports or commits.
   the implementation issues with `Refs #N` (never `Closes`), push a
   branch, `gh pr create`. Merge the docs-only park PR only when the
   operator asks; the code FRs stay open.
+- A live page on a private address is invisible to `web_fetch` (SSRF
+  block). That block is not evidence the UI exists only on the host.
+  Confirm the implementation with `git fetch` and `git show origin/main`,
+  or with the operator's merged PR list, before writing the gap.
 
 ## Harvest (AUTOMATIC)
 

@@ -30,7 +30,9 @@ Refuse park / git-create / dispatch until:
   (or the whole Success section is UNKNOWN)
 - `python tools/validate-vision-pack.py <vision.md> [--mocks-dir <dir>]`
   exits 0 (repo copy: `tools/validate-vision-pack.py`; CI: `vision-pack`
-  workflow).
+  workflow). In the Shape section the lock line must be exactly `LOCKED`
+  with nothing else on the line. `LOCKED.` fails that gate even when
+  Primary is set.
 
 Poetry is not a target. If you cannot score it later, it is UNKNOWN.
 
@@ -133,6 +135,10 @@ the data, never to this skill book. No secrets in exports or commits.
   dirty or not on main, `git fetch` then `git worktree add --detach
   <plan>\repo origin/main` and compare the vision Success table to that
   tree. Never ff-pull or reset over a dirty checkout.
+- Run that fetch only after `Set-Location` to the product clone, or as
+  `git -C <clone> fetch`. The Plan folder sits inside another git
+  worktree. A fetch from the plan folder updates that other worktree,
+  not the product.
 - Filing an approved FR pack: only after the operator approves filing,
   open one GitHub issue per small FR draft (Goal / Deliverables /
   Testable), never one omnibus; keep a draft-code -> issue-number map in

@@ -1,5 +1,13 @@
 # Skill harvest log
 
+## 2026-11-20 - FR #81 skill DAG + catalog mirrors
+
+- Added `docs/skill-sources/skills-visionary/_dag` and
+  `apps/mcp-catalog` sync/check scripts (priority-mcp pattern).
+- `.grok/skills` remains source of truth; catalog/ mirrors meta+SKILL.
+- CI job `mcp-catalog-dag` runs `npm run build` + `npm test`.
+- Rebuild: `python tools/build-skill-dag.py` then `npm run sync-dag`.
+
 ## 2026-11-12 - plan fetch cwd and LOCKED line
 
 - Fetch the product only after Set-Location to that clone, or with

@@ -93,3 +93,11 @@ Documented and fixed: `bob_git_hook` NO_COLOR/ANSI strip; skip
 `allow_forking` on user public repos; Cursor All-repos skip grant;
 prefer `bob_git_hook` over New-BobGitWebhook alone; headless Plan path;
 seed-FR ordering and live-queue warning; harvest without gh via intake.
+
+## 2026-11-20 - FR #61 / #63 explicit -Repo skills-visionary
+
+Plan how-to-plan harvests with explicit `-Repo SimonBarnett/skills-visionary`
+must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
+tray cues. Documented in `harvest-skills-visionary`; durable script fix in
+bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
+with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.

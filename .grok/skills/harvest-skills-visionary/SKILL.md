@@ -73,3 +73,7 @@ worker/fleet seats still route to bobiverse (FR #3959 a-search stub guard).
 
 If a harvest tip lands on bobiverse with Plan how-to-plan content: close it
 MOVED citing the skills-visionary tip (or re-file here), never leave both open.
+
+## Harvested lessons (intake)
+
+- When FR-F landing depends on FR-E Next scaffold and main only has DAG sync, co-implement both in one PR with Closes for each issue rather than GIVEUP on the dependency.

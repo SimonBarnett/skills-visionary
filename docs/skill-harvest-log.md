@@ -34,7 +34,7 @@ Visionary required on FR path; success gate before dispatch; no
 `gh repo create` on FR. Sync `agentic_build` `.grok/skills/visionary`
 and `bob-spec-intake` Feature request step (CAST IRON).
 
-## 2026-09-24 — foundation honesty box
+## 2026-09-24 â€” foundation honesty box
 
 Added `.grok/skills/harvest-agent-skills/SKILL.md`. Home:
 `https://github.com/SimonBarnett/skills-visionary`. Report
@@ -127,3 +127,10 @@ must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
 tray cues. Documented in `harvest-skills-visionary`; durable script fix in
 bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
 with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.
+
+## 2026-11-20 - FR #87 FR-K intake-first Plan harvest (no GitHub credentials)
+
+- `harvest-skills-visionary`: Plan-seat default is `Report-BobiverseIntakeIssue` + `Invoke-BobiverseHarvest -Repo SimonBarnett/skills-visionary`; `gh` branch+PR optional; intake URL `https://bob.ntsa.uk/bob/v1/intake`.
+- `visionary` Harvest section: Bob intake first; no `gh login` required.
+- Contract test: `tests/test_fr87_harvest_intake_first.py`.
+- Evidence: `Report-BobiverseIntakeIssue` with `GH_TOKEN` unset returned HTTP 202 (probe PR #108 closed).

@@ -192,11 +192,15 @@ the data, never to this skill book. No secrets in exports or commits.
 ## Harvest (AUTOMATIC)
 
 When this session creates or changes a skill playbook, **always** run
-honesty-box harvest to the **relevant home repo in the same turn**
-(branch + PR; never harvest push to `main`). Foundation:
-`harvest-agent-skills`. Visionary/plan-git learnings ->
-`SimonBarnett/skills-visionary`. New product skill books -> that product
-repo's `harvest-agent-skills` twin. Do not ask permission; do not defer.
+honesty-box harvest to the **relevant home repo in the same turn**.
+Foundation: `harvest-agent-skills`. Visionary/plan-git learnings ->
+`SimonBarnett/skills-visionary` via **Bob intake first** (FR-K / #87):
+`Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary`
+and `Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary`
+— **no GitHub credentials required**. A `gh` branch + PR is optional when
+authenticated; never harvest-push `main`; never require `gh login` on a
+Plan seat. New product skill books -> that product repo's
+`harvest-agent-skills` twin. Do not ask permission; do not defer.
 
 Harvest **how-to-plan lessons only** (process, pitfalls, repo-setup
 steps). The plan itself - requirements, designs, architecture or product

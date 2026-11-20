@@ -86,3 +86,8 @@ Parked intake for issue #1 is live on main: `docs/vision.md`, `docs/functional-s
 `visionary` Plan-seat repo hygiene: when skills and a launcher/build
 enforcement path both exist, grep exit checks, rules templates, and
 README for a second store. Skill wording alone is not proof.
+
+## 2026-11-20 - FR #42 plan CAST IRON cites skills-visionary
+
+`plan-git-from-plan` CAST IRON Report/Harvest examples use
+`-Repo SimonBarnett/skills-visionary`; regression test pins plan-* skills.

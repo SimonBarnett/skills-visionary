@@ -189,3 +189,7 @@ the app grant. A human fork-PR still opens without a collaborator invite.
 - `PUT collaborators/cursor[bot]` (404: not a user).
 - Stamp UAT.
 - Depend on full `agentic_build` skill install.
+## FR #42: harvest repo for Plan process
+
+How-to-plan harvest / intake examples use `-Repo SimonBarnett/skills-visionary`.
+Do not cite `-Repo SimonBarnett/bobiverse` for Plan playbooks (fleet tooling only).

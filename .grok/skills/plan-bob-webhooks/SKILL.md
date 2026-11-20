@@ -137,3 +137,7 @@ gh api repos/SimonBarnett/<name>/hooks/<id>/deliveries --jq '.[0] | {event,statu
 - Replace unrelated hooks.
 - Restart IRC / touch chair.
 - Stamp UAT.
+## FR #42: harvest repo for Plan process
+
+How-to-plan harvest / intake examples use `-Repo SimonBarnett/skills-visionary`.
+Do not cite `-Repo SimonBarnett/bobiverse` for Plan playbooks (fleet tooling only).

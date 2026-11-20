@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>plan.ntsa.uk — error</title>
+<style>
+body{font-family:system-ui,Segoe UI,sans-serif;margin:2rem;max-width:44rem;line-height:1.45;color:#122}
+h1{font-size:1.6rem;margin:0 0 .4rem}
+.meta{color:#456;font-size:.95rem}
+.badge{display:inline-block;background:#f7e8e8;border:1px solid #ddb9b9;border-radius:4px;padding:0 .35rem;font-size:.85rem}
+pre{background:#f4f6f8;padding:.8rem;overflow:auto;border:1px solid #dde}
+</style>
+</head>
+<body>
+<p class="meta"><span class="badge">wireframe</span> plan-error</p>
+<h1>Plan MCP unavailable</h1>
+<p>DAG check failed or the Amplify app is not WEB_COMPUTE. Typical causes:</p>
+<ul>
+<li><code>check-dag</code> failed (catalog↔DAG drift)</li>
+<li>App created as static WEB instead of WEB_COMPUTE</li>
+<li>Custom domain <code>plan.ntsa.uk</code> not attached yet (tell Slab)</li>
+</ul>
+<pre>npm run build   # must exit 0
+npm run smoke   # local MCP
+</pre>
+</body>
+</html>

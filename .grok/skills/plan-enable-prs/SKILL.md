@@ -203,3 +203,8 @@ the app grant. A human fork-PR still opens without a collaborator invite.
 - `Grant-CursorGitHubApp.ps1` is GUI-only (opens browser). Headless Plan
   seats: pass `-NoBrowser` and print the URLs only (do not require
   `Start-Process`). Simon must click when Selected-repos.
+
+## FR #42: harvest repo for Plan process
+
+How-to-plan harvest / intake examples use `-Repo SimonBarnett/skills-visionary`.
+Do not cite `-Repo SimonBarnett/bobiverse` for Plan playbooks (fleet tooling only).

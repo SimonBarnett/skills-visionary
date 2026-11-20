@@ -99,3 +99,8 @@ seed-FR ordering and live-queue warning; harvest without gh via intake.
 `bob_git_hook` warns on NICKNAME_RESERVED and accepts ping announce via
 2xx delivery fallback when the local ear nick is broken; Plan skill
 documents the preflight.
+
+## 2026-11-20 - FR #42 plan CAST IRON cites skills-visionary
+
+`plan-git-from-plan` CAST IRON Report/Harvest examples use
+`-Repo SimonBarnett/skills-visionary`; regression test pins plan-* skills.

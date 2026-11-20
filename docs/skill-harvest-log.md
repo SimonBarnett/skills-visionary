@@ -67,6 +67,7 @@ once their own implementation pull requests merge.
 `visionary` Plan-seat repo hygiene: when `web_fetch` refuses a private
 address, confirm the implementation with `git show origin/main` or the
 operator's merged PR list before treating the UI as host-only config.
+
 ## 2026-11-12 - per-user CLI detect-by-path; do not replace ISSUED.tsv
 
 `visionary` Plan-seat repo hygiene: a new pack's issue index goes under
@@ -75,3 +76,7 @@ pack. A per-machine installer that offers a per-user CLI detects
 same-named executables by install directory, prompts in the interactive
 user session, and does not run that installer from a deferred system
 custom action. Intake `in_5de6482911f24606` filed the CLI half first.
+
+## 2026-11-20 - Phase 0 visionary pack (FR #1) complete on main
+
+Parked intake for issue #1 is live on main: `docs/vision.md`, `docs/functional-spec.md`, `docs/mocks/`, `.grok/skills/visionary`, `.grok/skills/harvest-skills-visionary`. Phase 0 is the playbook. No UAT stamp.

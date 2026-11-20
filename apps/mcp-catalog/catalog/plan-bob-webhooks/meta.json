@@ -1,0 +1,8 @@
+{
+  "name": "plan-bob-webhooks",
+  "title": "plan bob webhooks",
+  "description": "Point a SimonBarnett GitHub repo at Bob fleet webhooks (git events to /bob/v1/git). Use when a new plan-created repo needs hooks, set up webhooks on git, GitHub hook, or /plan-bob-webhooks. Digest report URL is documented here for Plan seat",
+  "version": "1.0.0",
+  "topic": "plan",
+  "source": ".grok/skills/plan-bob-webhooks/SKILL.md"
+}

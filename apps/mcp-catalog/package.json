@@ -1,0 +1,14 @@
+{
+  "name": "mcp-skills-visionary-catalog",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync-dag": "node scripts/sync-skill-dag.mjs",
+    "check-dag": "node scripts/check-dag.mjs",
+    "build": "node scripts/sync-skill-dag.mjs && node scripts/check-dag.mjs",
+    "test": "node --test tests/check-dag.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

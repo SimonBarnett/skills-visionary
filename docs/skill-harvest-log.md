@@ -59,3 +59,7 @@ section with planning lessons moved from misfiled bobiverse harvests
 `visionary` Plan-seat repo hygiene: when `web_fetch` refuses a private
 address, confirm the implementation with `git show origin/main` or the
 operator's merged PR list before treating the UI as host-only config.
+
+## 2026-11-20 - Phase 0 visionary pack (FR #1) complete on main
+
+Parked intake for issue #1 is live on main: `docs/vision.md`, `docs/functional-spec.md`, `docs/mocks/`, `.grok/skills/visionary`, `.grok/skills/harvest-skills-visionary`. Phase 0 is the playbook. No UAT stamp.

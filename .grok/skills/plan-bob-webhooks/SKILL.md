@@ -150,3 +150,17 @@ gh api repos/SimonBarnett/<name>/hooks/<id>/deliveries --jq '.[0] | {event,statu
   certain marker strings is rejected by `/bob/v1/git` with HTTP 400 and
   never announced. Avoid those markers until #206 lands. Treat a 400
   delivery as **filtered**, not as a missing hook.
+
+## FR #25: irc.log nick reserved preflight
+
+Before `gh repo create` / the webhook gate:
+
+1. Confirm `~/.agentic-irc-bobiverse/irc.log` is receiving `:Jeeves!`
+   `PRIVMSG #bobiverse` lines (not only `NICKNAME_RESERVED`).
+2. If the local ear nick is reserved, fix the nick (or use another
+   machine's log via `--irc-log`) so announce_seen can work.
+3. Fallback: when GitHub records a **2xx ping** delivery and the local
+   log shows nick-reserved, `bob_git_hook.py` accepts the **ping**
+   announce via that delivery (still exit 0 only when all needles clear).
+   Replay items still use the digest-queue fallback.
+4. Keep **refuse-to-push / refuse-to-open-issue** until the gate exits 0.

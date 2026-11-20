@@ -1,5 +1,13 @@
 # Skill harvest log
 
+## 2026-11-12 - plan fetch cwd and LOCKED line
+
+- Fetch the product only after Set-Location to that clone, or with
+  git -C. A fetch started in the plan folder updates the git worktree
+  that contains the plan folder.
+- validate-vision-pack.py accepts a Shape lock only when a line is
+  exactly LOCKED. A trailing period fails the gate.
+
 ## 2026-09-23 - repo intake
 
 New public repo SimonBarnett/skills-visionary. Vision pack + HTML

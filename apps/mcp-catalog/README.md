@@ -1,6 +1,6 @@
-# mcp-catalog (skills-visionary)
+# Plan Agent (mcp-catalog)
 
-Public skill catalog + DAG for **plan.ntsa.uk** (FR-C / FR-D).
+**Plan Agent** — public skill catalog + DAG for **plan.ntsa.uk** (FR-C / FR-D).
 
 ## Source of truth
 
@@ -12,8 +12,8 @@ change; do not edit catalog copies as the primary store.
 
 - Source: `docs/skill-sources/skills-visionary/_dag/{dag.json,dag-index.json}`
 - Sync: `npm run sync-dag` copies into `data/`
-- Gate: `npm run check-dag` fails on catalog↔DAG drift, dangling edges,
-  skill-node cycles (topic↔topic loops OK), or secret-like blobs in DAG nodes
+- Gate: `npm run check-dag` fails on catalogâ†”DAG drift, dangling edges,
+  skill-node cycles (topicâ†”topic loops OK), or secret-like blobs in DAG nodes
 
 ## Next.js (FR-E / FR-F)
 

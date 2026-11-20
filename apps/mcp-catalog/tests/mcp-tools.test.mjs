@@ -32,7 +32,7 @@ function requiredFromDag(skillId) {
     .filter(Boolean);
 }
 
-test('catalog has public Plan skills', () => {
+test('catalog has public Plan Agent skills', () => {
   const ids = listSkillsFs();
   assert.ok(ids.includes('visionary'));
   assert.ok(ids.includes('plan-git-from-plan'));

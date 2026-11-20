@@ -2,13 +2,13 @@ import { getSkill, listSkills, requiredSkillIds, type SkillRecord } from './cata
 import { catalogPublicOrigin } from './public-origin';
 
 const PROTOCOL = '2024-11-05';
-const SERVER = { name: 'mcp-skills-visionary', version: '0.1.0' };
+const SERVER = { name: 'Plan Agent', version: '0.1.0' };
 
 const TOOLS = [
   {
     name: 'list_catalog',
     description:
-      'List Plan / visionary skills published on plan.ntsa.uk. Folders under catalog/ with meta.json register skills. No secrets; markdown only.',
+      'List Plan Agent skills published on plan.ntsa.uk. Folders under catalog/ with meta.json register skills. No secrets; markdown only.',
     inputSchema: { type: 'object', properties: {}, additionalProperties: false },
   },
   {
@@ -109,7 +109,7 @@ export function handleMcp(body: unknown, origin = catalogPublicOrigin()): unknow
       id,
       result: {
         tools: TOOLS,
-        note: 'Plan skills MCP: list_catalog / get_skill only (no ERP execute plane).',
+        note: 'Plan Agent MCP: list_catalog / get_skill only (no ERP execute plane).',
       },
     };
   }

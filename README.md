@@ -1,6 +1,8 @@
-# skills-visionary
+# Plan Agent
 
-High-reasoning new-product intake skill pack for TipForm **Plan →
+Repo: `SimonBarnett/skills-visionary` (plan.ntsa.uk).
+
+High-reasoning new-product intake skill pack for TipForm **Plan â†’
 Grok/Cursor** seats. See `docs/vision.md`.
 
 Plan seats load **this pack only** (not the full `agentic_build` /
@@ -12,9 +14,9 @@ harvested here as self-contained `plan-*` skills.
 | Skill | Role |
 |-------|------|
 | `visionary` | Measurable vision pack (shape, success, stack, mocks) |
-| `plan-git-from-plan` | Orchestrator: after plan approved → create → webhooks → PRs |
+| `plan-git-from-plan` | Orchestrator: after plan approved â†’ create â†’ webhooks â†’ PRs |
 | `plan-create-repo` | Public `gh repo create` under SimonBarnett |
-| `plan-bob-webhooks` | GitHub hook → `https://irc.ntsa.uk/bob/v1/git` |
+| `plan-bob-webhooks` | GitHub hook â†’ `https://irc.ntsa.uk/bob/v1/git` |
 | `plan-enable-prs` | Forking / no blocking ruleset / Cursor app for `cursor[bot]` |
 | `harvest-skills-visionary` | PR learnings back to this repo |
 
@@ -56,4 +58,4 @@ CI: `.github/workflows/vision-pack.yml`.
 
 Playbooks stolen from `agentic_build` (`bob-spec-intake`,
 `setup-github-webhooks`, `setup-github-cursor`, digest URL notes) land
-as PRs here — see `docs/skill-harvest-log.md`.
+as PRs here â€” see `docs/skill-harvest-log.md`.

@@ -34,7 +34,7 @@ Visionary required on FR path; success gate before dispatch; no
 `gh repo create` on FR. Sync `agentic_build` `.grok/skills/visionary`
 and `bob-spec-intake` Feature request step (CAST IRON).
 
-## 2026-09-24 — foundation honesty box
+## 2026-09-24 â€” foundation honesty box
 
 Added `.grok/skills/harvest-agent-skills/SKILL.md`. Home:
 `https://github.com/SimonBarnett/skills-visionary`. Report
@@ -127,3 +127,8 @@ must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
 tray cues. Documented in `harvest-skills-visionary`; durable script fix in
 bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
 with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.
+
+## 2026-11-20 - FR #89 Always call this Plan Agent
+
+- Landing, layout title, MCP `serverInfo.name`, plan mocks, README lead: **Plan Agent** (bobiverse #7458 twin).
+- Forbidden old names gated by `tests/plan-agent-name.test.mjs`.

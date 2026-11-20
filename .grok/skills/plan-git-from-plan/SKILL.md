@@ -112,6 +112,7 @@ leave Plan-only git setup only in `~/.grok/skills`.
 - Restart IRC.
 - Stamp UAT.
 - Add `cursoragent` / `cursor[bot]` as collaborators.
+
 ## FR #24: headless Plan, seed FRs, stubs
 
 ### Headless Plan (non-interactive)
@@ -120,9 +121,9 @@ The tray Plan menu launches interactive `agent.exe --permission-mode plan`.
 For headless runs use a **temp working folder** (never the live `D:\ai`
 trees), for example:
 
-`
-agent.exe -p \"<prompt>\" --cwd <skills-visionary clone> --always-approve --max-turns N --output-format streaming-messages-json --leader-socket ~/.grok/leader-<name>.sock --rules \"<plan rules>\"
-`
+```text
+agent.exe -p "<prompt>" --cwd <skills-visionary clone> --always-approve --max-turns N --output-format streaming-messages-json --leader-socket ~/.grok/leader-<name>.sock --rules "<plan rules>"
+```
 
 Redirect stdout to a file (a pipe owned by a short-lived shell gets
 orphaned). Optional helper: `tools/Start-PlanHeadless.ps1`.
@@ -144,6 +145,6 @@ After the webhook gate exits 0:
 
 ### Mermaid
 
-Many small human-scale diagrams (node ceiling + captions). See open
-issue #22 for the validator/template ceiling; do not ship one huge
-mermaid in the vision pack.
+Many small human-scale diagrams (node ceiling + captions). See FR #22 /
+PR #92 for the validator/template ceiling; do not ship one huge mermaid
+in the vision pack.

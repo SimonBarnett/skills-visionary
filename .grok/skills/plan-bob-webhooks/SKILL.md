@@ -137,6 +137,7 @@ gh api repos/SimonBarnett/<name>/hooks/<id>/deliveries --jq '.[0] | {event,statu
 - Replace unrelated hooks.
 - Restart IRC / touch chair.
 - Stamp UAT.
+
 ## FR #24: prefer bob_git_hook; ANSI; filtered 400
 
 - Prefer `python tools/bob_git_hook.py SimonBarnett/<name>` (exit 0) as

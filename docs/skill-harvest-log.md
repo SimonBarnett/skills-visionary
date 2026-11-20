@@ -99,3 +99,9 @@ seed-FR ordering and live-queue warning; harvest without gh via intake.
 `bob_git_hook` warns on NICKNAME_RESERVED and accepts ping announce via
 2xx delivery fallback when the local ear nick is broken; Plan skill
 documents the preflight.
+
+## 2026-11-20 - FR #77 human-readable README
+
+Rewrote root README for humans: plain overview, skills table with when-to-use,
+Bob URLs on `bob.ntsa.uk`, upcoming `plan.ntsa.uk` / `/mcp`, kept xcopy
+install and vision-pack validator command. Tools still on old host tracked as #99.

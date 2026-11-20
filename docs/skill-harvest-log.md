@@ -1,5 +1,13 @@
 # Skill harvest log
 
+## 2026-11-12 - plan fetch cwd and LOCKED line
+
+- Fetch the product only after Set-Location to that clone, or with
+  git -C. A fetch started in the plan folder updates the git worktree
+  that contains the plan folder.
+- validate-vision-pack.py accepts a Shape lock only when a line is
+  exactly LOCKED. A trailing period fails the gate.
+
 ## 2026-09-23 - repo intake
 
 New public repo SimonBarnett/skills-visionary. Vision pack + HTML
@@ -53,3 +61,9 @@ filed, read each issue state again before telling the operator the
 slices are still open. Workers can merge the first slices in that
 window. A docs park that uses `Refs` does not keep those issues open
 once their own implementation pull requests merge.
+
+## 2026-11-12 - private-host page is not host-only code
+
+`visionary` Plan-seat repo hygiene: when `web_fetch` refuses a private
+address, confirm the implementation with `git show origin/main` or the
+operator's merged PR list before treating the UI as host-only config.

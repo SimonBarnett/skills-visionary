@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- Plan tools calling gh api without a TTY must set NO_COLOR=1 and strip ANSI before json.loads; skip allow_forking on user public repos.

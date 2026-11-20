@@ -79,7 +79,26 @@ SaaS, instance URLs, secrets, or procedure ENAMEs.
 ### 5. Architecture
 
 Who talks to what. Process / data / trust boundaries. Enough to start
-Phase 0. Not a 40-page SAD. ASCII diagram is enough.
+Phase 0. Not a 40-page SAD.
+
+**Mermaid diagrams (human scale — FR #22):** many small diagrams, never
+one giant one.
+
+- One diagram per concern: a single flow, state machine, sequence, or
+  deployment slice.
+- Keep each to about 5–9 nodes (hard ceiling **12**). If bigger, split.
+- Put a one-sentence caption on the line immediately above every
+  mermaid fenced block: what it shows and why it matters.
+- Optionally one small index/overview diagram whose boxes are the names
+  of the detailed diagrams — never the full detail.
+- Prefer the right type: `sequenceDiagram` for message exchanges,
+  `stateDiagram-v2` for lifecycles/queues, `flowchart` for decisions,
+  and a small `flowchart` for deployment.
+- Use the same component name across diagrams.
+- No diagram should need horizontal scrolling on GitHub at normal width.
+
+`python tools/validate-vision-pack.py` fails when a mermaid block has no
+caption or exceeds the node ceiling.
 
 ### 6. Screens (HTML mocks)
 
@@ -164,6 +183,11 @@ the data, never to this skill book. No secrets in exports or commits.
   session. Do not run that installer from a deferred system custom
   action: it cannot prompt, and it writes the system profile. A silent
   install does not download.
+- When a product has both skill playbooks and a launcher/build
+  enforcement path, skill wording alone is not proof of the store. Grep
+  exit checks, rules templates, and README for a second store (skills
+  can already point at one webhook while the launcher still fetches
+  another origin).
 
 ## Harvest (AUTOMATIC)
 

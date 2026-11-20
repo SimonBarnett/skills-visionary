@@ -81,6 +81,19 @@ custom action. Intake `in_5de6482911f24606` filed the CLI half first.
 
 Parked intake for issue #1 is live on main: `docs/vision.md`, `docs/functional-spec.md`, `docs/mocks/`, `.grok/skills/visionary`, `.grok/skills/harvest-skills-visionary`. Phase 0 is the playbook. No UAT stamp.
 
+## 2026-11-07 - grep launcher for store drift (not skills only)
+
+`visionary` Plan-seat repo hygiene: when skills and a launcher/build
+enforcement path both exist, grep exit checks, rules templates, and
+README for a second store. Skill wording alone is not proof.
+
+## 2026-11-20 - FR #24 Plan gaps from gh-Jeeves
+
+Documented and fixed: `bob_git_hook` NO_COLOR/ANSI strip; skip
+`allow_forking` on user public repos; Cursor All-repos skip grant;
+prefer `bob_git_hook` over New-BobGitWebhook alone; headless Plan path;
+seed-FR ordering and live-queue warning; harvest without gh via intake.
+
 ## 2026-11-20 - FR #25 nick-reserved irc.log gate
 
 `bob_git_hook` warns on NICKNAME_RESERVED and accepts ping announce via

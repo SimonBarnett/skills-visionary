@@ -43,3 +43,15 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## FR #24: report-back without GitHub
+
+Route order for honesty-box harvest:
+
+1. `gh`: open a PR or issue on this repo.
+2. No `gh` / not authenticated: POST to Bob intake
+   `https://irc.ntsa.uk/bob/v1/intake` (curl or `Invoke-RestMethod`).
+   Never ask anyone to create a GitHub account just to report back.
+3. Offline: write `harvest-outbox/` and retry.
+
+(Fleet bobiverse harvest scripts follow the same order.)

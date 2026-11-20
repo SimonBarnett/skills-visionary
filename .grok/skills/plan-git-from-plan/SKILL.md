@@ -130,3 +130,39 @@ Never cite `-Repo SimonBarnett/bobiverse` for how-to-plan harvest.
 - Restart IRC.
 - Stamp UAT.
 - Add `cursoragent` / `cursor[bot]` as collaborators.
+
+## FR #24: headless Plan, seed FRs, stubs
+
+### Headless Plan (non-interactive)
+
+The tray Plan menu launches interactive `agent.exe --permission-mode plan`.
+For headless runs use a **temp working folder** (never the live `D:\ai`
+trees), for example:
+
+```text
+agent.exe -p "<prompt>" --cwd <skills-visionary clone> --always-approve --max-turns N --output-format streaming-messages-json --leader-socket ~/.grok/leader-<name>.sock --rules "<plan rules>"
+```
+
+Redirect stdout to a file (a pipe owned by a short-lived shell gets
+orphaned). Optional helper: `tools/Start-PlanHeadless.ps1`.
+
+### Seed FRs from a brief
+
+After the webhook gate exits 0:
+
+1. Create issues **before** committing stubs that cite them (or open a
+   follow-up PR that links the numbers). Do not leave `TODO: seed FR #N`
+   in the first commit when the issues do not exist yet.
+2. Title pattern + labels (`known-issue` / `gate-blocking` as needed);
+   pin the headline acceptance FR as #1 when that is the product intent.
+3. Space issue creation; keep bodies small (anti-omnibus).
+4. **Warning:** new issues go straight into the live fleet unaccepted
+   queue and are claimable by workers. Prefer a backlog-only label /
+   queue opt-out when seeding a large known-issue list, or warn the
+   operator that seeds are live.
+
+### Mermaid
+
+Many small human-scale diagrams (node ceiling + captions). See FR #22 /
+PR #92 for the validator/template ceiling; do not ship one huge mermaid
+in the vision pack.

@@ -189,6 +189,21 @@ the app grant. A human fork-PR still opens without a collaborator invite.
 - `PUT collaborators/cursor[bot]` (404: not a user).
 - Stamp UAT.
 - Depend on full `agentic_build` skill install.
+
+## FR #24: user public repos and Cursor grant
+
+- Do **not** PATCH `allow_forking=true` on SimonBarnett **user public**
+  repos. GitHub returns HTTP 422 (`Allow forks setting can only be changed
+  on org-owned private repositories`). Forking is already on for public
+  user repos. Still set merge/squash/rebase buttons, `allow_auto_merge`,
+  and `delete_branch_on_merge` as needed.
+- Cursor GitHub App: if Repository access is already **All repositories**
+  (settings/installations), **skip** the grant step. Only prompt a human
+  when the install is **Only select repositories**.
+- `Grant-CursorGitHubApp.ps1` is GUI-only (opens browser). Headless Plan
+  seats: pass `-NoBrowser` and print the URLs only (do not require
+  `Start-Process`). Simon must click when Selected-repos.
+
 ## FR #42: harvest repo for Plan process
 
 How-to-plan harvest / intake examples use `-Repo SimonBarnett/skills-visionary`.

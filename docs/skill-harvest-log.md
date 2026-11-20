@@ -87,6 +87,19 @@ Parked intake for issue #1 is live on main: `docs/vision.md`, `docs/functional-s
 enforcement path both exist, grep exit checks, rules templates, and
 README for a second store. Skill wording alone is not proof.
 
+## 2026-11-20 - FR #24 Plan gaps from gh-Jeeves
+
+Documented and fixed: `bob_git_hook` NO_COLOR/ANSI strip; skip
+`allow_forking` on user public repos; Cursor All-repos skip grant;
+prefer `bob_git_hook` over New-BobGitWebhook alone; headless Plan path;
+seed-FR ordering and live-queue warning; harvest without gh via intake.
+
+## 2026-11-20 - FR #25 nick-reserved irc.log gate
+
+`bob_git_hook` warns on NICKNAME_RESERVED and accepts ping announce via
+2xx delivery fallback when the local ear nick is broken; Plan skill
+documents the preflight.
+
 ## 2026-11-20 - FR #42 plan CAST IRON cites skills-visionary
 
 `plan-git-from-plan` CAST IRON Report/Harvest examples use

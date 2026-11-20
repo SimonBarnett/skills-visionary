@@ -43,3 +43,7 @@ it is plan content. Reviewers close a plan-content-only harvest with
 it here.
 
 Empty harvest: no commit. Do not stamp UAT.
+
+## Harvested lessons (intake)
+
+- Plan webhook gate: when irc.log shows NICKNAME_RESERVED, accept ping announce via 2xx delivery fallback; still refuse push until bob_git_hook exits 0.

@@ -53,17 +53,34 @@ def fleet_hook_body(url: str = HOOK_URL, secret: str | None = None) -> dict:
     return {"name": "web", "active": True, "events": list(EVENTS), "config": config}
 
 
+def strip_ansi(text: str) -> str:
+    """FR #24: gh may colour JSON when stdout is not a TTY."""
+    import re
+    return re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", text or "")
+
+
 def default_gh(args: list, stdin: str | None = None) -> str:
+    # FR #24: without a TTY, gh may emit ANSI around JSON and break json.loads.
+    env = os.environ.copy()
+    env.setdefault("NO_COLOR", "1")
+    env.setdefault("GH_FORCE_TTY", "0")
+    env.setdefault("CLICOLOR", "0")
     proc = subprocess.run(
         ["gh", "api", *args],
         input=stdin,
         capture_output=True,
         text=True,
         encoding="utf-8",
+        env=env,
     )
     if proc.returncode != 0:
-        raise RuntimeError(f"gh api {' '.join(args[:3])} failed: {proc.stderr.strip()[:300]}")
-    return proc.stdout
+        err = strip_ansi(proc.stderr.strip())[:300]
+        # 400 from /bob/v1/git deliveries often means receiver secret-filter
+        # (agentic_irc #206 markers in issue/PR/commit text). Surface that.
+        if "400" in err or "Bad Request" in err:
+            err = err + " (possible receiver filter / secret marker - see plan-bob-webhooks)"
+        raise RuntimeError(f"gh api {' '.join(args[:3])} failed: {err}")
+    return strip_ansi(proc.stdout)
 
 
 def gh_json(gh: GhRunner, args: list, stdin: str | None = None):

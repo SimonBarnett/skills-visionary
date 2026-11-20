@@ -75,3 +75,10 @@ pack. A per-machine installer that offers a per-user CLI detects
 same-named executables by install directory, prompts in the interactive
 user session, and does not run that installer from a deferred system
 custom action. Intake `in_5de6482911f24606` filed the CLI half first.
+
+## 2026-11-20 - FR #24 Plan gaps from gh-Jeeves
+
+Documented and fixed: `bob_git_hook` NO_COLOR/ANSI strip; skip
+`allow_forking` on user public repos; Cursor All-repos skip grant;
+prefer `bob_git_hook` over New-BobGitWebhook alone; headless Plan path;
+seed-FR ordering and live-queue warning; harvest without gh via intake.

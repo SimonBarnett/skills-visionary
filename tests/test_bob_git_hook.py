@@ -349,3 +349,25 @@ def test_mrb_fleet_create_body_never_includes_secret_key():
     assert "secret" not in body["config"]
     with_secret = bgh.fleet_hook_body(secret="x")
     assert with_secret["config"]["secret"] == "x"
+
+def test_fr24_strip_ansi_for_json_loads():
+    colored = "\x1b[32m[]\x1b[0m"
+    assert json.loads(bgh.strip_ansi(colored)) == []
+
+
+def test_fr24_default_gh_sets_no_color(monkeypatch):
+    seen = {}
+
+    def fake_run(cmd, **kwargs):
+        seen["env"] = kwargs.get("env") or {}
+        class P:
+            returncode = 0
+            stdout = "\x1b[1m{\"ok\":true}\x1b[0m"
+            stderr = ""
+        return P()
+
+    monkeypatch.setattr(bgh.subprocess, "run", fake_run)
+    out = bgh.default_gh(["repos/SimonBarnett/x"])
+    assert json.loads(out) == {"ok": True}
+    assert seen["env"].get("NO_COLOR") == "1"
+    assert seen["env"].get("GH_FORCE_TTY") == "0"

@@ -99,3 +99,9 @@ seed-FR ordering and live-queue warning; harvest without gh via intake.
 `bob_git_hook` warns on NICKNAME_RESERVED and accepts ping announce via
 2xx delivery fallback when the local ear nick is broken; Plan skill
 documents the preflight.
+
+## 2026-11-20 - FR #79 vision pack website + plan.ntsa.uk
+
+Updated `docs/vision.md`: Shape Primary website; Success rows for README,
+DAG, MCP, DNS, bob.ntsa.uk link; Amplify WEB_COMPUTE + Slab DNS architecture;
+Screens point at plan-home/empty/error. `validate-vision-pack` exits 0.

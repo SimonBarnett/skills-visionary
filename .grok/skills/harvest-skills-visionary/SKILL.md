@@ -55,3 +55,21 @@ Route order for honesty-box harvest:
 3. Offline: write `harvest-outbox/` and retry.
 
 (Fleet bobiverse harvest scripts follow the same order.)
+
+## CAST IRON: explicit `-Repo` skills-visionary (FR #3318 / #61 / #63)
+
+Plan seats harvest how-to-plan lessons with:
+
+```text
+Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary '...' -Lesson '...'
+```
+
+or `Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind harvest ...`.
+
+**Never** let tipform / bob-worker / tray / OpenCode word cues in a how-to-plan
+lesson rewrite that tip to `SimonBarnett/bobiverse`. The honesty box for Plan
+process is this repo (`harvest-skills-visionary`). Bob tooling lessons from
+worker/fleet seats still route to bobiverse (FR #3959 a-search stub guard).
+
+If a harvest tip lands on bobiverse with Plan how-to-plan content: close it
+MOVED citing the skills-visionary tip (or re-file here), never leave both open.

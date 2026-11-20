@@ -104,3 +104,11 @@ documents the preflight.
 
 `plan-git-from-plan` CAST IRON Report/Harvest examples use
 `-Repo SimonBarnett/skills-visionary`; regression test pins plan-* skills.
+
+## 2026-11-20 - FR #61 / #63 explicit -Repo skills-visionary
+
+Plan how-to-plan harvests with explicit `-Repo SimonBarnett/skills-visionary`
+must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
+tray cues. Documented in `harvest-skills-visionary`; durable script fix in
+bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
+with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.

@@ -80,3 +80,9 @@ custom action. Intake `in_5de6482911f24606` filed the CLI half first.
 ## 2026-11-20 - Phase 0 visionary pack (FR #1) complete on main
 
 Parked intake for issue #1 is live on main: `docs/vision.md`, `docs/functional-spec.md`, `docs/mocks/`, `.grok/skills/visionary`, `.grok/skills/harvest-skills-visionary`. Phase 0 is the playbook. No UAT stamp.
+
+## 2026-11-20 - FR #25 nick-reserved irc.log gate
+
+`bob_git_hook` warns on NICKNAME_RESERVED and accepts ping announce via
+2xx delivery fallback when the local ear nick is broken; Plan skill
+documents the preflight.

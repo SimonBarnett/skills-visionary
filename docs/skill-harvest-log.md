@@ -86,3 +86,10 @@ Parked intake for issue #1 is live on main: `docs/vision.md`, `docs/functional-s
 `visionary` Plan-seat repo hygiene: when skills and a launcher/build
 enforcement path both exist, grep exit checks, rules templates, and
 README for a second store. Skill wording alone is not proof.
+
+## 2026-11-20 - FR #24 Plan gaps from gh-Jeeves
+
+Documented and fixed: `bob_git_hook` NO_COLOR/ANSI strip; skip
+`allow_forking` on user public repos; Cursor All-repos skip grant;
+prefer `bob_git_hook` over New-BobGitWebhook alone; headless Plan path;
+seed-FR ordering and live-queue warning; harvest without gh via intake.

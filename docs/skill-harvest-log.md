@@ -80,3 +80,9 @@ custom action. Intake `in_5de6482911f24606` filed the CLI half first.
 ## 2026-11-20 - Phase 0 visionary pack (FR #1) complete on main
 
 Parked intake for issue #1 is live on main: `docs/vision.md`, `docs/functional-spec.md`, `docs/mocks/`, `.grok/skills/visionary`, `.grok/skills/harvest-skills-visionary`. Phase 0 is the playbook. No UAT stamp.
+
+## 2026-11-07 - grep launcher for store drift (not skills only)
+
+`visionary` Plan-seat repo hygiene: when skills and a launcher/build
+enforcement path both exist, grep exit checks, rules templates, and
+README for a second store. Skill wording alone is not proof.

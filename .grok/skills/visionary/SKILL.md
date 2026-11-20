@@ -164,6 +164,11 @@ the data, never to this skill book. No secrets in exports or commits.
   session. Do not run that installer from a deferred system custom
   action: it cannot prompt, and it writes the system profile. A silent
   install does not download.
+- When a product has both skill playbooks and a launcher/build
+  enforcement path, skill wording alone is not proof of the store. Grep
+  exit checks, rules templates, and README for a second store (skills
+  can already point at one webhook while the launcher still fetches
+  another origin).
 
 ## Harvest (AUTOMATIC)
 

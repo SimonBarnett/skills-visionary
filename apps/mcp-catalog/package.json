@@ -9,7 +9,7 @@
     "build": "node scripts/sync-skill-dag.mjs && node scripts/check-dag.mjs && next build",
     "start": "next start",
     "smoke": "node scripts/smoke-mcp.mjs",
-    "test": "node --test tests/check-dag.test.mjs tests/landing.test.mjs tests/mcp-tools.test.mjs"
+    "test": "node --test tests/check-dag.test.mjs tests/landing.test.mjs tests/mcp-tools.test.mjs tests/amplify-hosting.test.mjs"
   },
   "engines": {
     "node": ">=20"

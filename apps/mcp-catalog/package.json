@@ -3,12 +3,28 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "next dev",
     "sync-dag": "node scripts/sync-skill-dag.mjs",
     "check-dag": "node scripts/check-dag.mjs",
-    "build": "node scripts/sync-skill-dag.mjs && node scripts/check-dag.mjs",
-    "test": "node --test tests/check-dag.test.mjs"
+    "build": "node scripts/sync-skill-dag.mjs && node scripts/check-dag.mjs && next build",
+    "start": "next start",
+    "stdio": "tsx stdio.mjs",
+    "test": "node --import tsx --test tests/check-dag.test.mjs tests/mcp-handlers.test.mjs",
+    "smoke": "node scripts/smoke-mcp.mjs"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.10",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
   }
 }

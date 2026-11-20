@@ -120,3 +120,9 @@ must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
 tray cues. Documented in `harvest-skills-visionary`; durable script fix in
 bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
 with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.
+
+## 2026-11-20 - FR #82 MCP Next.js scaffold
+
+Scaffolded `apps/mcp-catalog` Next.js 14 App Router with `POST /mcp`
+(`list_catalog`, `get_skill`), protocol 2024-11-05. `npm test` 5 passed;
+`npm run build` + `npm run smoke` ok (7 skills).

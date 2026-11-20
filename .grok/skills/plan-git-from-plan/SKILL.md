@@ -12,6 +12,20 @@ description: >
 
 # Plan → git setup (orchestrator)
 
+> **CAST IRON RULE - HARVEST AND FILE EVERYTHING (read this first, every time).**
+> 1. ALWAYS harvest skills you learn and file EVERY issue / FR / bug / gap you find to the intake webhook in the
+>    SAME turn. Never leave a finding unfiled, never "note it for later", never skip it because it is small.
+> 2. File with the intake webhook (no secret or login needed; `POST https://bob.ntsa.uk/bob/v1/intake`; offline it is
+>    queued locally and retried):
+>    `..\scripts\Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind issue -Title "short title" -Body "what / where / evidence / fix"`
+>    (`-Kind issue|fr|skill|harvest`; always pass an explicit `-Repo owner/name`).
+>    How-to-plan / Plan process lessons use **`-Repo SimonBarnett/skills-visionary`** (FR #42 / #3318 / #3506 / #3667).
+>    Use `-Repo SimonBarnett/bobiverse` only for fleet-tooling docs (worker, Jeeves, tray, intake), never for Plan playbooks.
+> 3. BEFORE finishing ANY debugging session run the harvest step:
+>    `..\scripts\Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary "what broke / what fixed it" -Lesson "one learned playbook line"`
+>    then `..\scripts\Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Flush` to resend anything that was queued while offline.
+> 4. Never put a token, password, SASL/NickServ secret, key or private hostname in a filing, a skill or a log.
+
 TipForm **Plan** seats load **skills-visionary only**. This skill is the
 self-contained bridge that used to live inside `agentic_build`
 `bob-spec-intake` (create + webhook + Cursor app). Fleet build/IRC jobs
@@ -102,6 +116,10 @@ These playbooks were harvested from `agentic_build` (and webhook URL
 docs shared with `agentic_irc` / bobiverse). Changes land as PRs on
 `SimonBarnett/skills-visionary` via `harvest-skills-visionary`. Do not
 leave Plan-only git setup only in `~/.grok/skills`.
+
+**FR #42:** every `Report-BobiverseIntakeIssue` / `Invoke-BobiverseHarvest`
+example in this Plan skill uses `-Repo SimonBarnett/skills-visionary`.
+Never cite `-Repo SimonBarnett/bobiverse` for how-to-plan harvest.
 
 ## Do not
 

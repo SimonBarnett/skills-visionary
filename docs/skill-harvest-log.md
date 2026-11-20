@@ -94,10 +94,21 @@ Documented and fixed: `bob_git_hook` NO_COLOR/ANSI strip; skip
 prefer `bob_git_hook` over New-BobGitWebhook alone; headless Plan path;
 seed-FR ordering and live-queue warning; harvest without gh via intake.
 
+## 2026-11-20 - FR #25 nick-reserved irc.log gate
+
+ob_git_hook warns on NICKNAME_RESERVED and accepts ping announce via
+2xx delivery fallback when the local ear nick is broken; Plan skill
+documents the preflight.
+
+## 2026-11-20 - FR #42 plan CAST IRON cites skills-visionary
+
+plan-git-from-plan CAST IRON Report/Harvest examples use
+-Repo SimonBarnett/skills-visionary; regression test pins plan-* skills.
+
 ## 2026-11-20 - FR #61 / #63 explicit -Repo skills-visionary
 
-Plan how-to-plan harvests with explicit `-Repo SimonBarnett/skills-visionary`
+Plan how-to-plan harvests with explicit -Repo SimonBarnett/skills-visionary
 must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
-tray cues. Documented in `harvest-skills-visionary`; durable script fix in
-bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
+tray cues. Documented in harvest-skills-visionary; durable script fix in
+bobiverse Invoke-BobiverseHarvest.ps1 (FR #3318 keep path). Twin #63 closed
 with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.

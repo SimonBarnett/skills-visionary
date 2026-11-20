@@ -371,3 +371,26 @@ def test_fr24_default_gh_sets_no_color(monkeypatch):
     assert json.loads(out) == {"ok": True}
     assert seen["env"].get("NO_COLOR") == "1"
     assert seen["env"].get("GH_FORCE_TTY") == "0"
+
+
+def test_fr25_irc_log_nick_broken_detects_reserved(tmp_path):
+    log = tmp_path / "irc.log"
+    log.write_text(
+        ":irc.example NOTICE bob-marchhare :*** NICKNAME_RESERVED :Nickname is already in use.\n",
+        encoding="utf-8",
+    )
+    assert bgh.irc_log_nick_broken([log]) is True
+    clean = tmp_path / "clean.log"
+    clean.write_text(":Jeeves!~u@h PRIVMSG #bobiverse :GIT ping x\n", encoding="utf-8")
+    assert bgh.irc_log_nick_broken([clean]) is False
+
+
+def test_fr25_ping_delivery_fallback_when_nick_reserved(tmp_path, monkeypatch):
+    log = tmp_path / "irc.log"
+    log.write_text(
+        ":irc.example NOTICE * :NICKNAME_RESERVED :Nickname is already in use.\n",
+        encoding="utf-8",
+    )
+    gh = FakeGh(hooks=[dict(FLEET)])
+    rc = bgh.main([REPO, "--irc-log", str(log), "--timeout", "0"], gh=gh, post=lambda *a: 204)
+    assert rc == 0

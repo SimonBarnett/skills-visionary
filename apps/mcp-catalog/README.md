@@ -14,7 +14,15 @@ change; do not edit catalog copies as the primary store.
 - Sync: `npm run sync-dag` copies into `data/`
 - Gate: `npm run check-dag` fails on catalog↔DAG drift, dangling edges,
   skill-node cycles (topic↔topic loops OK), or secret-like blobs in DAG nodes
-- `npm run build` = sync + check (Next.js scaffold is FR-E)
+
+## Next.js (FR-E / FR-F)
+
+- Landing `GET /` matches `docs/mocks/plan-home.html` (empty/error branches too)
+- MCP `POST /mcp` JSON-RPC 2024-11-05: `list_catalog`, `get_skill`
+- Public MCP URL: `https://plan.ntsa.uk/mcp`
+- `npm run build` = sync + check-dag + `next build`
+- `npm run smoke` = local catalog non-empty check
+- No secrets in env; stdio is local-only (not served)
 
 ## Pattern
 

@@ -1,5 +1,12 @@
 # Skill harvest log
 
+## 2026-11-20 - FR #83 / #82 plan.ntsa.uk landing + MCP scaffold
+
+- Next.js 14 App Router under `apps/mcp-catalog`: `GET /` landing
+  (plan-home / empty / error) and `POST /mcp` `list_catalog` /
+  `get_skill` (protocol 2024-11-05).
+- Public MCP URL `https://plan.ntsa.uk/mcp`; links to bob.ntsa.uk + GitHub.
+
 ## 2026-11-20 - FR #81 skill DAG + catalog mirrors
 
 - Added `docs/skill-sources/skills-visionary/_dag` and

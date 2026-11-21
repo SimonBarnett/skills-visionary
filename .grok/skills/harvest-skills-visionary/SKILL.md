@@ -102,6 +102,10 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 
 ## Harvested lessons (intake)
 
+- Connect Plan MCP in Grok Build with `grok mcp add --transport http plan https://plan.ntsa.uk/mcp` then `grok mcp doctor plan` (2 tools). Mid-session add can doctor-green while `plan__list_catalog` / `plan__get_skill` stay missing until MCP reconnect or a new session. Skill: `plan-mcp-setup`.
+- Cross-repo Plan themes (bobiverse tray + skills-visionary Plan agent + priority-mcp Priority agent): park **one GitHub issue per acceptance row** with a per-repo index markdown; do not one omnibus issue per repo. Phase-gate models webhook / Weights before tray start-arg consumers; Plan/Priority MSI FRs may build in parallel; bob-ear consume waits on vendor assets. How-to-plan only — product FR bodies stay in each repo's docs.
+- `validate-vision-pack.py` rejects Success rows whose how-measured lacks an observable (path like `docs/`, backtick command, CI/workflow cue). Patch how-measured before park; skills-visionary `vision-pack` validate CI is required — fix the pack, do not teach admin-merge.
+- Plan agent **product** binary/MSI/GANTT branding harvest and FRs live on **skills-visionary** / plan.ntsa.uk releases; bobiverse owns tray menu consume and bob-ear MSI embed. Do not treat `bob-worker --mode plan` as the long-term Plan product binary (VIS product slices).
 - When FR-F landing depends on FR-E Next scaffold and main only has DAG sync, co-implement both in one PR with Closes for each issue rather than GIVEUP on the dependency.
 - When product open issues are 0 after a closed stay-dark provider wave, Plan gap analysis targets vision UNKNOWN + parked drains + per-account enable docs - draft small FRs first and file one slice at a time (anti-omnibus); use detached origin/main worktree when the product clone is dirty/behind
 - When the operator explicitly says create all Phase-3 FRs, file many small Goal/Deliverables/Testable issues in one turn (one GitHub issue per FR) and close the park-process pointer with Refs - that satisfies anti-omnibus without leaving the backlog unfiled

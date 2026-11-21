@@ -164,3 +164,10 @@ install and vision-pack validator command. Tools still on old host tracked as #9
 Rewrote FR #84 / #86 entries after PowerShell double-quote escapes ate
 leading letters. Pin test forbids those corruptions and requires
 amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
+## 2026-11-21 - plan-mcp-setup + anti-omnibus multi-repo park lessons
+
+- New skill `.grok/skills/plan-mcp-setup`: `grok mcp add --transport http plan https://plan.ntsa.uk/mcp`, doctor, session reload for `plan__*` tools.
+- README: plan.ntsa.uk marked Live (was Upcoming); skills table includes plan-mcp-setup.
+- harvest-skills-visionary + visionary: multi-repo one-issue-per-row park, validate how-measured observables, Plan product vs bobiverse tray split.
+- Evidence: session parked VIS-01..09 / BOB / PRI indexes; MCP doctor 2 tools on plan.ntsa.uk.
+

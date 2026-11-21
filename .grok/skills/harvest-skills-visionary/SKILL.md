@@ -44,6 +44,7 @@ it here.
 
 Empty harvest: no commit. Do not stamp UAT.
 
+
 ## FR #24: report-back without GitHub
 
 Route order for honesty-box harvest:
@@ -77,3 +78,5 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 ## Harvested lessons (intake)
 
 - When FR-F landing depends on FR-E Next scaffold and main only has DAG sync, co-implement both in one PR with Closes for each issue rather than GIVEUP on the dependency.
+- When product open issues are 0 after a closed stay-dark provider wave, Plan gap analysis targets vision UNKNOWN + parked drains + per-account enable docs - draft small FRs first and file one slice at a time (anti-omnibus); use detached origin/main worktree when the product clone is dirty/behind
+

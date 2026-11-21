@@ -195,56 +195,82 @@ npm run build
 
 ## Live smoke how-to (FR-I)
 
-From pps/mcp-catalog (Node 20+):
+From `apps/mcp-catalog` (Node 20+):
 
-`ash
+```bash
 npm ci --include=dev --no-audit --fund=false
 npm run smoke:live
-`
+```
 
 Override origin when testing a default Amplify hostname before DNS. Copy the
 exact deployment URL from the Amplify console (it includes the branch prefix),
 or set:
 
-`ash
+```bash
 SMOKE_MCP_ORIGIN=https://<main-branch>.<appId>.amplifyapp.com npm run smoke:live
-`
+```
 
-Do not invent only https://<appId>.amplifyapp.com unless that is the URL the
+Do not invent only `https://<appId>.amplifyapp.com` unless that is the URL the
 console shows for the deployed branch.
 
 The script asserts:
 
-1. GET / returns HTTP 200 (Plan landing HTML).
-2. GET /mcp returns HTTP 200 and tool names list_catalog, get_skill.
-3. POST /mcp initialize returns protocol 2024-11-05 and
-   serverInfo.name mcp-skills-visionary.
-4. 	ools/call list_catalog returns a non-empty skills array.
+1. `GET /` returns HTTP 200 (Plan landing HTML).
+2. `GET /mcp` returns HTTP 200 and tool names `list_catalog`, `get_skill`.
+3. `POST /mcp` `initialize` returns protocol `2024-11-05` and
+   `serverInfo.name` `Plan Agent` (FR #89 display name).
+4. `tools/call` `list_catalog` returns a non-empty `skills` array.
 
 Exit 0 prints a JSON evidence block. Paste that block under **Live evidence
-(FR-I)** below (replace the pending stub).
+(FR-I)** below.
 
-Local catalog-only check (no network): 
-pm run smoke.
+Local catalog-only check (no network): `npm run smoke`.
 
-Also listed under **Verification after FR-H deploys** above; smoke:live is
+Also listed under **Verification after FR-H deploys** above; `smoke:live` is
 the paste-ready harness for that gate.
 
 ## Live evidence (FR-I)
 
-**Status (2026-11-20):** pending FR-H. plan.ntsa.uk does not resolve yet
-(Cloudflare DNS + Amplify app not attached). After FR-H deploys and DNS
-propagates, run 
-pm run smoke:live and replace this stub with the printed
-JSON (keep the heading).
+**Status (2026-11-21):** live. FR-H (#85) deployed.
 
-`json
+| Item | Value |
+| --- | --- |
+| Amplify app id | `d2ae27jt2feuj7` (eu-west-2, `WEB_COMPUTE`, branch `main`) |
+| Default domain | `main.d2ae27jt2feuj7.amplifyapp.com` |
+| Custom domain | `plan.ntsa.uk` -> `main`, domain status `AVAILABLE`, Amplify-managed certificate |
+| DNS | Cloudflare, DNS-only (not proxied): `plan` CNAME + ACM validation CNAME |
+| First good build | job 4, 2026-11-21 13:39 UTC, BUILD/DEPLOY/VERIFY SUCCEED (Node 20.20.2) |
+| Amplify env | `AMPLIFY_MONOREPO_APP_ROOT=apps/mcp-catalog`, `AMPLIFY_DIFF_DEPLOY=false`, `NPM_CONFIG_PRODUCTION=false`. No secrets. |
+
+`npm run smoke:live` (origin `https://plan.ntsa.uk`) printed `smoke-mcp-live PASS`:
+
+```json
 {
   "origin": "https://plan.ntsa.uk",
-  "when": null,
-  "note": "pending FR-H - re-run npm run smoke:live and paste PASS JSON here"
+  "when": "2026-11-21T13:40:01.975Z",
+  "homeStatus": 200,
+  "mcpGetTools": [
+    "list_catalog",
+    "get_skill"
+  ],
+  "serverInfo": {
+    "name": "Plan Agent",
+    "version": "0.1.0"
+  },
+  "protocolVersion": "2024-11-05",
+  "listCatalogCount": 7,
+  "listCatalogHost": "https://plan.ntsa.uk",
+  "sampleSkillNames": [
+    "harvest-agent-skills",
+    "harvest-skills-visionary",
+    "plan-bob-webhooks",
+    "plan-create-repo",
+    "plan-enable-prs",
+    "plan-git-from-plan",
+    "visionary"
+  ]
 }
-`
+```
 
 ### Expected after FR-H
 

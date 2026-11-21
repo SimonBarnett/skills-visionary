@@ -79,7 +79,7 @@ const init = await rpc('initialize', { protocolVersion: '2024-11-05', capabiliti
 evidence.serverInfo = init.result?.serverInfo || null;
 evidence.protocolVersion = init.result?.protocolVersion || null;
 assert.equal(init.result?.protocolVersion, '2024-11-05');
-assert.equal(init.result?.serverInfo?.name, 'mcp-skills-visionary');
+assert.equal(init.result?.serverInfo?.name, 'Plan Agent'); // FR #89 display name
 
 const listEnv = await rpc('tools/call', { name: 'list_catalog', arguments: {} }, 2);
 const listPayload = JSON.parse(toolText(listEnv));

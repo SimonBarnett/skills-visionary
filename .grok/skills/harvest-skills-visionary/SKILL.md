@@ -88,3 +88,4 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - After ComponentsPiece-style approve: file one GitHub issue per small FR, open docs-only park PR with Refs (not Closes), merge the docs PR, close only the mocks/park slice issue; leave implementation FRs open.
 - When an operator clarifies a gate after Phase park, amend the FR vision + affected small FR mirrors in a docs PR with Refs, comment the open issues, and file only the net-new slice (do not reopen the whole backlog).
 - After a parked Phase, operator commercial clarifications become an additive docs amend with new small FRs (Refs not Closes); close only the mocks-park issue after merge.
+- Auth for multi-role commercial surfaces: lock a pluggable provider registry with fail-closed contact claims, plus one email magic/OTP path; scaffold shortlist adapters stay-dark until credentials.

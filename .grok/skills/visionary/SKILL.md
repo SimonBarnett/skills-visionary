@@ -182,6 +182,7 @@ the data, never to this skill book. No secrets in exports or commits.
 - On an existing repo, read each named CLI usage reader on origin/main before a vision says add recording for every CLI. A session-total reader is not a per-model reader. A missing local counter stays UNKNOWN. Do not plan a fabricated zero. Record one line per CLI: already measured, partial (name the missing field), or UNKNOWN, and lock success rows against that line.
 - A display gap that a merged PR already fixes is briefed with that PR. Do not file a second FR for the same paint.
 - A late visual add (logo or mark) needs TipForm HTML mocks in the same vision pack before filing.
+- When docs/mocks/home.html already exists for another surface, park the new wireframes in docs/mocks/<slug>/home.html, empty.html, and error.html. Point validate-vision-pack.py --mocks-dir at that subfolder. Do not overwrite the existing trio. Before filing, read open issues that share the UI noun and compare the Goal line. A page required to drop a field is a different slice from a page that must show that field. Do not merge those drafts into one issue.
 - Parking FR docs: copy the drafts into a clean worktree from
   `origin/main` (not the dirty local clone), commit docs only, reference
   the implementation issues with `Refs #N` (never `Closes`), push a

@@ -179,6 +179,7 @@ the data, never to this skill book. No secrets in exports or commits.
 - Public download labels use the product name (Priority Agent), never an internal release tag.
 - Before locking who publishes a live feed, check the live publisher. Do not lock from the operator assertion alone.
 - When a new agent kind is claimed on origin/main, also probe the live frozen worker binary and the install fuel JSON. Closed GitHub FRs do not mean the seat binary can select that kind. A source-only fast-forward without a rebuild leaves the tray on the old decision table.
+- On an existing repo, read each named CLI usage reader on origin/main before a vision says add recording for every CLI. A session-total reader is not a per-model reader. A missing local counter stays UNKNOWN. Do not plan a fabricated zero. Record one line per CLI: already measured, partial (name the missing field), or UNKNOWN, and lock success rows against that line.
 - A display gap that a merged PR already fixes is briefed with that PR. Do not file a second FR for the same paint.
 - A late visual add (logo or mark) needs TipForm HTML mocks in the same vision pack before filing.
 - Parking FR docs: copy the drafts into a clean worktree from

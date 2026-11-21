@@ -1,11 +1,20 @@
-﻿"""MRB FR#19: every Plan new-repo requirement must be on main."""
+"""MRB FR#19: every Plan new-repo requirement must be on main."""
 from __future__ import annotations
 
 import re
 import subprocess
+import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+import pytest
+
+_TESTS = Path(__file__).resolve().parent
+if str(_TESTS) not in sys.path:
+    sys.path.insert(0, str(_TESTS))
+
+from ps_runtime import find_powershell  # noqa: E402
+
+ROOT = _TESTS.parent
 
 
 def _read(rel: str) -> str:
@@ -31,7 +40,10 @@ def test_fr19_ps51_webhook_helper_ascii_and_parses():
     for bad in ("\u2014", "\u2013", "\u2018", "\u2019", "\u201c", "\u201d"):
         assert bad not in text
     assert "https://irc.ntsa.uk/bob/v1/git" in text
-    ps = "powershell.exe"
+    # FR #52: ASCII always; parse soft-skips when powershell/pwsh absent (Ubuntu CI)
+    ps = find_powershell()
+    if ps is None:
+        pytest.skip("powershell/pwsh not on PATH (Linux CI); ASCII checks already ran")
     cmd = (
         "$e=$null;$t=$null;"
         "[void][System.Management.Automation.Language.Parser]::ParseFile("

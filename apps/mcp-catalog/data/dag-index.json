@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "built": "2026-11-20",
+  "note": "Slim index for skills-visionary plan DAG (FR #81).",
+  "nodeCount": 9,
+  "defaults": {
+    "maxSkills": 8,
+    "maxBytes": 24000
+  },
+  "nodes": [
+    {
+      "id": "topic:harvest",
+      "type": "topic",
+      "title": "harvest"
+    },
+    {
+      "id": "topic:plan",
+      "type": "topic",
+      "title": "plan"
+    },
+    {
+      "id": "skill:harvest-agent-skills",
+      "type": "catalog-skill",
+      "title": "harvest agent skills"
+    },
+    {
+      "id": "skill:harvest-skills-visionary",
+      "type": "catalog-skill",
+      "title": "harvest skills visionary"
+    },
+    {
+      "id": "skill:plan-bob-webhooks",
+      "type": "catalog-skill",
+      "title": "plan bob webhooks"
+    },
+    {
+      "id": "skill:plan-create-repo",
+      "type": "catalog-skill",
+      "title": "plan create repo"
+    },
+    {
+      "id": "skill:plan-enable-prs",
+      "type": "catalog-skill",
+      "title": "plan enable prs"
+    },
+    {
+      "id": "skill:plan-git-from-plan",
+      "type": "catalog-skill",
+      "title": "plan git from plan"
+    },
+    {
+      "id": "skill:visionary",
+      "type": "catalog-skill",
+      "title": "visionary"
+    }
+  ]
+}

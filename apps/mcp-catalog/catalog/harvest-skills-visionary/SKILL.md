@@ -44,7 +44,6 @@ it here.
 
 Empty harvest: no commit. Do not stamp UAT.
 
-
 ## FR #24: report-back without GitHub
 
 Route order for honesty-box harvest:
@@ -56,27 +55,3 @@ Route order for honesty-box harvest:
 3. Offline: write `harvest-outbox/` and retry.
 
 (Fleet bobiverse harvest scripts follow the same order.)
-
-## CAST IRON: explicit `-Repo` skills-visionary (FR #3318 / #61 / #63)
-
-Plan seats harvest how-to-plan lessons with:
-
-```text
-Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary '...' -Lesson '...'
-```
-
-or `Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind harvest ...`.
-
-**Never** let tipform / bob-worker / tray / OpenCode word cues in a how-to-plan
-lesson rewrite that tip to `SimonBarnett/bobiverse`. The honesty box for Plan
-process is this repo (`harvest-skills-visionary`). Bob tooling lessons from
-worker/fleet seats still route to bobiverse (FR #3959 a-search stub guard).
-
-If a harvest tip lands on bobiverse with Plan how-to-plan content: close it
-MOVED citing the skills-visionary tip (or re-file here), never leave both open.
-
-## Harvested lessons (intake)
-
-- When FR-F landing depends on FR-E Next scaffold and main only has DAG sync, co-implement both in one PR with Closes for each issue rather than GIVEUP on the dependency.
-- When product open issues are 0 after a closed stay-dark provider wave, Plan gap analysis targets vision UNKNOWN + parked drains + per-account enable docs - draft small FRs first and file one slice at a time (anti-omnibus); use detached origin/main worktree when the product clone is dirty/behind
-

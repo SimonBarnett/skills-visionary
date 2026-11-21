@@ -137,12 +137,20 @@ with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.
 - docs/amplify-hosting.md: WEB_COMPUTE (not static WEB), env allowlist (no secrets), Slab owns custom domain via FR-H #85.
 - Contract test: apps/mcp-catalog/tests/amplify-hosting.test.mjs.
 
+
 ## 2026-11-20 - FR #86 smoke:live against plan.ntsa.uk
 
 - apps/mcp-catalog/scripts/smoke-mcp-live.mjs +
   npm run smoke:live (GET /, GET/POST /mcp, list_catalog non-empty).
 - docs/amplify-hosting.md Live evidence (FR-I) paste instructions; pending FR-H DNS.
 - Contract test: apps/mcp-catalog/tests/smoke-live.test.mjs (no network).
+
+
+## 2026-11-20 - FR #77 human-readable README
+
+Rewrote root README for humans: plain overview, skills table with when-to-use,
+Bob URLs on `bob.ntsa.uk`, upcoming `plan.ntsa.uk` / `/mcp`, kept xcopy
+install and vision-pack validator command. Tools still on old host tracked as #99.
 
 ## 2026-11-21 - FR #113 skill-harvest-log Amplify spelling repair
 

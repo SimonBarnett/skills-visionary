@@ -1,5 +1,12 @@
 # Skill harvest log
 
+## 2026-11-21 - FR #90 anti-omnibus FRs
+
+- Plan Agent CAST IRON: file one small GitHub issue per FR draft
+  (Goal / Deliverables / Testable), sized for unpaid / non-frontier seats.
+- Never one omnibus issue. Keep a draft-code to issue-number map in the plan folder.
+- Home skill and catalog mirror: `.grok/skills/visionary/SKILL.md`.
+
 ## 2026-11-20 - FR #83 / #82 plan.ntsa.uk landing + MCP scaffold
 
 - Next.js 14 App Router under `apps/mcp-catalog`: `GET /` landing

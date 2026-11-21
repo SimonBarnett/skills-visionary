@@ -127,3 +127,10 @@ must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
 tray cues. Documented in `harvest-skills-visionary`; durable script fix in
 bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
 with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.
+
+## 2026-11-21 - FR #99 plan webhook defaults bob.ntsa.uk
+
+`bob_git_hook.py` / `New-BobGitWebhook.ps1` / `plan-bob-webhooks`
+(+ plan-git-from-plan / visionary citations + catalog mirrors) default
+to `https://bob.ntsa.uk/bob/v1/git` and `/bob/v1/report`. Event shape
+unchanged. README host switch remains FR-A #77.

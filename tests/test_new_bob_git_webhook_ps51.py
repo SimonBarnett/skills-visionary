@@ -54,7 +54,7 @@ def test_webhook_helper_targets_bob_v1_git_not_report():
     assert "/bob/v1/git" in text
     assert "plan-bob-webhooks" in text
     # Must not default hook URL to digest report
-    assert re.search(r'HookUrl\s*=\s*[\'"]https://irc\.ntsa\.uk/bob/v1/git', text)
+    assert re.search(r'HookUrl\s*=\s*[\'"]https://bob\.ntsa\.uk/bob/v1/git', text)
 
 
 def test_harvest_cast_iron_same_turn_in_skills():

@@ -16,7 +16,7 @@ FLEET = {
     "active": True,
     "events": ["issues", "pull_request", "push"],
     "created_at": "2026-09-25T08:04:21Z",
-    "config": {"url": "https://irc.ntsa.uk/bob/v1/git", "content_type": "json", "insecure_ssl": "0"},
+    "config": {"url": "https://bob.ntsa.uk/bob/v1/git", "content_type": "json", "insecure_ssl": "0"},
 }
 
 
@@ -72,7 +72,7 @@ def test_creates_exact_fleet_hook_when_absent():
         "name": "web",
         "active": True,
         "events": ["issues", "pull_request", "push"],
-        "config": {"url": "https://irc.ntsa.uk/bob/v1/git", "content_type": "json", "insecure_ssl": "0"},
+        "config": {"url": "https://bob.ntsa.uk/bob/v1/git", "content_type": "json", "insecure_ssl": "0"},
     }
     assert "secret" not in posted["config"]  # fleet standard: no secret
     assert bgh.hook_drift(hook) == []
@@ -132,7 +132,7 @@ def test_post_replay_sets_github_headers():
         return 204
 
     assert bgh.post_replay("issues", {"action": "opened"}, post=post) == 204
-    assert seen["url"] == "https://irc.ntsa.uk/bob/v1/git"
+    assert seen["url"] == "https://bob.ntsa.uk/bob/v1/git"
     assert seen["headers"]["X-GitHub-Event"] == "issues"
     assert seen["headers"]["Content-Type"] == "application/json"
 

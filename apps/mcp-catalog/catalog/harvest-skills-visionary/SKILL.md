@@ -20,13 +20,33 @@ Fleet/build jobs stay `agentic_build` `harvest-agent-skills`. IRC stays
 ## AUTOMATIC
 
 **ALWAYS** harvest new or changed visionary / plan-git playbooks to this
-repo **in the same turn** (branch + PR). Do not ask. Do not wait.
+repo **in the same turn**. Do not ask. Do not wait.
 Honesty box: foundation `.grok/skills/harvest-agent-skills`.
 
+**Plan-seat default (FR-K / #87):** report via Bob **intake**  -  no GitHub
+credentials required. Prefer:
+
+```text
+Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind harvest|skill|fr -Title '...' -Body '...'
+```
+
+and close the session with:
+
+```text
+Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary '...' -Lesson '...'
+Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Flush
+```
+
+When `gh` is authenticated **and** you already edited a skill in a local
+clone, a branch + PR is an **optional** extra (never push `origin/main`).
+Intake alone is enough for honesty-box success on a Plan seat with no
+`gh` login. Never put tokens in harvest bodies.
+
 If you learn a repeatable visionary rule (trigger, measurable success,
-shape/stack/mocks, plan-git webhook/PR path), edit the skill **now**,
-append `docs/skill-harvest-log.md`, commit on a branch, open a PR. Do not
-push `origin/main`. Do not leave the playbook only in `~/.grok/skills`.
+shape/stack/mocks, plan-git webhook/PR path), edit the skill **now** when
+you have a writable clone; otherwise file the lesson via intake with
+`-Kind harvest` / `-Kind skill`. Append `docs/skill-harvest-log.md` when
+the edit lands in-repo. Do not leave the playbook only in `~/.grok/skills`.
 
 ## What belongs here (how-to-plan only)
 
@@ -44,18 +64,23 @@ it here.
 
 Empty harvest: no commit. Do not stamp UAT.
 
+## FR #24 / FR-K (#87): Plan-seat harvest via Bob intake (no GitHub)
 
-## FR #24: report-back without GitHub
+**Intake-first** for Plan seats. Do **not** require `gh` auth or a GitHub
+account for honesty-box harvest.
 
-Route order for honesty-box harvest:
+Route order:
 
-1. `gh`: open a PR or issue on this repo.
-2. No `gh` / not authenticated: POST to Bob intake
-   `https://irc.ntsa.uk/bob/v1/intake` (curl or `Invoke-RestMethod`).
-   Never ask anyone to create a GitHub account just to report back.
-3. Offline: write `harvest-outbox/` and retry.
+1. **Default:** `Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind harvest|skill|fr ...`
+   -> `POST https://bob.ntsa.uk/bob/v1/intake` (HTTP 202). Offline: local
+   outbox queue; `Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Flush` retries.
+2. **Session closer (always):** `Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary '...' -Lesson '...'` then `-Flush`.
+3. **Optional when credentials exist:** `gh` branch + PR into this repo for
+   in-tree skill edits. Never a substitute for intake when `gh` is missing.
+   Never push `origin/main`. Never invent or paste tokens into bodies.
 
-(Fleet bobiverse harvest scripts follow the same order.)
+Never ask anyone to create a GitHub account just to report back.
+Never instruct that Plan harvest **requires** `gh login`.
 
 ## CAST IRON: explicit `-Repo` skills-visionary (FR #3318 / #61 / #63)
 
@@ -79,4 +104,15 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 
 - When FR-F landing depends on FR-E Next scaffold and main only has DAG sync, co-implement both in one PR with Closes for each issue rather than GIVEUP on the dependency.
 - When product open issues are 0 after a closed stay-dark provider wave, Plan gap analysis targets vision UNKNOWN + parked drains + per-account enable docs - draft small FRs first and file one slice at a time (anti-omnibus); use detached origin/main worktree when the product clone is dirty/behind
-
+- When the operator explicitly says create all Phase-3 FRs, file many small Goal/Deliverables/Testable issues in one turn (one GitHub issue per FR) and close the park-process pointer with Refs - that satisfies anti-omnibus without leaving the backlog unfiled
+- For a-search Phase-3 docs park: branch from detached origin/main worktree under plan/work/plan-*/repo, docs-only commit, push, gh pr create with Refs not Closes for implementation issues
+- For an AWS-installable release gap on a Node CDK service: inventory stack for Bucket/Secrets/VPC/DLQ/CI/deploy docs and verify every Code.fromAsset path can resolve shared/ and runtime deps (@aws-sdk, mssql) inside the zip - then file many small Goal/Deliverables/Testable FRs, not one omnibus deploy ticket
+- Second installable-release pass should re-check product stubs still returning empty payloads (/selftest), optional runtime deps (jose) not in package.json/stage, shared package files[] vs real dirs, API CORS/access logs, S3/SQS encryption defaults, and queue visibility vs Lambda timeout
+- Post-installable waves: file one enable FR per stay-dark provider (never bulk-enable), plus separate small FR slices for Creators-behind-flag, WAFv2 associate, and multi-region strategy docs before second-region CDK
+- For a-search FR gap analysis when C:\ai\a-search is dirty or behind, git fetch then worktree add --detach under plan/work/plan-*/repo from origin/main before comparing Success rows; keep FR drafts unfiled until human approve (anti-omnibus).
+- After ComponentsPiece-style approve: file one GitHub issue per small FR, open docs-only park PR with Refs (not Closes), merge the docs PR, close only the mocks/park slice issue; leave implementation FRs open.
+- When an operator clarifies a gate after Phase park, amend the FR vision + affected small FR mirrors in a docs PR with Refs, comment the open issues, and file only the net-new slice (do not reopen the whole backlog).
+- After a parked Phase, operator commercial clarifications become an additive docs amend with new small FRs (Refs not Closes); close only the mocks-park issue after merge.
+- Auth for multi-role commercial surfaces: lock a pluggable provider registry with fail-closed contact claims, plus one email magic/OTP path; scaffold shortlist adapters stay-dark until credentials.
+- skills-visionary harvest tips must never teach admin-merge; Ubuntu validate red on test_fr19_ps51 is ambient env-only - arm --auto --squash only (FR #3948) and keep soft-skip FR #52
+- FIX README tip CONFLICTING on skill-harvest-log: fold origin/main, keep main entries then tip FR entry; file separate issue for unrelated main corruption.

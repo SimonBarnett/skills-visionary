@@ -24,7 +24,7 @@ test('smoke-mcp-live.mjs targets plan.ntsa.uk and checks GET / + list_catalog', 
   assert.match(script, /list_catalog/);
   assert.match(script, /GET \//);
   assert.match(script, /homeUrl|GET \//);
-  assert.match(script, /mcp-skills-visionary/);
+  assert.match(script, /Plan Agent/);
   assert.match(script, /2024-11-05/);
 });
 

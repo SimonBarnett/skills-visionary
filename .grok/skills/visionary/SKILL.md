@@ -199,6 +199,8 @@ the data, never to this skill book. No secrets in exports or commits.
   block). That block is not evidence the UI exists only on the host.
   Confirm the implementation with `git fetch` and `git show origin/main`,
   or with the operator's merged PR list, before writing the gap.
+  Read a path with `git show origin/main:<path>` or a disposable worktree.
+  Do not ff-merge `origin/main` into an unrelated local feature branch.
 - When `docs/fr/ISSUED.tsv` already indexes an older pack, write the new
   index at `docs/fr/<slug>/ISSUED.tsv`. Do not replace the root file.
 - When a per-machine installer offers a per-user CLI, and two CLIs can

@@ -67,3 +67,27 @@ def test_pr18_fr_pack_has_shape_and_success():
     assert re.search(r"^##\s+Shape\s*$", text, re.MULTILINE)
     assert re.search(r"^##\s+Success\s*$", text, re.MULTILINE)
     assert run_validator(path, ROOT / "docs" / "mocks") == 0
+
+
+def test_fr22_mermaid_small_captioned_passes():
+    mocks = FIXTURES / "mocks-good"
+    assert run_validator(FIXTURES / "positive-mermaid-small.md", mocks) == 0
+
+
+def test_fr22_mermaid_missing_caption_fails():
+    mocks = FIXTURES / "mocks-good"
+    assert run_validator(FIXTURES / "negative-mermaid-no-caption.md", mocks) == 1
+
+
+def test_fr22_mermaid_too_many_nodes_fails():
+    mocks = FIXTURES / "mocks-good"
+    assert run_validator(FIXTURES / "negative-mermaid-too-many-nodes.md", mocks) == 1
+
+
+def test_fr22_skill_and_template_state_mermaid_rules():
+    skill = (ROOT / ".grok" / "skills" / "visionary" / "SKILL.md").read_text(encoding="utf-8")
+    template = (ROOT / "docs" / "templates" / "vision.md").read_text(encoding="utf-8")
+    for text in (skill, template):
+        assert "hard ceiling" in text.lower() or "ceiling 12" in text.lower()
+        assert "caption" in text.lower()
+        assert "one diagram per concern" in text.lower()

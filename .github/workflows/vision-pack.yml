@@ -23,3 +23,19 @@ jobs:
             --mocks-dir tests/fixtures/vision-pack/mocks-good
       - name: pytest
         run: pip install pytest && pytest tests/ -q
+
+  mcp-catalog-dag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: sync-skill-dag + Next.js build + checks (FR #81/#82/#83)
+        working-directory: apps/mcp-catalog
+        run: |
+          npm install
+          npm run build
+          npm test
+          npm run smoke
+

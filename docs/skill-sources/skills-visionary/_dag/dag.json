@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "built": "2026-11-20",
+  "repo": "SimonBarnett/skills-visionary",
+  "lessonsRoot": "docs/skill-sources/skills-visionary",
+  "nodeCount": 9,
+  "edgeCount": 16,
+  "defaults": {
+    "maxSkills": 8,
+    "maxBytes": 24000
+  },
+  "nodes": [
+    {
+      "id": "topic:harvest",
+      "type": "topic",
+      "title": "harvest",
+      "path": "harvest",
+      "triggers": [
+        "harvest"
+      ],
+      "weight": "normal"
+    },
+    {
+      "id": "topic:plan",
+      "type": "topic",
+      "title": "plan",
+      "path": "plan",
+      "triggers": [
+        "plan"
+      ],
+      "weight": "normal"
+    },
+    {
+      "id": "skill:harvest-agent-skills",
+      "type": "catalog-skill",
+      "title": "harvest agent skills",
+      "path": "apps/mcp-catalog/catalog/harvest-agent-skills/SKILL.md",
+      "topic": "harvest",
+      "summary": "FOUNDATION skill for every skill book. Identify this skill's home GitHub, harvest playbooks back as a PR, and report gaps as issues/FRs. Triggers: harvest skills, CAST IRON harvest, honesty box, skill",
+      "triggers": [
+        "harvest agent skills",
+        "harvest-agent-skills"
+      ]
+    },
+    {
+      "id": "skill:harvest-skills-visionary",
+      "type": "catalog-skill",
+      "title": "harvest skills visionary",
+      "path": "apps/mcp-catalog/catalog/harvest-skills-visionary/SKILL.md",
+      "topic": "harvest",
+      "summary": "Promote visionary playbooks into SimonBarnett/skills-visionary .grok/skills on GitHub. Use when the visionary intake procedure changes, or the user says harvest visionary, harvest skills-visionary, or",
+      "triggers": [
+        "harvest skills visionary",
+        "harvest-skills-visionary"
+      ]
+    },
+    {
+      "id": "skill:plan-bob-webhooks",
+      "type": "catalog-skill",
+      "title": "plan bob webhooks",
+      "path": "apps/mcp-catalog/catalog/plan-bob-webhooks/SKILL.md",
+      "topic": "plan",
+      "summary": "Point a SimonBarnett GitHub repo at Bob fleet webhooks (git events to /bob/v1/git). Use when a new plan-created repo needs hooks, set up webhooks on git, GitHub hook, or /plan-bob-webhooks. Digest rep",
+      "triggers": [
+        "plan bob webhooks",
+        "plan-bob-webhooks"
+      ]
+    },
+    {
+      "id": "skill:plan-create-repo",
+      "type": "catalog-skill",
+      "title": "plan create repo",
+      "path": "apps/mcp-catalog/catalog/plan-create-repo/SKILL.md",
+      "topic": "plan",
+      "summary": "Create a public SimonBarnett GitHub repo from an approved plan / vision pack. Use when a TipForm Plan seat (Grok/Cursor) has LOCKED a vision pack and needs gh repo create, after plan approved, new pro",
+      "triggers": [
+        "plan create repo",
+        "plan-create-repo"
+      ]
+    },
+    {
+      "id": "skill:plan-enable-prs",
+      "type": "catalog-skill",
+      "title": "plan enable prs",
+      "path": "apps/mcp-catalog/catalog/plan-enable-prs/SKILL.md",
+      "topic": "plan",
+      "summary": "Permit pull-request workflow on a new SimonBarnett product repo: keep the repo public with forking on, avoid rulesets that block outside PRs, and ensure the Cursor GitHub App can push/PR as cursor[bot",
+      "triggers": [
+        "plan enable prs",
+        "plan-enable-prs"
+      ]
+    },
+    {
+      "id": "skill:plan-git-from-plan",
+      "type": "catalog-skill",
+      "title": "plan git from plan",
+      "path": "apps/mcp-catalog/catalog/plan-git-from-plan/SKILL.md",
+      "topic": "plan",
+      "summary": "After an approved TipForm Plan (vision pack LOCKED), create the product git repo, point Bob git webhooks, and enable PR workflow ? without installing the full agentic_build or agentic_irc skill packs.",
+      "triggers": [
+        "plan git from plan",
+        "plan-git-from-plan"
+      ]
+    },
+    {
+      "id": "skill:visionary",
+      "type": "catalog-skill",
+      "title": "visionary",
+      "path": "apps/mcp-catalog/catalog/visionary/SKILL.md",
+      "topic": "plan",
+      "summary": "High-reasoning long-term strategy at new-product repo intake and feature requests on an existing repo. Spec measurable success, product shape (service / website / app), stack, architecture, and HTML m",
+      "triggers": [
+        "visionary",
+        "visionary"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "topic:plan",
+      "to": "topic:harvest",
+      "rel": "related"
+    },
+    {
+      "from": "topic:harvest",
+      "to": "topic:plan",
+      "rel": "related"
+    },
+    {
+      "from": "skill:harvest-agent-skills",
+      "to": "topic:harvest",
+      "rel": "loads_topic"
+    },
+    {
+      "from": "skill:harvest-skills-visionary",
+      "to": "topic:harvest",
+      "rel": "loads_topic"
+    },
+    {
+      "from": "skill:harvest-skills-visionary",
+      "to": "skill:harvest-agent-skills",
+      "rel": "depends_on"
+    },
+    {
+      "from": "skill:plan-bob-webhooks",
+      "to": "topic:plan",
+      "rel": "loads_topic"
+    },
+    {
+      "from": "skill:plan-create-repo",
+      "to": "topic:plan",
+      "rel": "loads_topic"
+    },
+    {
+      "from": "skill:plan-create-repo",
+      "to": "skill:plan-bob-webhooks",
+      "rel": "depends_on"
+    },
+    {
+      "from": "skill:plan-create-repo",
+      "to": "skill:plan-enable-prs",
+      "rel": "depends_on"
+    },
+    {
+      "from": "skill:plan-enable-prs",
+      "to": "topic:plan",
+      "rel": "loads_topic"
+    },
+    {
+      "from": "skill:plan-git-from-plan",
+      "to": "topic:plan",
+      "rel": "loads_topic"
+    },
+    {
+      "from": "skill:plan-git-from-plan",
+      "to": "skill:visionary",
+      "rel": "depends_on"
+    },
+    {
+      "from": "skill:plan-git-from-plan",
+      "to": "skill:plan-create-repo",
+      "rel": "depends_on"
+    },
+    {
+      "from": "skill:plan-git-from-plan",
+      "to": "skill:plan-bob-webhooks",
+      "rel": "depends_on"
+    },
+    {
+      "from": "skill:plan-git-from-plan",
+      "to": "skill:plan-enable-prs",
+      "rel": "depends_on"
+    },
+    {
+      "from": "skill:visionary",
+      "to": "topic:plan",
+      "rel": "loads_topic"
+    }
+  ]
+}

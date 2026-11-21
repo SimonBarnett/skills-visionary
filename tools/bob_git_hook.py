@@ -53,17 +53,34 @@ def fleet_hook_body(url: str = HOOK_URL, secret: str | None = None) -> dict:
     return {"name": "web", "active": True, "events": list(EVENTS), "config": config}
 
 
+def strip_ansi(text: str) -> str:
+    """FR #24: gh may colour JSON when stdout is not a TTY."""
+    import re
+    return re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", text or "")
+
+
 def default_gh(args: list, stdin: str | None = None) -> str:
+    # FR #24: without a TTY, gh may emit ANSI around JSON and break json.loads.
+    env = os.environ.copy()
+    env.setdefault("NO_COLOR", "1")
+    env.setdefault("GH_FORCE_TTY", "0")
+    env.setdefault("CLICOLOR", "0")
     proc = subprocess.run(
         ["gh", "api", *args],
         input=stdin,
         capture_output=True,
         text=True,
         encoding="utf-8",
+        env=env,
     )
     if proc.returncode != 0:
-        raise RuntimeError(f"gh api {' '.join(args[:3])} failed: {proc.stderr.strip()[:300]}")
-    return proc.stdout
+        err = strip_ansi(proc.stderr.strip())[:300]
+        # 400 from /bob/v1/git deliveries often means receiver secret-filter
+        # (agentic_irc #206 markers in issue/PR/commit text). Surface that.
+        if "400" in err or "Bad Request" in err:
+            err = err + " (possible receiver filter / secret marker - see plan-bob-webhooks)"
+        raise RuntimeError(f"gh api {' '.join(args[:3])} failed: {err}")
+    return strip_ansi(proc.stdout)
 
 
 def gh_json(gh: GhRunner, args: list, stdin: str | None = None):
@@ -219,6 +236,21 @@ def announce_seen(needle: str, log_paths: Iterable) -> str | None:
     return hit
 
 
+def irc_log_nick_broken(log_paths: Iterable) -> bool:
+    """FR #25: local ear nick reserved -> irc.log has no usable #bobiverse traffic."""
+    markers = (
+        "NICKNAME_RESERVED",
+        "Nickname is already in use",
+        "nick is already in use",
+    )
+    for p in log_paths:
+        for ln in _tail_lines(Path(p)):
+            low = ln.lower()
+            if any(m.lower() in low for m in markers):
+                return True
+    return False
+
+
 def digest_has(repo: str, ident: str, digest: dict | None) -> bool:
     q = ((digest or {}).get("queue") or {}).get("unaccepted") or []
     return any(e.get("repo") == repo and str(e.get("id")) == ident for e in q)
@@ -294,6 +326,13 @@ def main(argv=None, gh: GhRunner = default_gh, post: Poster = default_post) -> i
 
     logs = [Path(p) for p in (a.irc_log or [])] or default_log_paths()
     logs = [p for p in logs if p.is_file()]
+    # FR #25: preflight - warn when local nick is reserved (no Jeeves traffic).
+    if logs and irc_log_nick_broken(logs):
+        print(
+            "WARN local irc.log shows NICKNAME_RESERVED / nick-in-use. "
+            "Fix the ear nick before relying on announce_seen (FR #25). "
+            "Ping 2xx + digest fallback may still clear the gate."
+        )
     found = wait_announce(needles, logs, 0) if logs else {}
     if logs and needles[0] not in found:
         # Old hook: its ping line may be long gone from the log. One fresh ping.
@@ -310,6 +349,16 @@ def main(argv=None, gh: GhRunner = default_gh, post: Poster = default_post) -> i
             if n in missing and digest_has(repo, f"#{num}", digest):
                 print(f"OK digest queue has {repo} #{num} (Jeeves announced it; no local irc.log line)")
                 missing.remove(n)
+    # FR #25: ping announce missing because local nick is broken, but GitHub
+    # recorded a 2xx ping delivery - accept that needle only.
+    ping_needle = announce_needle("ping", repo)
+    if ping_needle in missing and ping and irc_log_nick_broken(logs):
+        print(
+            f"OK ping delivery {ping.get('id')} -> {ping.get('status_code')} "
+            "with local nick reserved; accepting ping announce via delivery "
+            "fallback (FR #25). Still refuse to push until this gate exits 0."
+        )
+        missing.remove(ping_needle)
     if missing:
         where = ", ".join(str(p) for p in logs) or "no local #bobiverse irc.log"
         print(f"FAIL Jeeves announce not seen for: {missing} (checked {where}). "

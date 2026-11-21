@@ -30,7 +30,9 @@ Refuse park / git-create / dispatch until:
   (or the whole Success section is UNKNOWN)
 - `python tools/validate-vision-pack.py <vision.md> [--mocks-dir <dir>]`
   exits 0 (repo copy: `tools/validate-vision-pack.py`; CI: `vision-pack`
-  workflow).
+  workflow). In the Shape section the lock line must be exactly `LOCKED`
+  with nothing else on the line. `LOCKED.` fails that gate even when
+  Primary is set.
 
 Poetry is not a target. If you cannot score it later, it is UNKNOWN.
 
@@ -77,7 +79,26 @@ SaaS, instance URLs, secrets, or procedure ENAMEs.
 ### 5. Architecture
 
 Who talks to what. Process / data / trust boundaries. Enough to start
-Phase 0. Not a 40-page SAD. ASCII diagram is enough.
+Phase 0. Not a 40-page SAD.
+
+**Mermaid diagrams (human scale — FR #22):** many small diagrams, never
+one giant one.
+
+- One diagram per concern: a single flow, state machine, sequence, or
+  deployment slice.
+- Keep each to about 5–9 nodes (hard ceiling **12**). If bigger, split.
+- Put a one-sentence caption on the line immediately above every
+  mermaid fenced block: what it shows and why it matters.
+- Optionally one small index/overview diagram whose boxes are the names
+  of the detailed diagrams — never the full detail.
+- Prefer the right type: `sequenceDiagram` for message exchanges,
+  `stateDiagram-v2` for lifecycles/queues, `flowchart` for decisions,
+  and a small `flowchart` for deployment.
+- Use the same component name across diagrams.
+- No diagram should need horizontal scrolling on GitHub at normal width.
+
+`python tools/validate-vision-pack.py` fails when a mermaid block has no
+caption or exceeds the node ceiling.
 
 ### 6. Screens (HTML mocks)
 
@@ -133,6 +154,10 @@ the data, never to this skill book. No secrets in exports or commits.
   dirty or not on main, `git fetch` then `git worktree add --detach
   <plan>\repo origin/main` and compare the vision Success table to that
   tree. Never ff-pull or reset over a dirty checkout.
+- Run that fetch only after `Set-Location` to the product clone, or as
+  `git -C <clone> fetch`. The Plan folder sits inside another git
+  worktree. A fetch from the plan folder updates that other worktree,
+  not the product.
 - Filing an approved FR pack: only after the operator approves filing,
   open one GitHub issue per small FR draft (Goal / Deliverables /
   Testable), never one omnibus; keep a draft-code -> issue-number map in
@@ -142,6 +167,27 @@ the data, never to this skill book. No secrets in exports or commits.
   the implementation issues with `Refs #N` (never `Closes`), push a
   branch, `gh pr create`. Merge the docs-only park PR only when the
   operator asks; the code FRs stay open.
+- Before the status reply, re-query each filed issue. A still-open line
+  written at create time goes stale when workers merge the first slices
+  in that window. `Refs` on the docs park does not keep an issue open
+  after its own implementation PR merges.
+- A live page on a private address is invisible to `web_fetch` (SSRF
+  block). That block is not evidence the UI exists only on the host.
+  Confirm the implementation with `git fetch` and `git show origin/main`,
+  or with the operator's merged PR list, before writing the gap.
+- When `docs/fr/ISSUED.tsv` already indexes an older pack, write the new
+  index at `docs/fr/<slug>/ISSUED.tsv`. Do not replace the root file.
+- When a per-machine installer offers a per-user CLI, and two CLIs can
+  install the same executable name, lock detection by install directory
+  in the success table. The yes path runs in the interactive user
+  session. Do not run that installer from a deferred system custom
+  action: it cannot prompt, and it writes the system profile. A silent
+  install does not download.
+- When a product has both skill playbooks and a launcher/build
+  enforcement path, skill wording alone is not proof of the store. Grep
+  exit checks, rules templates, and README for a second store (skills
+  can already point at one webhook while the launcher still fetches
+  another origin).
 
 ## Harvest (AUTOMATIC)
 

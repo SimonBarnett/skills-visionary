@@ -12,8 +12,8 @@ change; do not edit catalog copies as the primary store.
 
 - Source: `docs/skill-sources/skills-visionary/_dag/{dag.json,dag-index.json}`
 - Sync: `npm run sync-dag` copies into `data/`
-- Gate: `npm run check-dag` fails on catalog↔DAG drift, dangling edges,
-  skill-node cycles (topic↔topic loops OK), or secret-like blobs in DAG nodes
+- Gate: `npm run check-dag` fails on catalog-DAG drift, dangling edges,
+  skill-node cycles (topic-topic loops OK), or secret-like blobs in DAG nodes
 
 ## Next.js (FR-E / FR-F)
 
@@ -22,6 +22,8 @@ change; do not edit catalog copies as the primary store.
 - Public MCP URL: `https://plan.ntsa.uk/mcp`
 - `npm run build` = sync + check-dag + `next build`
 - `npm run smoke` = local catalog non-empty check
+- `npm run smoke:live` = live `https://plan.ntsa.uk` GET / + `list_catalog` (FR-I; after FR-H). Paste PASS JSON into `docs/amplify-hosting.md` Live evidence.
+- Override: `SMOKE_MCP_ORIGIN=https://<host> npm run smoke:live`
 - No secrets in env; stdio is local-only (not served)
 
 ## Pattern

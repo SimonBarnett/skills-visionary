@@ -5,7 +5,7 @@
 **Phase:** `P5`  
 **Date:** 2026-11-21  
 **Theme:** Bob ear systray Agents/Workers/Weights + models webhook  
-**Index:** `docs/feature-request-plan-agent-systray-index-2026-11-21.md`  
+**Index:** `docs/fr-index-plan-agent-systray-2026-11-21.md`  
 **Depends-on:** VIS-01, VIS-07  
 **Skill:** visionary  
 **Park:** park-only (no bob-job-loop)

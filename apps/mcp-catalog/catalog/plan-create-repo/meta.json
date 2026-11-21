@@ -1,0 +1,8 @@
+{
+  "name": "plan-create-repo",
+  "title": "plan create repo",
+  "description": "Create a public SimonBarnett GitHub repo from an approved plan / vision pack. Use when a TipForm Plan seat (Grok/Cursor) has LOCKED a vision pack and needs gh repo create, after plan approved, new product git, or /plan-create-repo. Orchestr",
+  "version": "1.0.0",
+  "topic": "plan",
+  "source": ".grok/skills/plan-create-repo/SKILL.md"
+}

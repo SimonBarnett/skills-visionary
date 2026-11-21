@@ -1,0 +1,8 @@
+{
+  "name": "plan-git-from-plan",
+  "title": "plan git from plan",
+  "description": "After an approved TipForm Plan (vision pack LOCKED), create the product git repo, point Bob git webhooks, and enable PR workflow ? without installing the full agentic_build or agentic_irc skill packs. Use when Plan ? Grok/Cursor seats finis",
+  "version": "1.0.0",
+  "topic": "plan",
+  "source": ".grok/skills/plan-git-from-plan/SKILL.md"
+}

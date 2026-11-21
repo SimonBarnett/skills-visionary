@@ -60,7 +60,7 @@ The Next.js process does not read it.
 `npm run build` is `node scripts/sync-skill-dag.mjs` (copy
 `docs/skill-sources/skills-visionary/_dag` into `data/`),
 `node scripts/check-dag.mjs` (catalog↔DAG sync + public-safe scan), and
-`next build`. The check fails the build on catalog–DAG drift, dangling
+`next build`. The check fails the build on catalog-DAG drift, dangling
 edges, skill-node cycles, or secret-like blobs in DAG nodes.
 
 The spec then deletes `.next/cache`. That cache is not used at runtime.
@@ -93,7 +93,7 @@ Node 20, 22, and 24 are the Amplify SSR runtimes. Node 14, 16, and 18 fail
 the SSR build. `package.json` `engines.node` is `>=20`. Prefer `nvm use 20`
 so the Amplify build matches local.
 
-## Environment variable names (allowlist — no secrets)
+## Environment variable names (allowlist - no secrets)
 
 The running app needs no secrets. Do not store tokens, passwords, PATs, or
 SASL material on the Amplify app.
@@ -192,3 +192,64 @@ cd apps/mcp-catalog
 npm test
 npm run build
 ```
+
+## Live smoke how-to (FR-I)
+
+From pps/mcp-catalog (Node 20+):
+
+`ash
+npm ci --include=dev --no-audit --fund=false
+npm run smoke:live
+`
+
+Override origin when testing a default Amplify hostname before DNS. Copy the
+exact deployment URL from the Amplify console (it includes the branch prefix),
+or set:
+
+`ash
+SMOKE_MCP_ORIGIN=https://<main-branch>.<appId>.amplifyapp.com npm run smoke:live
+`
+
+Do not invent only https://<appId>.amplifyapp.com unless that is the URL the
+console shows for the deployed branch.
+
+The script asserts:
+
+1. GET / returns HTTP 200 (Plan landing HTML).
+2. GET /mcp returns HTTP 200 and tool names list_catalog, get_skill.
+3. POST /mcp initialize returns protocol 2024-11-05 and
+   serverInfo.name mcp-skills-visionary.
+4. 	ools/call list_catalog returns a non-empty skills array.
+
+Exit 0 prints a JSON evidence block. Paste that block under **Live evidence
+(FR-I)** below (replace the pending stub).
+
+Local catalog-only check (no network): 
+pm run smoke.
+
+Also listed under **Verification after FR-H deploys** above; smoke:live is
+the paste-ready harness for that gate.
+
+## Live evidence (FR-I)
+
+**Status (2026-11-20):** pending FR-H. plan.ntsa.uk does not resolve yet
+(Cloudflare DNS + Amplify app not attached). After FR-H deploys and DNS
+propagates, run 
+pm run smoke:live and replace this stub with the printed
+JSON (keep the heading).
+
+`json
+{
+  "origin": "https://plan.ntsa.uk",
+  "when": null,
+  "note": "pending FR-H - re-run npm run smoke:live and paste PASS JSON here"
+}
+`
+
+### Expected after FR-H
+
+| Check | Expect |
+| --- | --- |
+| https://plan.ntsa.uk/ | HTTP 200 |
+| https://plan.ntsa.uk/mcp | HTTP 200, tools include list_catalog + get_skill |
+| list_catalog | non-empty skills |

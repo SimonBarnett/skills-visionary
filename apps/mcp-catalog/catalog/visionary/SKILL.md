@@ -36,6 +36,16 @@ Refuse park / git-create / dispatch until:
 
 Poetry is not a target. If you cannot score it later, it is UNKNOWN.
 
+> **CAST IRON — Anti-omnibus FRs (FR #90).**
+> Fleet FR seats are often unpaid / non-frontier models. The Plan Agent
+> **must** file **small, well-documented** GitHub issues that one such
+> seat can finish in a single job: one Goal, concrete Deliverables, and
+> Testable acceptance. **Never** one omnibus issue that bundles many
+> independent slices. Split the pack; keep a draft-code → issue-number
+> map in the plan folder. Prefer Goal / Deliverables / Testable (or
+> What / Where / Evidence / Fix) bodies a junior model can execute
+> without re-planning the product.
+
 ### New product
 
 Copy `docs/templates/vision.md` and fill it in this session **before**
@@ -158,10 +168,11 @@ the data, never to this skill book. No secrets in exports or commits.
   `git -C <clone> fetch`. The Plan folder sits inside another git
   worktree. A fetch from the plan folder updates that other worktree,
   not the product.
-- Filing an approved FR pack: only after the operator approves filing,
-  open one GitHub issue per small FR draft (Goal / Deliverables /
-  Testable), never one omnibus; keep a draft-code -> issue-number map in
-  the plan folder.
+- Filing an approved FR pack (**CAST IRON anti-omnibus, FR #90**): only
+  after the operator approves filing, open **one GitHub issue per small
+  FR draft** (Goal / Deliverables / Testable — sized for unpaid /
+  non-frontier FR seats), **never one omnibus**; keep a draft-code ->
+  issue-number map in the plan folder.
 - Parking FR docs: copy the drafts into a clean worktree from
   `origin/main` (not the dirty local clone), commit docs only, reference
   the implementation issues with `Refs #N` (never `Closes`), push a
@@ -214,3 +225,5 @@ pack / FR markdown / issues of the product repo (bobiverse#3097).
   create a repo or set webhooks — use `plan-*` skills in this pack.
 - Split architecture or stack into a second skill (sections of this one).
 - End a turn with new skills only in chat/temp/`~/.grok` and no home PR.
+- File an **omnibus** FR (many independent slices in one issue) — CAST
+  IRON FR #90; unpaid / non-frontier seats cannot safely carry those.

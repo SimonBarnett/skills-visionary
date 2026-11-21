@@ -127,3 +127,9 @@ must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
 tray cues. Documented in `harvest-skills-visionary`; durable script fix in
 bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
 with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.
+
+## 2026-11-21 - FR #90 CAST IRON anti-omnibus FRs
+
+Plan Agent must file small, well-documented FRs (Goal / Deliverables /
+Testable) sized for unpaid / non-frontier seats; never one omnibus issue.
+Pinned in `.grok/skills/visionary/SKILL.md` + catalog mirror.

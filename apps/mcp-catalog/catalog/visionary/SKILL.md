@@ -233,6 +233,7 @@ Harvest **how-to-plan lessons only** (process, pitfalls, repo-setup
 steps). The plan itself - requirements, designs, architecture or product
 decisions, FR/issue lists - is never a harvest: it goes in the vision
 pack / FR markdown / issues of the product repo (bobiverse#3097).
+A tip whose only file is `docs/intake-harvest` never enters review. To unblock a stuck draft, copy the body to `docs/skill-sources/plan-lessons/`, title it `lesson(<book>)`, stamp the lesson label, and mark it ready for review. The durable playbook still belongs in this `SKILL.md`. Empty-file intake is bobiverse#8642.
 
 ## Do not
 

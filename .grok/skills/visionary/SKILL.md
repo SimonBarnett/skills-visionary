@@ -173,6 +173,9 @@ the data, never to this skill book. No secrets in exports or commits.
   FR draft** (Goal / Deliverables / Testable  -  sized for unpaid /
   non-frontier FR seats), **never one omnibus**; keep a draft-code ->
   issue-number map in the plan folder.
+- Multi-host public plan (bob.ntsa.uk and mcp.ntsa.uk) plus a visual system: file the first FR as the shared visual system and HTML mocks. Leave host-specific downloads, commands, and agent-download slices as unfiled drafts. Cross-repo mcp work stays on priority-mcp drafts, not a bobiverse omnibus.
+- If the operator says nobody knows about an old LAN port, plan a quiet removal. Do not write a deprecation brochure.
+- Public download labels use the product name (Priority Agent), never an internal release tag.
 - Parking FR docs: copy the drafts into a clean worktree from
   `origin/main` (not the dirty local clone), commit docs only, reference
   the implementation issues with `Refs #N` (never `Closes`), push a

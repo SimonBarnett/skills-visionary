@@ -87,3 +87,4 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - For a-search FR gap analysis when C:\ai\a-search is dirty or behind, git fetch then worktree add --detach under plan/work/plan-*/repo from origin/main before comparing Success rows; keep FR drafts unfiled until human approve (anti-omnibus).
 - After ComponentsPiece-style approve: file one GitHub issue per small FR, open docs-only park PR with Refs (not Closes), merge the docs PR, close only the mocks/park slice issue; leave implementation FRs open.
 - When an operator clarifies a gate after Phase park, amend the FR vision + affected small FR mirrors in a docs PR with Refs, comment the open issues, and file only the net-new slice (do not reopen the whole backlog).
+- After a parked Phase, operator commercial clarifications become an additive docs amend with new small FRs (Refs not Closes); close only the mocks-park issue after merge.

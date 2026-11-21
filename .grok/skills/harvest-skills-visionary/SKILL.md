@@ -44,6 +44,7 @@ it here.
 
 Empty harvest: no commit. Do not stamp UAT.
 
+
 ## FR #24: report-back without GitHub
 
 Route order for honesty-box harvest:
@@ -77,3 +78,16 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 ## Harvested lessons (intake)
 
 - When FR-F landing depends on FR-E Next scaffold and main only has DAG sync, co-implement both in one PR with Closes for each issue rather than GIVEUP on the dependency.
+- When product open issues are 0 after a closed stay-dark provider wave, Plan gap analysis targets vision UNKNOWN + parked drains + per-account enable docs - draft small FRs first and file one slice at a time (anti-omnibus); use detached origin/main worktree when the product clone is dirty/behind
+- When the operator explicitly says create all Phase-3 FRs, file many small Goal/Deliverables/Testable issues in one turn (one GitHub issue per FR) and close the park-process pointer with Refs - that satisfies anti-omnibus without leaving the backlog unfiled
+- For a-search Phase-3 docs park: branch from detached origin/main worktree under plan/work/plan-*/repo, docs-only commit, push, gh pr create with Refs not Closes for implementation issues
+- For an AWS-installable release gap on a Node CDK service: inventory stack for Bucket/Secrets/VPC/DLQ/CI/deploy docs and verify every Code.fromAsset path can resolve shared/ and runtime deps (@aws-sdk, mssql) inside the zip - then file many small Goal/Deliverables/Testable FRs, not one omnibus deploy ticket
+- Second installable-release pass should re-check product stubs still returning empty payloads (/selftest), optional runtime deps (jose) not in package.json/stage, shared package files[] vs real dirs, API CORS/access logs, S3/SQS encryption defaults, and queue visibility vs Lambda timeout
+- Post-installable waves: file one enable FR per stay-dark provider (never bulk-enable), plus separate small FR slices for Creators-behind-flag, WAFv2 associate, and multi-region strategy docs before second-region CDK
+- For a-search FR gap analysis when C:\ai\a-search is dirty or behind, git fetch then worktree add --detach under plan/work/plan-*/repo from origin/main before comparing Success rows; keep FR drafts unfiled until human approve (anti-omnibus).
+- After ComponentsPiece-style approve: file one GitHub issue per small FR, open docs-only park PR with Refs (not Closes), merge the docs PR, close only the mocks/park slice issue; leave implementation FRs open.
+- When an operator clarifies a gate after Phase park, amend the FR vision + affected small FR mirrors in a docs PR with Refs, comment the open issues, and file only the net-new slice (do not reopen the whole backlog).
+- After a parked Phase, operator commercial clarifications become an additive docs amend with new small FRs (Refs not Closes); close only the mocks-park issue after merge.
+- Auth for multi-role commercial surfaces: lock a pluggable provider registry with fail-closed contact claims, plus one email magic/OTP path; scaffold shortlist adapters stay-dark until credentials.
+- skills-visionary harvest tips must never teach admin-merge; Ubuntu validate red on test_fr19_ps51 is ambient env-only - arm --auto --squash only (FR #3948) and keep soft-skip FR #52
+- FIX README tip CONFLICTING on skill-harvest-log: fold origin/main, keep main entries then tip FR entry; file separate issue for unrelated main corruption.

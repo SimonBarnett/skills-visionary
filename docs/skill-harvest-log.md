@@ -143,6 +143,7 @@ pm run build (sync-dag + check-dag + next build), strip .next/cache, artifacts .
 pm run smoke:live (GET /, GET/POST /mcp, list_catalog non-empty).
 - docs/amplify-hosting.md Live evidence (FR-I) paste instructions; pending FR-H DNS.
 - Contract test 	ests/smoke-live.test.mjs (no network).
+
 ## 2026-11-20 - FR #77 human-readable README
 
 Rewrote root README for humans: plain overview, skills table with when-to-use,

@@ -40,8 +40,10 @@ No secrets. Copy the skill folders into the agent skills tree:
 xcopy /E /I /Y .grok\skills %USERPROFILE%\.grok\skills
 ```
 
-Or copy individual folders under `%USERPROFILE%\.grok\skills\`
-(for example only `visionary` and `plan-git-from-plan`).
+Or copy individual folders under `%USERPROFILE%\.grok\skills\`.
+For the full plan-git path, copy `visionary`, `plan-git-from-plan`,
+`plan-create-repo`, `plan-bob-webhooks`, and `plan-enable-prs` (or copy
+the whole `.grok/skills` tree).
 
 ## Bob URLs (no secrets)
 
@@ -59,7 +61,7 @@ TipForm digest merge (`reportUrl` in the build pack
 Helpers in this repo:
 
 ```text
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\New-BobGitWebhook.ps1 -Repo SimonBarnett/<name>
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\New-BobGitWebhook.ps1 -Repo SimonBarnett/<name> -HookUrl https://bob.ntsa.uk/bob/v1/git
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\Grant-CursorGitHubApp.ps1
 ```
 
@@ -77,10 +79,12 @@ Sibling FRs cover the DAG, Next.js MCP app, Amplify, and smoke tests.
 
 ## Vision-pack gate
 
-Before create or park, run the validator (no need to open `SKILL.md`):
+Before create or park, run the validator (no need to open `SKILL.md`).
+From a product repo, invoke the script from a checkout of this pack;
+keep `docs/vision.md` and `--mocks-dir` relative to the product repo:
 
 ```text
-python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
+python /path/to/skills-visionary/tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
 ```
 
 CI: `.github/workflows/vision-pack.yml`.

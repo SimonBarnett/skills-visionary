@@ -12,6 +12,20 @@ description: >
 
 # Plan → git setup (orchestrator)
 
+> **CAST IRON RULE - HARVEST AND FILE EVERYTHING (read this first, every time).**
+> 1. ALWAYS harvest skills you learn and file EVERY issue / FR / bug / gap you find to the intake webhook in the
+>    SAME turn. Never leave a finding unfiled, never "note it for later", never skip it because it is small.
+> 2. File with the intake webhook (no secret or login needed; `POST https://bob.ntsa.uk/bob/v1/intake`; offline it is
+>    queued locally and retried):
+>    `..\scripts\Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind issue -Title "short title" -Body "what / where / evidence / fix"`
+>    (`-Kind issue|fr|skill|harvest`; always pass an explicit `-Repo owner/name`).
+>    How-to-plan / Plan process lessons use **`-Repo SimonBarnett/skills-visionary`** (FR #42 / #3318 / #3506 / #3667).
+>    Use `-Repo SimonBarnett/bobiverse` only for fleet-tooling docs (worker, Jeeves, tray, intake), never for Plan playbooks.
+> 3. BEFORE finishing ANY debugging session run the harvest step:
+>    `..\scripts\Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary "what broke / what fixed it" -Lesson "one learned playbook line"`
+>    then `..\scripts\Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Flush` to resend anything that was queued while offline.
+> 4. Never put a token, password, SASL/NickServ secret, key or private hostname in a filing, a skill or a log.
+
 TipForm **Plan** seats load **skills-visionary only**. This skill is the
 self-contained bridge that used to live inside `agentic_build`
 `bob-spec-intake` (create + webhook + Cursor app). Fleet build/IRC jobs
@@ -103,6 +117,10 @@ docs shared with `agentic_irc` / bobiverse). Changes land as PRs on
 `SimonBarnett/skills-visionary` via `harvest-skills-visionary`. Do not
 leave Plan-only git setup only in `~/.grok/skills`.
 
+**FR #42:** every `Report-BobiverseIntakeIssue` / `Invoke-BobiverseHarvest`
+example in this Plan skill uses `-Repo SimonBarnett/skills-visionary`.
+Never cite `-Repo SimonBarnett/bobiverse` for how-to-plan harvest.
+
 ## Do not
 
 - Install all of `agentic_build` or `agentic_irc` onto Plan seats.
@@ -112,3 +130,39 @@ leave Plan-only git setup only in `~/.grok/skills`.
 - Restart IRC.
 - Stamp UAT.
 - Add `cursoragent` / `cursor[bot]` as collaborators.
+
+## FR #24: headless Plan, seed FRs, stubs
+
+### Headless Plan (non-interactive)
+
+The tray Plan menu launches interactive `agent.exe --permission-mode plan`.
+For headless runs use a **temp working folder** (never the live `D:\ai`
+trees), for example:
+
+```text
+agent.exe -p "<prompt>" --cwd <skills-visionary clone> --always-approve --max-turns N --output-format streaming-messages-json --leader-socket ~/.grok/leader-<name>.sock --rules "<plan rules>"
+```
+
+Redirect stdout to a file (a pipe owned by a short-lived shell gets
+orphaned). Optional helper: `tools/Start-PlanHeadless.ps1`.
+
+### Seed FRs from a brief
+
+After the webhook gate exits 0:
+
+1. Create issues **before** committing stubs that cite them (or open a
+   follow-up PR that links the numbers). Do not leave `TODO: seed FR #N`
+   in the first commit when the issues do not exist yet.
+2. Title pattern + labels (`known-issue` / `gate-blocking` as needed);
+   pin the headline acceptance FR as #1 when that is the product intent.
+3. Space issue creation; keep bodies small (anti-omnibus).
+4. **Warning:** new issues go straight into the live fleet unaccepted
+   queue and are claimable by workers. Prefer a backlog-only label /
+   queue opt-out when seeding a large known-issue list, or warn the
+   operator that seeds are live.
+
+### Mermaid
+
+Many small human-scale diagrams (node ceiling + captions). See FR #22 /
+PR #92 for the validator/template ceiling; do not ship one huge mermaid
+in the vision pack.

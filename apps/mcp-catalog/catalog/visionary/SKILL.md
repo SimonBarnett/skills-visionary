@@ -127,7 +127,7 @@ Self-contained git setup harvested into this pack (do **not** require
 installing all of `agentic_build`):
 
 1. `plan-create-repo`  -  public `gh repo create` under SimonBarnett.
-2. `plan-bob-webhooks`  -  GitHub -> `https://irc.ntsa.uk/bob/v1/git`
+2. `plan-bob-webhooks`  -  GitHub -> `https://bob.ntsa.uk/bob/v1/git`
    (never `/bob/v1/report`; that digest URL is documented only).
 3. `plan-enable-prs`  -  forking on, no blocking ruleset, Cursor GitHub
    App All repositories so `cursor[bot]` can push/PR.

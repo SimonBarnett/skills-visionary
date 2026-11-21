@@ -23,7 +23,7 @@ def _read(rel: str) -> str:
 
 def test_fr19_bob_git_hook_tool_exists_with_fleet_url_events_ping_replay_announce():
     src = _read("tools/bob_git_hook.py")
-    assert "https://irc.ntsa.uk/bob/v1/git" in src
+    assert "https://bob.ntsa.uk/bob/v1/git" in src
     assert "issues" in src and "pull_request" in src and "push" in src
     assert "application/json" in src or "json" in src.lower()
     assert "ping" in src.lower()
@@ -39,7 +39,7 @@ def test_fr19_ps51_webhook_helper_ascii_and_parses():
     text = script.read_text(encoding="utf-8")
     for bad in ("\u2014", "\u2013", "\u2018", "\u2019", "\u201c", "\u201d"):
         assert bad not in text
-    assert "https://irc.ntsa.uk/bob/v1/git" in text
+    assert "https://bob.ntsa.uk/bob/v1/git" in text
     # FR #52: ASCII always; parse soft-skips when powershell/pwsh absent (Ubuntu CI)
     ps = find_powershell()
     if ps is None:
@@ -83,4 +83,4 @@ def test_fr19_acceptance_doc_on_main():
     body = doc.read_text(encoding="utf-8")
     assert re.search(r"^##\s+Shape\s*$", body, re.M)
     assert re.search(r"^##\s+Success\s*$", body, re.M)
-    assert "bob_git_hook" in body or "irc.ntsa.uk/bob/v1/git" in body
+    assert "bob_git_hook" in body or "bob.ntsa.uk/bob/v1/git" in body

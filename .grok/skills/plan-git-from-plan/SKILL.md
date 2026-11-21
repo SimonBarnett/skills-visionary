@@ -55,8 +55,8 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
    `gh repo create SimonBarnett/<name> --public`.
 
 2. **Bob git webhook** — skill `plan-bob-webhooks`.
-   Hook URL `https://irc.ntsa.uk/bob/v1/git` only.
-   Digest `https://irc.ntsa.uk/bob/v1/report` is not a GitHub hook.
+   Hook URL `https://bob.ntsa.uk/bob/v1/git` only.
+   Digest `https://bob.ntsa.uk/bob/v1/report` is not a GitHub hook.
    **Gate:** `python tools/bob_git_hook.py SimonBarnett/<name>` must exit 0
    (exact hook config, ping 2xx, Jeeves `GIT ping` seen) **before step 4**.
    No push and no issue until it does. Anything earlier is never delivered.

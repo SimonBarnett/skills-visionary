@@ -1,0 +1,8 @@
+{
+  "name": "harvest-agent-skills",
+  "title": "harvest agent skills",
+  "description": "FOUNDATION skill for every skill book. Identify this skill's home GitHub, harvest playbooks back as a PR, and report gaps as issues/FRs. Triggers: harvest skills, CAST IRON harvest, honesty box, skill book foundation, learned a procedure, h",
+  "version": "1.0.0",
+  "topic": "harvest",
+  "source": ".grok/skills/harvest-agent-skills/SKILL.md"
+}

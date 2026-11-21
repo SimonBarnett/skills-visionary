@@ -1,0 +1,26 @@
+version: 1
+applications:
+  - appRoot: apps/mcp-catalog
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            # Amplify SSR rejects Node 18. AL2023 can default to 22; this app is built on 20.
+            - nvm use 20
+            - node -v
+            # NODE_ENV=production would omit typescript. Next still needs it to build.
+            - npm ci --include=dev --no-audit --fund=false
+        build:
+          commands:
+            # Matches local `npm run build`: sync-dag && check-dag && next build.
+            - npm run build
+            # Next's build cache is not part of the server. Leaving it in .next
+            # uploads tens of MB toward the 220 MB SSR cap.
+            - rm -rf .next/cache
+      artifacts:
+        baseDirectory: .next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*

@@ -7,7 +7,7 @@ description: >
   work has a UI. After an approved new-product plan, orchestrate git setup
   via plan-git-from-plan (create repo, Bob webhooks, permit PRs) without
   installing the full agentic_build pack. Use when creating a new product
-  repo, repo intake, TipForm Plan→Grok/Cursor, parking or dispatching a
+  repo, repo intake, TipForm Plan->Grok/Cursor, parking or dispatching a
   feature request, big picture, full scope, or /visionary.
 ---
 
@@ -19,7 +19,7 @@ ticket. Opinionated. Measurable. Refuse to start the build until
 
 High-reasoning / plan-mode only. Do not hand this to a cheap Composer
 PR worker. TipForm **Plan** seats load **this pack only**
-(`skills-visionary`) — not the full IRC/build packs.
+(`skills-visionary`)  -  not the full IRC/build packs.
 
 ## Before anything else
 
@@ -36,12 +36,12 @@ Refuse park / git-create / dispatch until:
 
 Poetry is not a target. If you cannot score it later, it is UNKNOWN.
 
-> **CAST IRON — Anti-omnibus FRs (FR #90).**
+> **CAST IRON  -  Anti-omnibus FRs (FR #90).**
 > Fleet FR seats are often unpaid / non-frontier models. The Plan Agent
 > **must** file **small, well-documented** GitHub issues that one such
 > seat can finish in a single job: one Goal, concrete Deliverables, and
 > Testable acceptance. **Never** one omnibus issue that bundles many
-> independent slices. Split the pack; keep a draft-code → issue-number
+> independent slices. Split the pack; keep a draft-code -> issue-number
 > map in the plan folder. Prefer Goal / Deliverables / Testable (or
 > What / Where / Evidence / Fix) bodies a junior model can execute
 > without re-planning the product.
@@ -91,16 +91,16 @@ SaaS, instance URLs, secrets, or procedure ENAMEs.
 Who talks to what. Process / data / trust boundaries. Enough to start
 Phase 0. Not a 40-page SAD.
 
-**Mermaid diagrams (human scale — FR #22):** many small diagrams, never
+**Mermaid diagrams (human scale  -  FR #22):** many small diagrams, never
 one giant one.
 
 - One diagram per concern: a single flow, state machine, sequence, or
   deployment slice.
-- Keep each to about 5–9 nodes (hard ceiling **12**). If bigger, split.
+- Keep each to about 5-9 nodes (hard ceiling **12**). If bigger, split.
 - Put a one-sentence caption on the line immediately above every
   mermaid fenced block: what it shows and why it matters.
 - Optionally one small index/overview diagram whose boxes are the names
-  of the detailed diagrams — never the full detail.
+  of the detailed diagrams  -  never the full detail.
 - Prefer the right type: `sequenceDiagram` for message exchanges,
   `stateDiagram-v2` for lifecycles/queues, `flowchart` for decisions,
   and a small `flowchart` for deployment.
@@ -121,15 +121,15 @@ Do not stamp UAT here.
 
 ## After the pack is approved (Plan seats)
 
-### New product → `plan-git-from-plan`
+### New product -> `plan-git-from-plan`
 
 Self-contained git setup harvested into this pack (do **not** require
 installing all of `agentic_build`):
 
-1. `plan-create-repo` — public `gh repo create` under SimonBarnett.
-2. `plan-bob-webhooks` — GitHub → `https://irc.ntsa.uk/bob/v1/git`
+1. `plan-create-repo`  -  public `gh repo create` under SimonBarnett.
+2. `plan-bob-webhooks`  -  GitHub -> `https://irc.ntsa.uk/bob/v1/git`
    (never `/bob/v1/report`; that digest URL is documented only).
-3. `plan-enable-prs` — forking on, no blocking ruleset, Cursor GitHub
+3. `plan-enable-prs`  -  forking on, no blocking ruleset, Cursor GitHub
    App All repositories so `cursor[bot]` can push/PR.
 4. Commit vision pack + open FR issue. Plan seats stop here unless a
    build seat is intentionally next.
@@ -138,12 +138,12 @@ Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
 
 ### Feature request
 
-1. Visionary first (this skill) — success table LOCKED or UNKNOWN in
+1. Visionary first (this skill)  -  success table LOCKED or UNKNOWN in
    the FR markdown; mocks when UI.
 2. Commit `docs/feature-request-<slug>-YYYY-MM-DD.md` (and mocks) on
    the **existing** target repo.
 3. Open the GitHub issue. Build dispatch (`bob-job-loop`) is a build-seat
-   concern — Plan seats do not install that pack.
+   concern  -  Plan seats do not install that pack.
 
 ## Plan-seat inputs (workbooks on network drives)
 
@@ -170,7 +170,7 @@ the data, never to this skill book. No secrets in exports or commits.
   not the product.
 - Filing an approved FR pack (**CAST IRON anti-omnibus, FR #90**): only
   after the operator approves filing, open **one GitHub issue per small
-  FR draft** (Goal / Deliverables / Testable — sized for unpaid /
+  FR draft** (Goal / Deliverables / Testable  -  sized for unpaid /
   non-frontier FR seats), **never one omnibus**; keep a draft-code ->
   issue-number map in the plan folder.
 - Parking FR docs: copy the drafts into a clean worktree from
@@ -222,8 +222,8 @@ pack / FR markdown / issues of the product repo (bobiverse#3097).
 - Stamp UAT.
 - Add `cursoragent` or `cursor[bot]` as a collaborator.
 - Install full `agentic_build` / `agentic_irc` onto Plan seats just to
-  create a repo or set webhooks — use `plan-*` skills in this pack.
+  create a repo or set webhooks  -  use `plan-*` skills in this pack.
 - Split architecture or stack into a second skill (sections of this one).
 - End a turn with new skills only in chat/temp/`~/.grok` and no home PR.
-- File an **omnibus** FR (many independent slices in one issue) — CAST
+- File an **omnibus** FR (many independent slices in one issue)  -  CAST
   IRON FR #90; unpaid / non-frontier seats cannot safely carry those.

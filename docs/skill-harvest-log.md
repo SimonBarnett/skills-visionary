@@ -130,19 +130,21 @@ with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.
 
 ## 2026-11-20 - FR #84 Amplify deploy contract for plan.ntsa.uk
 
-- Root mplify.yml: monorepo ppRoot: apps/mcp-catalog, 
-vm use 20, 
-pm ci --include=dev, 
-pm run build (sync-dag + check-dag + next build), strip .next/cache, artifacts .next.
+- Root amplify.yml: monorepo appRoot: apps/mcp-catalog,
+  nvm use 20,
+  npm ci --include=dev,
+  npm run build (sync-dag + check-dag + next build), strip .next/cache, artifacts .next.
 - docs/amplify-hosting.md: WEB_COMPUTE (not static WEB), env allowlist (no secrets), Slab owns custom domain via FR-H #85.
-- Contract test: pps/mcp-catalog/tests/amplify-hosting.test.mjs.
+- Contract test: apps/mcp-catalog/tests/amplify-hosting.test.mjs.
+
 
 ## 2026-11-20 - FR #86 smoke:live against plan.ntsa.uk
 
-- pps/mcp-catalog/scripts/smoke-mcp-live.mjs + 
-pm run smoke:live (GET /, GET/POST /mcp, list_catalog non-empty).
+- apps/mcp-catalog/scripts/smoke-mcp-live.mjs +
+  npm run smoke:live (GET /, GET/POST /mcp, list_catalog non-empty).
 - docs/amplify-hosting.md Live evidence (FR-I) paste instructions; pending FR-H DNS.
-- Contract test 	ests/smoke-live.test.mjs (no network).
+- Contract test: apps/mcp-catalog/tests/smoke-live.test.mjs (no network).
+
 
 ## 2026-11-20 - FR #77 human-readable README
 
@@ -150,9 +152,8 @@ Rewrote root README for humans: plain overview, skills table with when-to-use,
 Bob URLs on `bob.ntsa.uk`, upcoming `plan.ntsa.uk` / `/mcp`, kept xcopy
 install and vision-pack validator command. Tools still on old host tracked as #99.
 
-## 2026-11-20 - FR #87 FR-K intake-first Plan harvest (no GitHub credentials)
+## 2026-11-21 - FR #113 skill-harvest-log Amplify spelling repair
 
-- `harvest-skills-visionary`: Plan-seat default is `Report-BobiverseIntakeIssue` + `Invoke-BobiverseHarvest -Repo SimonBarnett/skills-visionary`; `gh` branch+PR optional; intake URL `https://bob.ntsa.uk/bob/v1/intake`.
-- `visionary` Harvest section: Bob intake first; no `gh login` required.
-- Contract test: `tests/test_fr87_harvest_intake_first.py`.
-- Evidence: `Report-BobiverseIntakeIssue` with `GH_TOKEN` unset returned HTTP 202 (probe PR #108 closed).
+Rewrote FR #84 / #86 entries after PowerShell double-quote escapes ate
+leading letters. Pin test forbids those corruptions and requires
+amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.

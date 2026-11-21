@@ -66,7 +66,9 @@ are never delivered, so Jeeves stays silent about the new repo and its FR issue.
 After create, in the **same turn**:
 
 1. `plan-bob-webhooks` — git hook to Bob.
-2. `plan-enable-prs` — Cursor app / no ruleset that blocks PRs.
+2. `plan-enable-prs` — Cursor app / no ruleset that blocks PRs /
+   `allow_auto_merge=true`, plus the `required-ci-3948` ruleset once CI
+   runs on PRs (bobiverse#3948: MRB PASS = `gh pr merge --auto`).
 
 Do not invent instance URLs or secrets. Do not stamp UAT.
 
@@ -78,3 +80,7 @@ Do not invent instance URLs or secrets. Do not stamp UAT.
 - Create private by default (Plan → public products).
 - Put PATs, hook secrets, or `report.secret` in git.
 - Depend on installing all of `agentic_build`.
+## FR #42: harvest repo for Plan process
+
+How-to-plan harvest / intake examples use `-Repo SimonBarnett/skills-visionary`.
+Do not cite `-Repo SimonBarnett/bobiverse` for Plan playbooks (fleet tooling only).

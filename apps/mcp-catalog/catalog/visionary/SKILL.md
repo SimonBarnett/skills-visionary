@@ -177,6 +177,9 @@ the data, never to this skill book. No secrets in exports or commits.
 - If the operator says nobody knows about an old LAN port, plan a quiet removal. Do not write a deprecation brochure.
 - Market or currency hold: lock the gate in docs, then one small FR per held id that sets registry enabled false without deleting folders. Mark open enable issues and PRs hold / not-planned, and retarget enablement floor pins. Docs park uses Refs, not Closes. Do not copy the product keep/hold id list into this skill.
 - Public download labels use the product name (Priority Agent), never an internal release tag.
+- Before locking who publishes a live feed, check the live publisher. Do not lock from the operator assertion alone.
+- A display gap that a merged PR already fixes is briefed with that PR. Do not file a second FR for the same paint.
+- A late visual add (logo or mark) needs TipForm HTML mocks in the same vision pack before filing.
 - Parking FR docs: copy the drafts into a clean worktree from
   `origin/main` (not the dirty local clone), commit docs only, reference
   the implementation issues with `Refs #N` (never `Closes`), push a

@@ -22,7 +22,7 @@ export default function Home() {
         <p className="meta">
           <span className="badge badge-error">error</span> plan-error
         </p>
-        <h1>Plan MCP unavailable</h1>
+        <h1>Plan Agent unavailable</h1>
         <p>DAG check failed or the catalog data is missing. Typical causes:</p>
         <ul>
           <li>
@@ -65,7 +65,7 @@ npm run smoke   # local MCP`}</pre>
       <p className="meta">
         <a href="https://bob.ntsa.uk">bob.ntsa.uk</a> · <span className="badge">plan-home</span>
       </p>
-      <h1>Plan skills (visionary)</h1>
+      <h1>Plan Agent</h1>
       <p>
         Public catalog for TipForm <strong>Plan</strong> seats: measurable vision packs, then create
         repo → Bob git webhooks → permit PRs — without the full build pack.

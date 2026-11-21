@@ -10,7 +10,7 @@
     "start": "next start",
     "smoke": "node scripts/smoke-mcp.mjs",
     "smoke:live": "node scripts/smoke-mcp-live.mjs",
-    "test": "node --test tests/check-dag.test.mjs tests/landing.test.mjs tests/mcp-tools.test.mjs tests/amplify-hosting.test.mjs tests/smoke-live.test.mjs"
+    "test": "node --test tests/check-dag.test.mjs tests/landing.test.mjs tests/mcp-tools.test.mjs tests/amplify-hosting.test.mjs tests/smoke-live.test.mjs tests/plan-agent-name.test.mjs"
   },
   "engines": {
     "node": ">=20"

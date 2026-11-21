@@ -14,8 +14,8 @@ const mock = fs.readFileSync(
   'utf8',
 );
 
-test('landing names plan.ntsa.uk/mcp and Plan explainer', () => {
-  assert.match(page, /Plan skills \(visionary\)/);
+test('landing names Plan Agent and plan.ntsa.uk/mcp', () => {
+  assert.match(page, /Plan Agent/);
   assert.match(page, /plan\.ntsa\.uk|mcpUrl|\/mcp/);
   assert.match(page, /list_catalog/);
   assert.match(page, /get_skill/);
@@ -25,10 +25,10 @@ test('landing names plan.ntsa.uk/mcp and Plan explainer', () => {
 
 test('landing has empty and error UX branches', () => {
   assert.match(page, /Catalog empty|plan-empty/);
-  assert.match(page, /Plan MCP unavailable|plan-error/);
+  assert.match(page, /Plan Agent unavailable|plan-error/);
 });
 
 test('mock wireframe still documents MCP URL', () => {
   assert.match(mock, /https:\/\/plan\.ntsa\.uk\/mcp/);
-  assert.match(mock, /Plan skills \(visionary\)/);
+  assert.match(mock, /Plan Agent/);
 });

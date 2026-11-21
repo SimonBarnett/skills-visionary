@@ -1,13 +1,13 @@
 # Vision: skills-visionary
 
-Skill: `visionary`. New-product intake for this repo.
+Skill: `visionary`. Product vision for this repo.
 
 ## Objective
 
-Every new SimonBarnett product and every feature request on an existing
-repo starts with a scored long-term plan (shape, stack, architecture,
-HTML mocks when there is a UI) before anyone parks a ticket or dispatches
-a build.
+Plan seats and humans discover and pull visionary / plan skills via a
+public surface at **https://plan.ntsa.uk** (landing + MCP), with a clear
+human README and a discoverable link from **https://bob.ntsa.uk**. Skill
+markdown under `.grok/skills` remains the source of truth.
 
 LOCKED
 
@@ -15,53 +15,68 @@ LOCKED
 
 | id | metric | target | how measured | fail-when |
 |----|--------|--------|--------------|-----------|
-| S1 | Parks include a passing vision pack | 100% of new products and FRs on SimonBarnett repos | `python tools/validate-vision-pack.py` on the pack exits 0 locally; GitHub Actions `vision-pack` workflow on this repo (product + in-scope FR packs); `bob-spec-intake` must run the same command before park/dispatch | A new product parks `functional-spec` only and dispatches, or an FR parks/dispatches without a vision pack that exits 0 |
-| S2 | Mocks are HTML wireframes | Key + empty + error | `docs/mocks/*.html` present; no generated PNG mocks | Intake ships PNG-only or skips empty/error |
-| S3 | Harvest home is this repo | Learnings land on a PR here | `.grok/skills/harvest-skills-visionary` used; no playbook-only in `~/.grok` | Visionary playbook edited only on agentic_build or home disk |
+| S1 | Public README is human-readable | Non-agent reader can state purpose, skills list, MCP URL, install/copy path in ≤2 min | Manual read of root `README.md`; links use `bob.ntsa.uk` / `plan.ntsa.uk` | README is agent-only jargon only, or still points at the old fleet host |
+| S2 | Skill DAG builds clean | `check-dag` (or twin) exit 0 on CI | CI job on PR; catalog↔DAG sync, no cycles on skill nodes, no secrets in public catalog | Drift between `.grok/skills` and catalog/DAG |
+| S3 | MCP tools work on Amplify | `list_catalog` + `get_skill` over `POST https://plan.ntsa.uk/mcp` | `npm run smoke` locally + `smoke:live` after Slab DNS | 404 / wrong transport / empty catalog |
+| S4 | plan.ntsa.uk resolves | HTTPS 200 on `/` and MCP path | curl/Invoke-WebRequest after Slab attach | NXDOMAIN or Amplify default-only forever |
+| S5 | bob.ntsa.uk links Plan | Home page has visible `plan.ntsa.uk` link | Fetch `https://bob.ntsa.uk/` HTML contains href | Home ships without Plan link |
+| S6 | Vision pack stays green | `python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks` exits 0 | Local + GitHub Actions `vision-pack` workflow | Pack parks with poetry rows or missing mocks |
+
+LOCKED
 
 ## Shape
 
-Primary: service
+Primary: website
 
-Hybrid note: the product is an agent playbook (skill pack). Delivery is
-public git markdown plus HTML mocks, not a website or installable app.
+Hybrid note: product surface is plan.ntsa.uk landing + MCP HTTP.
+`.grok/skills` markdown remains source of truth; Amplify serves catalog
++ DAG read API. Explicit change from prior vision shape skill-pack
+service.
 
 LOCKED
 
 ## Stack
 
-Default: Markdown `SKILL.md` in `.grok/skills/visionary`, HTML/CSS mocks
-in `docs/mocks/`, public GitHub (`SimonBarnett/skills-visionary`).
+Default: Markdown skills in `.grok/skills` → sync into `apps/mcp-catalog`
+(Next.js 14 App Router), Node 20, Amplify **WEB_COMPUTE**, public DAG
+under `data/`, no secrets on Amplify. Pattern:
+`SimonBarnett/priority-mcp` `v2/apps/mcp-catalog` / live
+`https://mcp.ntsa.uk`.
 
-Why: fleet already loads `.grok/skills`; HTML mocks are reviewable
-without an image model; public repo lets anyone open a PR.
+Why: proven MCP host; Plan seats already load this pack; one repo owns
+playbook + public surface.
 
-Why-not: no web app, no SaaS, no generated PNG pipeline, no extra
-runtime. Windows + `gh` + existing intake skills are enough.
+Why-not: Amplify static `WEB` only; new empty host repo; execute-plane
+tools on Amplify.
 
 LOCKED
 
 ## Architecture
 
-Who talks to what. Phase 0 only.
+Who talks to what. Amplify WEB_COMPUTE + Slab DNS for plan.ntsa.uk.
 
 ```
-brief --> visionary (high-reasoning seat)
-       --> docs/vision.md + docs/mocks/*.html   [new product]
-       --> FR markdown success + mocks          [feature request]
-       --> plan-git-from-plan (Plan seats; no full build pack)
-       --> public repo + Bob git webhook + permit PRs  [new product only]
-       --> FR commit on existing repo                  [FR; no create]
-       --> FR issue --> bob-job-loop
-design-uat later reads mocks + brief (does not stamp UAT here)
-harvest-skills-visionary PRs learnings back to this repo
+.grok/skills/*  (source of truth SKILL.md)
+       |
+       v
+ sync-skill-dag + catalog mirrors + check-dag  (CI / amplify preBuild)
+       |
+       v
+ apps/mcp-catalog  Next.js  --POST /mcp-->  list_catalog, get_skill
+       |
+       v
+ Amplify WEB_COMPUTE  <--- Slab agent: app + DNS plan.ntsa.uk + cert
+       |
+       +--> public landing HTML (human)
+       |
+bob.ntsa.uk home  -->  link to plan.ntsa.uk
 ```
 
-Trust: no secrets, no instance URLs. This pack owns the visionary
-playbook **and** Plan-seat git setup (`plan-git-from-plan` /
-`plan-create-repo` / `plan-bob-webhooks` / `plan-enable-prs`),
-harvested from agentic_build so Plan seats do not install the full
-build pack. Fleet build/IRC jobs stay in their packs.
+Trust: public skills only; no tokens on Amplify; how-to-plan harvest
+stays this repo (`harvest-skills-visionary`). Fleet build/IRC jobs stay
+in their packs. Plan-seat git helpers remain
+`plan-git-from-plan` / `plan-create-repo` / `plan-bob-webhooks` /
+`plan-enable-prs`.
 
 LOCKED
 
@@ -69,19 +84,24 @@ LOCKED
 
 | id | file | state |
 |----|------|-------|
-| M1 | docs/mocks/home.html | primary Ã¢â‚¬â€ vision pack filled |
-| M2 | docs/mocks/empty.html | empty Ã¢â‚¬â€ refuse dispatch |
-| M3 | docs/mocks/error.html | error Ã¢â‚¬â€ poetry / unmeasurable |
+| M1 | docs/mocks/plan-home.html | Landing: what Plan is + MCP connect snippet |
+| M2 | docs/mocks/plan-empty.html | Empty catalog / not deployed |
+| M3 | docs/mocks/plan-error.html | MCP/DAG build failure message |
+
+Required validator trio (`home.html` / `empty.html` / `error.html`)
+remains in `docs/mocks/` for `validate-vision-pack`; product UI mocks
+above are the plan.ntsa.uk wireframes.
 
 ## LOCKED
 
-- Shape is a skill-pack service.
-- Success S1-S3 as above.
-- Stack is SKILL.md + HTML mocks + public git.
+- Shape Primary is website (plan.ntsa.uk landing + MCP).
+- Success S1-S6 as above (README, DAG, MCP, DNS, bob link, vision gate).
+- Stack is `.grok/skills` → Amplify WEB_COMPUTE catalog; no secrets.
 - Harvest skill is foundation.
 
 ## UNKNOWN
 
+- Exact Amplify app id / custom-domain attach timing (Slab FR-H).
 - Whether agentic_build keeps a stub pointer or copies this skill on
   Install-BobFleet only.
 - Visual UAT of the HTML mocks (Bob stamps; not this intake).

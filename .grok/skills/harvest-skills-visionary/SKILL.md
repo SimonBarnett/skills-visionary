@@ -20,13 +20,33 @@ Fleet/build jobs stay `agentic_build` `harvest-agent-skills`. IRC stays
 ## AUTOMATIC
 
 **ALWAYS** harvest new or changed visionary / plan-git playbooks to this
-repo **in the same turn** (branch + PR). Do not ask. Do not wait.
+repo **in the same turn**. Do not ask. Do not wait.
 Honesty box: foundation `.grok/skills/harvest-agent-skills`.
 
+**Plan-seat default (FR-K / #87):** report via Bob **intake**  -  no GitHub
+credentials required. Prefer:
+
+```text
+Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind harvest|skill|fr -Title '...' -Body '...'
+```
+
+and close the session with:
+
+```text
+Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary '...' -Lesson '...'
+Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Flush
+```
+
+When `gh` is authenticated **and** you already edited a skill in a local
+clone, a branch + PR is an **optional** extra (never push `origin/main`).
+Intake alone is enough for honesty-box success on a Plan seat with no
+`gh` login. Never put tokens in harvest bodies.
+
 If you learn a repeatable visionary rule (trigger, measurable success,
-shape/stack/mocks, plan-git webhook/PR path), edit the skill **now**,
-append `docs/skill-harvest-log.md`, commit on a branch, open a PR. Do not
-push `origin/main`. Do not leave the playbook only in `~/.grok/skills`.
+shape/stack/mocks, plan-git webhook/PR path), edit the skill **now** when
+you have a writable clone; otherwise file the lesson via intake with
+`-Kind harvest` / `-Kind skill`. Append `docs/skill-harvest-log.md` when
+the edit lands in-repo. Do not leave the playbook only in `~/.grok/skills`.
 
 ## What belongs here (how-to-plan only)
 
@@ -44,18 +64,23 @@ it here.
 
 Empty harvest: no commit. Do not stamp UAT.
 
+## FR #24 / FR-K (#87): Plan-seat harvest via Bob intake (no GitHub)
 
-## FR #24: report-back without GitHub
+**Intake-first** for Plan seats. Do **not** require `gh` auth or a GitHub
+account for honesty-box harvest.
 
-Route order for honesty-box harvest:
+Route order:
 
-1. `gh`: open a PR or issue on this repo.
-2. No `gh` / not authenticated: POST to Bob intake
-   `https://irc.ntsa.uk/bob/v1/intake` (curl or `Invoke-RestMethod`).
-   Never ask anyone to create a GitHub account just to report back.
-3. Offline: write `harvest-outbox/` and retry.
+1. **Default:** `Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind harvest|skill|fr ...`
+   -> `POST https://bob.ntsa.uk/bob/v1/intake` (HTTP 202). Offline: local
+   outbox queue; `Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Flush` retries.
+2. **Session closer (always):** `Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary '...' -Lesson '...'` then `-Flush`.
+3. **Optional when credentials exist:** `gh` branch + PR into this repo for
+   in-tree skill edits. Never a substitute for intake when `gh` is missing.
+   Never push `origin/main`. Never invent or paste tokens into bodies.
 
-(Fleet bobiverse harvest scripts follow the same order.)
+Never ask anyone to create a GitHub account just to report back.
+Never instruct that Plan harvest **requires** `gh login`.
 
 ## CAST IRON: explicit `-Repo` skills-visionary (FR #3318 / #61 / #63)
 

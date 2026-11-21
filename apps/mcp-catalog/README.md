@@ -1,6 +1,6 @@
-# mcp-catalog (skills-visionary)
+# Plan Agent (mcp-catalog)
 
-Public skill catalog + DAG for **plan.ntsa.uk** (FR-C / FR-D).
+**Plan Agent** - public skill catalog + DAG for **plan.ntsa.uk** (FR-C / FR-D).
 
 ## Source of truth
 

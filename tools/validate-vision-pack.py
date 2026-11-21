@@ -40,6 +40,63 @@ OBSERVABLE_HOW_PATTERNS = (
     r"\\",
 )
 
+# FR #22: human-scale mermaid - hard ceiling ~12 nodes; caption required.
+MERMAID_NODE_CEILING = 12
+MERMAID_FENCE_RE = re.compile(
+    r"(?ms)^(?P<indent>[ \t]*)```mermaid[ \t]*\r?\n(?P<body>.*?)(?P=indent)```[ \t]*$"
+)
+MERMAID_KW = frozenset(
+    {
+        "flowchart",
+        "graph",
+        "sequencediagram",
+        "statediagram",
+        "statediagram-v2",
+        "classdiagram",
+        "erdiagram",
+        "gantt",
+        "pie",
+        "journey",
+        "requirementdiagram",
+        "gitgraph",
+        "mindmap",
+        "timeline",
+        "participant",
+        "actor",
+        "as",
+        "note",
+        "over",
+        "left",
+        "right",
+        "of",
+        "end",
+        "loop",
+        "alt",
+        "else",
+        "opt",
+        "par",
+        "and",
+        "rect",
+        "activate",
+        "deactivate",
+        "state",
+        "direction",
+        "tb",
+        "td",
+        "bt",
+        "rl",
+        "lr",
+        "subgraph",
+        "class",
+        "click",
+        "style",
+        "linkstyle",
+        "classdef",
+        "yes",
+        "no",
+    }
+)
+
 
 def section(text: str, name: str) -> str:
     pattern = rf"^##\s+{re.escape(name)}\s*$"
@@ -201,6 +258,85 @@ def validate_success(success: str, errors: list[str]) -> bool:
     return False
 
 
+def iter_mermaid_blocks(text: str) -> list[tuple[int, str, str]]:
+    """Return (1-based start line, caption_line, body) for each mermaid fence."""
+    out: list[tuple[int, str, str]] = []
+    for m in MERMAID_FENCE_RE.finditer(text):
+        start = text[: m.start()].count("\n") + 1
+        before = text[: m.start()].rstrip("\r\n")
+        caption = ""
+        if before:
+            caption = before.splitlines()[-1].strip()
+        out.append((start, caption, m.group("body")))
+    return out
+
+
+def count_mermaid_nodes(body: str) -> int:
+    """Best-effort unique node/participant/state id count for FR #22 ceiling."""
+    ids: set[str] = set()
+    for raw in body.splitlines():
+        line = raw.strip()
+        if not line or line.startswith("%%"):
+            continue
+        low = line.lower()
+        # sequenceDiagram participants
+        m = re.match(r"(?i)^(participant|actor)\s+(\w+)", line)
+        if m:
+            ids.add(m.group(2))
+            continue
+        # stateDiagram: state Id or Id: label / [*]
+        m = re.match(r"(?i)^state\s+(\w+)\b", line)
+        if m:
+            ids.add(m.group(1))
+        # flowchart / graph node defs and edge endpoints
+        for tok in re.findall(r"[A-Za-z][\w]*", line):
+            if tok.lower() in MERMAID_KW:
+                continue
+            if tok.isdigit():
+                continue
+            # skip pure direction tokens already in KW
+            ids.add(tok)
+        # edge-only lines still contribute via findall above
+        if re.search(r"\[\*\]", line):
+            ids.add("*")
+    return len(ids)
+
+
+def caption_is_usable(caption: str) -> bool:
+    if not caption:
+        return False
+    if caption.startswith("#"):
+        return False
+    if caption.startswith("```"):
+        return False
+    if re.match(r"^[-*|]{1,}\s*$", caption):
+        return False
+    # Require a short sentence, not a bare heading word.
+    letters = sum(1 for c in caption if c.isalpha())
+    return letters >= 8
+
+
+def validate_mermaid(text: str, errors: list[str]) -> bool:
+    """FR #22: every mermaid block needs a caption; nodes <= ceiling."""
+    ok = True
+    blocks = iter_mermaid_blocks(text)
+    for idx, (line_no, caption, body) in enumerate(blocks, start=1):
+        if not caption_is_usable(caption):
+            errors.append(
+                f"mermaid[{idx}]@{line_no}: missing one-sentence caption on the "
+                "line immediately above the mermaid fence"
+            )
+            ok = False
+        nodes = count_mermaid_nodes(body)
+        if nodes > MERMAID_NODE_CEILING:
+            errors.append(
+                f"mermaid[{idx}]@{line_no}: {nodes} nodes exceeds ceiling "
+                f"{MERMAID_NODE_CEILING} - split into smaller diagrams"
+            )
+            ok = False
+    return ok
+
+
 def validate_mocks(mocks_dir: Path, errors: list[str]) -> bool:
     if not mocks_dir.is_dir():
         errors.append(f"mocks: directory not found: {mocks_dir}")
@@ -230,6 +366,7 @@ def validate_pack(vision_path: Path, mocks_dir: Path, historical: bool = False) 
 
     shape_ok = validate_shape(shape_sec, errors)
     validate_success(success_sec, errors)
+    validate_mermaid(text, errors)
 
     shape_unknown = shape_is_unknown(shape_sec)
     if shape_ok and not shape_unknown:

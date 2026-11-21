@@ -1,0 +1,8 @@
+{
+  "name": "plan-enable-prs",
+  "title": "plan enable prs",
+  "description": "Permit pull-request workflow on a new SimonBarnett product repo: keep the repo public with forking on, avoid rulesets that block outside PRs, and ensure the Cursor GitHub App can push/PR as cursor[bot]. Use when Plan seats finish create+web",
+  "version": "1.0.0",
+  "topic": "plan",
+  "source": ".grok/skills/plan-enable-prs/SKILL.md"
+}

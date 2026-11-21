@@ -34,7 +34,7 @@ Visionary required on FR path; success gate before dispatch; no
 `gh repo create` on FR. Sync `agentic_build` `.grok/skills/visionary`
 and `bob-spec-intake` Feature request step (CAST IRON).
 
-## 2026-09-24 â€” foundation honesty box
+## 2026-09-24 — foundation honesty box
 
 Added `.grok/skills/harvest-agent-skills/SKILL.md`. Home:
 `https://github.com/SimonBarnett/skills-visionary`. Report

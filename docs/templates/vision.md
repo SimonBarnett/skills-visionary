@@ -39,8 +39,18 @@ LOCKED / UNKNOWN:
 
 Who talks to what. Process / data / trust boundaries. Phase 0 only.
 
-```
-<ascii diagram>
+Mermaid rules (human scale): one diagram per concern; about 5-9 nodes
+each (hard ceiling 12 - split if larger); one-sentence caption on the
+line above every mermaid fenced block; optional tiny index diagram of
+diagram names only; prefer sequenceDiagram / stateDiagram-v2 /
+flowchart by concern; same component names across diagrams; no
+horizontal scroll at normal GitHub width.
+
+Caption: what this flow shows and why it matters.
+```mermaid
+flowchart LR
+  A[Client] --> B[API]
+  B --> C[Store]
 ```
 
 LOCKED / UNKNOWN:

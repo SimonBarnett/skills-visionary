@@ -1,0 +1,48 @@
+body {
+  font-family: system-ui, Segoe UI, sans-serif;
+  margin: 2rem;
+  max-width: 44rem;
+  line-height: 1.45;
+  color: #122;
+}
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 0.4rem;
+}
+h2 {
+  font-size: 1.15rem;
+  margin: 1.4rem 0 0.4rem;
+}
+.meta {
+  color: #456;
+  font-size: 0.95rem;
+}
+pre {
+  background: #f4f6f8;
+  padding: 0.8rem;
+  overflow: auto;
+  border: 1px solid #dde;
+}
+a {
+  color: #0645ad;
+}
+.badge {
+  display: inline-block;
+  background: #e8eef7;
+  border: 1px solid #b9c7dd;
+  border-radius: 4px;
+  padding: 0 0.35rem;
+  font-size: 0.85rem;
+}
+.badge-empty {
+  background: #f7efe8;
+  border-color: #ddc7b9;
+}
+.badge-error {
+  background: #f7e8e8;
+  border-color: #ddb9b9;
+}
+.skill-list {
+  list-style: disc;
+  padding-left: 1.2rem;
+}

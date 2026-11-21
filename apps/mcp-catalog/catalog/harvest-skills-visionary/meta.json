@@ -1,0 +1,8 @@
+{
+  "name": "harvest-skills-visionary",
+  "title": "harvest skills visionary",
+  "description": "Promote visionary playbooks into SimonBarnett/skills-visionary .grok/skills on GitHub. Use when the visionary intake procedure changes, or the user says harvest visionary, harvest skills-visionary, or /harvest-skills-visionary. Do not harve",
+  "version": "1.0.0",
+  "topic": "harvest",
+  "source": ".grok/skills/harvest-skills-visionary/SKILL.md"
+}

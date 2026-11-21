@@ -178,6 +178,7 @@ the data, never to this skill book. No secrets in exports or commits.
 - Market or currency hold: lock the gate in docs, then one small FR per held id that sets registry enabled false without deleting folders. Mark open enable issues and PRs hold / not-planned, and retarget enablement floor pins. Docs park uses Refs, not Closes. Do not copy the product keep/hold id list into this skill.
 - Public download labels use the product name (Priority Agent), never an internal release tag.
 - Before locking who publishes a live feed, check the live publisher. Do not lock from the operator assertion alone.
+- When a new agent kind is claimed on origin/main, also probe the live frozen worker binary and the install fuel JSON. Closed GitHub FRs do not mean the seat binary can select that kind. A source-only fast-forward without a rebuild leaves the tray on the old decision table.
 - A display gap that a merged PR already fixes is briefed with that PR. Do not file a second FR for the same paint.
 - A late visual add (logo or mark) needs TipForm HTML mocks in the same vision pack before filing.
 - Parking FR docs: copy the drafts into a clean worktree from

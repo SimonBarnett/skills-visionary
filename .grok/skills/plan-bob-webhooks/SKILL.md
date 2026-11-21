@@ -164,3 +164,8 @@ Before `gh repo create` / the webhook gate:
    announce via that delivery (still exit 0 only when all needles clear).
    Replay items still use the digest-queue fallback.
 4. Keep **refuse-to-push / refuse-to-open-issue** until the gate exits 0.
+
+## FR #42: harvest repo for Plan process
+
+How-to-plan harvest / intake examples use `-Repo SimonBarnett/skills-visionary`.
+Do not cite `-Repo SimonBarnett/bobiverse` for Plan playbooks (fleet tooling only).

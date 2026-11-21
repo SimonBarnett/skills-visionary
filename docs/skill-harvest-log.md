@@ -1,5 +1,20 @@
 # Skill harvest log
 
+## 2026-11-20 - FR #83 / #82 plan.ntsa.uk landing + MCP scaffold
+
+- Next.js 14 App Router under `apps/mcp-catalog`: `GET /` landing
+  (plan-home / empty / error) and `POST /mcp` `list_catalog` /
+  `get_skill` (protocol 2024-11-05).
+- Public MCP URL `https://plan.ntsa.uk/mcp`; links to bob.ntsa.uk + GitHub.
+
+## 2026-11-20 - FR #81 skill DAG + catalog mirrors
+
+- Added `docs/skill-sources/skills-visionary/_dag` and
+  `apps/mcp-catalog` sync/check scripts (priority-mcp pattern).
+- `.grok/skills` remains source of truth; catalog/ mirrors meta+SKILL.
+- CI job `mcp-catalog-dag` runs `npm run build` + `npm test`.
+- Rebuild: `python tools/build-skill-dag.py` then `npm run sync-dag`.
+
 ## 2026-11-12 - plan fetch cwd and LOCKED line
 
 - Fetch the product only after Set-Location to that clone, or with
@@ -19,7 +34,7 @@ Visionary required on FR path; success gate before dispatch; no
 `gh repo create` on FR. Sync `agentic_build` `.grok/skills/visionary`
 and `bob-spec-intake` Feature request step (CAST IRON).
 
-## 2026-09-24 — foundation honesty box
+## 2026-09-24 - foundation honesty box
 
 Added `.grok/skills/harvest-agent-skills/SKILL.md`. Home:
 `https://github.com/SimonBarnett/skills-visionary`. Report
@@ -100,8 +115,37 @@ seed-FR ordering and live-queue warning; harvest without gh via intake.
 2xx delivery fallback when the local ear nick is broken; Plan skill
 documents the preflight.
 
+## 2026-11-20 - FR #42 plan CAST IRON cites skills-visionary
+
+`plan-git-from-plan` CAST IRON Report/Harvest examples use
+`-Repo SimonBarnett/skills-visionary`; regression test pins plan-* skills.
+
+## 2026-11-20 - FR #61 / #63 explicit -Repo skills-visionary
+
+Plan how-to-plan harvests with explicit `-Repo SimonBarnett/skills-visionary`
+must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
+tray cues. Documented in `harvest-skills-visionary`; durable script fix in
+bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
+with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.
+
+## 2026-11-20 - FR #84 Amplify deploy contract for plan.ntsa.uk
+
+- Root mplify.yml: monorepo ppRoot: apps/mcp-catalog, 
+vm use 20, 
+pm ci --include=dev, 
+pm run build (sync-dag + check-dag + next build), strip .next/cache, artifacts .next.
+- docs/amplify-hosting.md: WEB_COMPUTE (not static WEB), env allowlist (no secrets), Slab owns custom domain via FR-H #85.
+- Contract test: pps/mcp-catalog/tests/amplify-hosting.test.mjs.
+
+## 2026-11-20 - FR #86 smoke:live against plan.ntsa.uk
+
+- pps/mcp-catalog/scripts/smoke-mcp-live.mjs + 
+pm run smoke:live (GET /, GET/POST /mcp, list_catalog non-empty).
+- docs/amplify-hosting.md Live evidence (FR-I) paste instructions; pending FR-H DNS.
+- Contract test 	ests/smoke-live.test.mjs (no network).
 ## 2026-11-20 - FR #77 human-readable README
 
 Rewrote root README for humans: plain overview, skills table with when-to-use,
 Bob URLs on `bob.ntsa.uk`, upcoming `plan.ntsa.uk` / `/mcp`, kept xcopy
 install and vision-pack validator command. Tools still on old host tracked as #99.
+

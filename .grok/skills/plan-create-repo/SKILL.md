@@ -80,3 +80,7 @@ Do not invent instance URLs or secrets. Do not stamp UAT.
 - Create private by default (Plan → public products).
 - Put PATs, hook secrets, or `report.secret` in git.
 - Depend on installing all of `agentic_build`.
+## FR #42: harvest repo for Plan process
+
+How-to-plan harvest / intake examples use `-Repo SimonBarnett/skills-visionary`.
+Do not cite `-Repo SimonBarnett/bobiverse` for Plan playbooks (fleet tooling only).

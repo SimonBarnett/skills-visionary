@@ -175,6 +175,7 @@ the data, never to this skill book. No secrets in exports or commits.
   issue-number map in the plan folder.
 - Multi-host public plan (bob.ntsa.uk and mcp.ntsa.uk) plus a visual system: file the first FR as the shared visual system and HTML mocks. Leave host-specific downloads, commands, and agent-download slices as unfiled drafts. Cross-repo mcp work stays on priority-mcp drafts, not a bobiverse omnibus.
 - If the operator says nobody knows about an old LAN port, plan a quiet removal. Do not write a deprecation brochure.
+- Market or currency hold: lock the gate in docs, then one small FR per held id that sets registry enabled false without deleting folders. Mark open enable issues and PRs hold / not-planned, and retarget enablement floor pins. Docs park uses Refs, not Closes. Do not copy the product keep/hold id list into this skill.
 - Public download labels use the product name (Priority Agent), never an internal release tag.
 - Parking FR docs: copy the drafts into a clean worktree from
   `origin/main` (not the dirty local clone), commit docs only, reference

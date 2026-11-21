@@ -144,6 +144,12 @@ pm run smoke:live (GET /, GET/POST /mcp, list_catalog non-empty).
 - docs/amplify-hosting.md Live evidence (FR-I) paste instructions; pending FR-H DNS.
 - Contract test 	ests/smoke-live.test.mjs (no network).
 
+## 2026-11-20 - FR #77 human-readable README
+
+Rewrote root README for humans: plain overview, skills table with when-to-use,
+Bob URLs on `bob.ntsa.uk`, upcoming `plan.ntsa.uk` / `/mcp`, kept xcopy
+install and vision-pack validator command. Tools still on old host tracked as #99.
+
 ## 2026-11-20 - FR #79 vision pack website + plan.ntsa.uk
 
 Updated docs/vision.md: Shape Primary website; Success rows for README,

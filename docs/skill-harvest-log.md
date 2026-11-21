@@ -34,7 +34,7 @@ Visionary required on FR path; success gate before dispatch; no
 `gh repo create` on FR. Sync `agentic_build` `.grok/skills/visionary`
 and `bob-spec-intake` Feature request step (CAST IRON).
 
-## 2026-09-24 — foundation honesty box
+## 2026-09-24 - foundation honesty box
 
 Added `.grok/skills/harvest-agent-skills/SKILL.md`. Home:
 `https://github.com/SimonBarnett/skills-visionary`. Report
@@ -127,3 +127,9 @@ must stay on this honesty box when Summary/Lesson mention tipform / bob-worker /
 tray cues. Documented in `harvest-skills-visionary`; durable script fix in
 bobiverse `Invoke-BobiverseHarvest.ps1` (FR #3318 keep path). Twin #63 closed
 with this PR. Wrong-book bobiverse tips #6140 / #6155 already CLOSED/MOVED.
+
+## 2026-11-20 - FR #84 Amplify deploy contract for plan.ntsa.uk
+
+- Root `amplify.yml`: monorepo `appRoot: apps/mcp-catalog`, `nvm use 20`, `npm ci --include=dev`, `npm run build` (sync-dag + check-dag + next build), strip `.next/cache`, artifacts `.next`.
+- `docs/amplify-hosting.md`: WEB_COMPUTE (not static WEB), env allowlist (no secrets), Slab owns custom domain via FR-H #85.
+- Contract test: `apps/mcp-catalog/tests/amplify-hosting.test.mjs`.

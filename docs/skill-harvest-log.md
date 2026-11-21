@@ -171,3 +171,9 @@ amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
 - harvest-skills-visionary + visionary: multi-repo one-issue-per-row park, validate how-measured observables, Plan product vs bobiverse tray split.
 - Evidence: session parked VIS-01..09 / BOB / PRI indexes; MCP doctor 2 tools on plan.ntsa.uk.
 
+## 2026-11-21 - park-only issue body vs dispatch (bobiverse#8707)
+
+- Living feature-request issues must not keep Park-only / Do not bob-job after operator dispatch; workers GIVEUP.
+- Same turn: rewrite sibling FR bodies to implement-S1, clear BOB_BRIDGE_HOME loops board, then Start-BobBuildLoop.
+- FR indexes: docs/fr-index-*.md so CI feature-request-*.md validate skips them.
+

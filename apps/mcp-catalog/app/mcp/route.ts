@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
       transport: 'POST JSON-RPC to /mcp',
       protocolVersion: '2024-11-05',
       tools: listedToolNames(),
-      note: 'Plan skills catalog. No secrets. stdio is not served here.',
+      note: 'Plan Agent catalog. No secrets. stdio is not served here.',
     },
     { headers: responseHeaders },
   );

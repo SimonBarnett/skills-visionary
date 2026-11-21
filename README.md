@@ -1,12 +1,13 @@
-# skills-visionary
+# Plan Agent
 
+Repo: `SimonBarnett/skills-visionary` (plan.ntsa.uk).
 Skill pack for **Plan seats**: agents (and humans) who turn a new-product
 idea into a measurable vision pack, then create the GitHub repo and wire
 Bob webhooks so the fleet can build it.
 
 This pack is **only** the Plan / vision surface. It is not the full IRC
 fleet (`agentic_irc`) or the full build pack (`agentic_build`). TipForm
-**Plan → Grok/Cursor** seats load these skills so they can lock shape and
+**Plan -> Grok/Cursor** seats load these skills so they can lock shape and
 success metrics, then run `plan-git-from-plan` without installing
 everything else.
 
@@ -15,20 +16,20 @@ Vision: [`docs/vision.md`](docs/vision.md)
 
 ## What you get
 
-1. **Vision gate** — refuse park / create until shape and success metrics
+1. **Vision gate**  -  refuse park / create until shape and success metrics
    are LOCKED (or marked UNKNOWN), with HTML mocks when there is a UI.
-2. **Plan-git helpers** — create a public SimonBarnett repo, point Bob at
+2. **Plan-git helpers**  -  create a public SimonBarnett repo, point Bob at
    git events, and enable outside PRs (including Cursor).
-3. **Harvest** — send how-to-plan lessons back here (not plan content).
+3. **Harvest**  -  send how-to-plan lessons back here (not plan content).
 
 ## Skills
 
 | Skill | Role | When to use |
 |-------|------|-------------|
 | `visionary` | Measurable vision pack (shape, success, stack, mocks) | New product or large FR; before any park / git-create |
-| `plan-git-from-plan` | Orchestrator: create → webhooks → enable PRs | After the vision pack is approved / LOCKED |
+| `plan-git-from-plan` | Orchestrator: create -> webhooks -> enable PRs | After the vision pack is approved / LOCKED |
 | `plan-create-repo` | Public `gh repo create` under SimonBarnett | Step 1 of plan-git (or alone when only the empty repo is needed) |
-| `plan-bob-webhooks` | GitHub hook → Bob `/bob/v1/git` | Step 2 of plan-git; any new product repo that needs fleet git events |
+| `plan-bob-webhooks` | GitHub hook -> Bob `/bob/v1/git` | Step 2 of plan-git; any new product repo that needs fleet git events |
 | `plan-enable-prs` | Forking / no blocking ruleset / Cursor app | Step 3 of plan-git; when `cursor[bot]` cannot open PRs |
 | `harvest-skills-visionary` | PR learnings back to this repo | After a Plan session teaches a reusable how-to-plan rule |
 
@@ -91,7 +92,7 @@ CI: `.github/workflows/vision-pack.yml`.
 
 ## Harvest honesty
 
-Reusable how-to-plan playbooks land here as PRs — see
+Reusable how-to-plan playbooks land here as PRs  -  see
 [`docs/skill-harvest-log.md`](docs/skill-harvest-log.md). Plan content
 (requirements, designs, FR lists) stays in the plan folder / product
 `docs/vision.md`, not in skill books.

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'plan.ntsa.uk — Plan skills',
-  description: 'Public Plan / visionary skill catalog and MCP for TipForm Plan seats.',
+  title: 'Plan Agent',
+  description: 'Plan Agent  -  public skill catalog and MCP for TipForm Plan seats (plan.ntsa.uk).',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

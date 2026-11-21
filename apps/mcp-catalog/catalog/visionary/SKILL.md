@@ -201,6 +201,7 @@ the data, never to this skill book. No secrets in exports or commits.
   or with the operator's merged PR list, before writing the gap.
   Read a path with `git show origin/main:<path>` or a disposable worktree.
   Do not ff-merge `origin/main` into an unrelated local feature branch.
+- New FR packs name the product repo `SimonBarnett/priority-mcp`. `gh --repo SimonBarnett/agentic_fomprep` still resolves. A local git remote may still say `agentic_fomprep.git`.
 - When `docs/fr/ISSUED.tsv` already indexes an older pack, write the new
   index at `docs/fr/<slug>/ISSUED.tsv`. Do not replace the root file.
 - When a per-machine installer offers a per-user CLI, and two CLIs can

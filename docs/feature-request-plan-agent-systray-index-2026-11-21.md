@@ -21,3 +21,19 @@
 
 - Park-only: no bob-job-loop until human dispatch.
 - Phase gate: models webhook (P0) before Weights/start consumers; Plan/Priority MSI (VIS/PRI) before bob-ear consume (BOB P4).
+## Success
+
+| id | metric | target | how measured | fail-when |
+|----|--------|--------|--------------|-----------|
+| S1 | Index lists VIS-01..09 with GitHub issues | Nine rows cite issues #135-#143 | Count Issue links in `docs/feature-request-plan-agent-systray-index-2026-11-21.md` | Missing or non-GitHub issue link |
+| S2 | Each row points at a parked FR pack path | Doc column paths exist under docs/ | `python -c` Path.exists for each Doc cell under docs/ | Broken relative path |
+
+LOCKED
+
+## Shape
+
+Primary: app
+
+Hybrid note: park-only anti-omnibus index for theme `Bob ear systray Agents/Workers/Weights + models webhook`; points at SimonBarnett/skills-visionary FR packs and shared mocks under docs/mocks/plan-agent-systray/.
+
+LOCKED

@@ -10,3 +10,4 @@ launcher/out/
 *.suo
 .vs/
 tools/out/
+.bobiverse-seat

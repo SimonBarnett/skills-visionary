@@ -125,4 +125,5 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - Never write skill-harvest-log from PowerShell double-quoted strings with \\a/\\n/\\t path fragments; use single-quoted here-strings or WriteAllText.
 - When a webhook-host PR also rewrites visionary/SKILL.md, merge-tree the result onto current main and reject it if harvest or anti-omnibus paragraphs disappear.
 - VIS-02 settings flags land as apps/plan_agent CLI before VIS-01 wraps PlanAgent.exe; measure help/dry-run shows --model/--context/--effort
+- A Plan seat start is not loaded until list_catalog and get_skill both return from https://plan.ntsa.uk/mcp.
 - VIS-08: expose PlanAgent.msi on plan.ntsa.uk HTML (home + /downloads) via lib/downloads.ts; asset publish is VIS-07

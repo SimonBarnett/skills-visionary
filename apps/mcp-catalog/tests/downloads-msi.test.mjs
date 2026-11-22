@@ -39,3 +39,11 @@ test('docs mocks include MSI download links', () => {
   assert.ok(home.includes(MSI), 'plan-home mock missing MSI href');
   assert.ok(dl.includes(MSI), 'plan-downloads mock missing MSI href');
 });
+
+test('next.config redirects /plan.msi to the latest PlanAgent.msi release', () => {
+  const src = fs.readFileSync(path.join(appRoot, 'next.config.mjs'), 'utf8');
+  assert.match(src, /redirects\s*\(/);
+  assert.match(src, /source:\s*['"]\/plan\.msi['"]/);
+  assert.ok(src.includes(MSI), 'redirect destination must be the latest PlanAgent.msi URL');
+  assert.match(src, /source:\s*['"]\/plan\.msi\.sha256['"]/);
+});

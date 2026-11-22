@@ -37,3 +37,11 @@ def test_fr140_downloads_lib_canonical_href():
 def test_fr140_docs_mocks_link_msi():
     assert MSI in MOCK_HOME.read_text(encoding="utf-8")
     assert MSI in MOCK_DL.read_text(encoding="utf-8")
+
+
+def test_fr140_plan_msi_redirect():
+    text = (ROOT / "apps" / "mcp-catalog" / "next.config.mjs").read_text(encoding="utf-8")
+    assert "redirects" in text
+    assert "/plan.msi" in text
+    assert MSI in text
+    assert "/plan.msi.sha256" in text

@@ -1,0 +1,108 @@
+# PlanAgent.exe launcher CI (FR #153). Mirrors priority-mcp launcher-release shape:
+# publish self-contained win-x64, dotnet test, --version, --smoke against plan-agent/.
+name: build-plan-agent-launcher
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Optional release tag (defaults to plan-v from ref or 1.0.0)
+        required: false
+        type: string
+  pull_request:
+    paths:
+      - .github/workflows/build-plan-agent-launcher.yml
+      - launcher/**
+      - launcher.Tests/**
+      - plan-agent/AGENTS.md
+      - plan-agent/.grok/skills/**
+  push:
+    branches: [main]
+    tags:
+      - "plan-v*"
+    paths:
+      - .github/workflows/build-plan-agent-launcher.yml
+      - launcher/**
+      - launcher.Tests/**
+      - plan-agent/AGENTS.md
+      - plan-agent/.grok/skills/**
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Resolve version from plan-v* tag
+        id: ver
+        shell: pwsh
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          . .\launcher\Get-LauncherReleaseVersion.ps1
+          $tag = ''
+          if ($env:GITHUB_REF_TYPE -eq 'tag') { $tag = $env:GITHUB_REF_NAME }
+          elseif ($env:INPUT_TAG) { $tag = $env:INPUT_TAG }
+          $v = Get-LauncherReleaseVersion -Tag $tag -Fallback '1.0.0'
+          $file = Get-LauncherFileVersion -Version $v
+          $info = Get-LauncherInformationalVersion -Version $v -Sha $env:GITHUB_SHA
+          "version=$v" | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
+          "file_version=$file" | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
+          "informational=$info" | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
+          Write-Host "PlanAgent version $v file $file info $info"
+
+      - name: Publish self-contained Windows executable
+        run: >
+          dotnet publish launcher/PlanAgent.csproj -c Release -r win-x64 --self-contained true
+          -p:PublishSingleFile=true
+          -p:Version=${{ steps.ver.outputs.version }}
+          -p:FileVersion=${{ steps.ver.outputs.file_version }}
+          -p:InformationalVersion=${{ steps.ver.outputs.informational }}
+          -o launcher/out
+
+      - name: Run launcher unit tests
+        run: |
+          dotnet restore launcher.Tests/PlanAgent.Tests.csproj
+          dotnet test launcher.Tests/PlanAgent.Tests.csproj -c Release --no-restore
+
+      - name: Check --version and --smoke
+        shell: pwsh
+        env:
+          EXPECTED_VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          $exe = Join-Path $PWD "launcher\out\PlanAgent.exe"
+          if (-not (Test-Path -LiteralPath $exe)) { throw "missing $exe" }
+          $ver = (& $exe --version | Out-String).Trim()
+          if ($LASTEXITCODE -ne 0) { throw "--version exit $LASTEXITCODE" }
+          Write-Host "PlanAgent.exe --version => $ver"
+          if ($ver -notlike "$($env:EXPECTED_VERSION)*") {
+            throw "version '$ver' does not start with '$($env:EXPECTED_VERSION)'"
+          }
+          & $exe --root (Join-Path $PWD "plan-agent") --smoke
+          if ($LASTEXITCODE -ne 0) { throw "--smoke exit $LASTEXITCODE" }
+          $missing = Join-Path $env:RUNNER_TEMP "plan-agent-missing"
+          New-Item -ItemType Directory -Force -Path $missing | Out-Null
+          & $exe --root $missing --smoke
+          if ($LASTEXITCODE -eq 0) { throw "--smoke against empty root must fail" }
+          Write-Host "missing-root smoke failed as expected (exit $LASTEXITCODE)"
+          $help = & $exe --help | Out-String
+          foreach ($opt in @('--version', '--smoke', '--dry-run', '--root', '--help')) {
+            if ($help -notmatch [regex]::Escape($opt)) { throw "Help does not list $opt" }
+          }
+
+      - name: Upload PlanAgent.exe artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: plan-agent-exe
+          path: launcher/out/PlanAgent.exe
+          if-no-files-found: error

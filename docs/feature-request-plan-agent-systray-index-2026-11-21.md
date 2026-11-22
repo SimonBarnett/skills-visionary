@@ -2,7 +2,7 @@
 
 **Repo:** `SimonBarnett/skills-visionary`  
 **Date:** 2026-11-21  
-**Branch:** `docs/plan-agent-systray-frs-2026-11-21`  
+**Branch:** `main` (the `docs/plan-agent-systray-frs-2026-11-21` ref 404s; packs live on main)  
 **Mode:** park-only anti-omnibus (one issue per acceptance row)
 
 | ID | Phase | Issue | Title | Doc |

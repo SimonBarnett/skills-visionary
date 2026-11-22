@@ -69,10 +69,12 @@ jobs:
       - name: Install WiX and build PlanAgent.msi
         shell: pwsh
         run: |
-          dotnet tool install --global wix
+          dotnet tool install --global wix --version 7.0.1
           $env:Path = "$env:USERPROFILE\.dotnet\tools;" + $env:Path
           New-Item -ItemType Directory -Force -Path dist | Out-Null
+          # WiX 7 requires an explicit OSMF EULA acknowledgement (WIX7015).
           wix build installer/PlanAgent.wxs `
+            -acceptEula wix7 `
             -d "ProductVersion=${{ steps.ver.outputs.version }}" `
             -d "PlanExe=$PWD\dist\PlanAgent.exe" `
             -d "PlanRoot=$PWD\plan-agent" `

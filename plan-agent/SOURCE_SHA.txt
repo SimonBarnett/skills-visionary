@@ -1,0 +1,4 @@
+bobiverse_source_sha=919912e1dd399d4151809efca51e233650eed217
+imported_paths=bob/agents/plan/**; bob/.grok/skills/bobiverse-bob-plan/**; bob/tests/test_fr7524_plan_build_ci.py
+dest=plan-agent/
+import_note=single import from bobiverse worktree at bobiverse_source_sha; path fixes in workflow + adapted tests

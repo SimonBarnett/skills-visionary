@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "built": "2026-11-20",
+  "built": "2026-11-22",
   "note": "Slim index for skills-visionary plan DAG (FR #81).",
-  "nodeCount": 9,
+  "nodeCount": 10,
   "defaults": {
     "maxSkills": 8,
     "maxBytes": 24000
@@ -47,6 +47,11 @@
       "id": "skill:plan-git-from-plan",
       "type": "catalog-skill",
       "title": "plan git from plan"
+    },
+    {
+      "id": "skill:plan-mcp-setup",
+      "type": "catalog-skill",
+      "title": "plan mcp setup"
     },
     {
       "id": "skill:visionary",

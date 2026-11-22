@@ -3,5 +3,11 @@
 hook.json
 __pycache__/
 .pytest_cache/
-
+bin/
+obj/
+launcher/out/
+*.user
+*.suo
+.vs/
+tools/out/
 .bobiverse-seat

@@ -32,6 +32,7 @@ Vision: [`docs/vision.md`](docs/vision.md)
 | `plan-bob-webhooks` | GitHub hook -> Bob `/bob/v1/git` | Step 2 of plan-git; any new product repo that needs fleet git events |
 | `plan-enable-prs` | Forking / no blocking ruleset / Cursor app | Step 3 of plan-git; when `cursor[bot]` cannot open PRs |
 | `harvest-skills-visionary` | PR learnings back to this repo | After a Plan session teaches a reusable how-to-plan rule |
+| `plan-mcp-setup` | Connect Grok/MCP clients to plan.ntsa.uk | Load Plan catalog MCP; empty `plan__*` tools |
 
 ## Install (copy into agent home)
 
@@ -66,17 +67,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\New-BobGitWebhook.ps1 
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\Grant-CursorGitHubApp.ps1
 ```
 
-## Upcoming: plan.ntsa.uk
+## Live: plan.ntsa.uk
 
-A public Plan landing page and MCP are planned:
+Public Plan landing + MCP catalog (no secrets):
 
 | Surface | URL | Status |
 |---------|-----|--------|
-| Landing | `https://plan.ntsa.uk` | Upcoming (Amplify + DNS via Slab) |
-| MCP | `https://plan.ntsa.uk/mcp` | Upcoming (catalog of these skills) |
+| Landing | `https://plan.ntsa.uk` | Live |
+| MCP | `https://plan.ntsa.uk/mcp` | Live (`list_catalog`, `get_skill`) |
 
-Until that is live, use this GitHub repo and the copy/xcopy install above.
-Sibling FRs cover the DAG, Next.js MCP app, Amplify, and smoke tests.
+Grok Build:
+
+```powershell
+grok mcp add --transport http plan https://plan.ntsa.uk/mcp
+grok mcp doctor plan
+```
+
+See skill `plan-mcp-setup`. xcopy install above still works offline.
 
 ## Vision-pack gate
 

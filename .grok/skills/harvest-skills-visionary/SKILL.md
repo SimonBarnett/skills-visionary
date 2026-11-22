@@ -122,7 +122,16 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - Auth for multi-role commercial surfaces: lock a pluggable provider registry with fail-closed contact claims, plus one email magic/OTP path; scaffold shortlist adapters stay-dark until credentials.
 - skills-visionary harvest tips must never teach admin-merge; Ubuntu validate red on test_fr19_ps51 is ambient env-only - arm --auto --squash only (FR #3948) and keep soft-skip FR #52
 - FIX README tip CONFLICTING on skill-harvest-log: fold origin/main, keep main entries then tip FR entry; file separate issue for unrelated main corruption.
+- FIX worktree stale origin/main: `git fetch origin --quiet` can refresh `FETCH_HEAD` while `refs/remotes/origin/main` stays behind, so `git rev-list --left-right --count origin/main...HEAD` reports 0 behind while `gh pr view` says CONFLICTING/DIRTY. Trust `git ls-remote origin refs/heads/main` (or `FETCH_HEAD`), `git update-ref refs/remotes/origin/main <sha>`, merge, keep main entries then the tip FR entry, and push. If wincredman cannot persist, push with `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push origin HEAD`.
 - Never write skill-harvest-log from PowerShell double-quoted strings with \\a/\\n/\\t path fragments; use single-quoted here-strings or WriteAllText.
 - When a webhook-host PR also rewrites visionary/SKILL.md, merge-tree the result onto current main and reject it if harvest or anti-omnibus paragraphs disappear.
 - When a docs branch is deleted, retarget issue vision-pack links to main instead of restoring the dead ref.
+- Plan agent revendoring: import bob/agents/plan + bobiverse-bob-plan into plan-agent/ with SOURCE_SHA.txt and windows build-plan-agent.yml (pytest/PSSA/SKILL FM)
+
 - VIS-02 settings flags land as apps/plan_agent CLI before VIS-01 wraps PlanAgent.exe; measure help/dry-run shows --model/--context/--effort
+- VIS-09 bob-ear vendor contract: ship docs/vendor-contract-bob-ear.md with MSI/exe URLs, plan-v* scheme, and docs/vendor/*.json twin for BOB-44/49
+- A Plan seat start is not loaded until list_catalog and get_skill both return from https://plan.ntsa.uk/mcp.
+- VIS-08: expose PlanAgent.msi on plan.ntsa.uk HTML (home + /downloads) via lib/downloads.ts; asset publish is VIS-07
+- The Plan standalone MSI is tools/out/PlanAgent.msi from tools/build_plan_agent_msi.py. Do not commit the built MSI.
+- When a stacked Plan CLI PR conflicts on cli.py after the parent merged, keep both the settings flags and the fuel-empty quit.
+

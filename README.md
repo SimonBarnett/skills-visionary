@@ -90,9 +90,17 @@ python /path/to/skills-visionary/tools/validate-vision-pack.py docs/vision.md --
 
 CI: `.github/workflows/vision-pack.yml`.
 
-## Harvest honesty
+## Harvest honesty (VIS-05)
 
-Reusable how-to-plan playbooks land here as PRs  -  see
-[`docs/skill-harvest-log.md`](docs/skill-harvest-log.md). Plan content
+Reusable how-to-plan playbooks land here via **Bob intake** (and optional PRs)
+- see [`AGENTS.md`](AGENTS.md) and [`docs/skill-harvest-log.md`](docs/skill-harvest-log.md).
+
+```text
+Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind harvest -Title '...' -Body '...'
+Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary '...' -Lesson '...'
+Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Flush
+```
+
+**Never** harvest how-to-plan to `SimonBarnett/bobiverse`. Plan content
 (requirements, designs, FR lists) stays in the plan folder / product
 `docs/vision.md`, not in skill books.

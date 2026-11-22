@@ -73,7 +73,7 @@ jobs:
           $env:Path = "$env:USERPROFILE\.dotnet\tools;" + $env:Path
           New-Item -ItemType Directory -Force -Path dist | Out-Null
           # WiX 7 requires an explicit OSMF EULA acknowledgement (WIX7015).
-          wix build installer/PlanAgent.wxs `
+          wix build installer/PlanAgent.wxs -arch x64 `
             -acceptEula wix7 `
             -d "ProductVersion=${{ steps.ver.outputs.version }}" `
             -d "PlanExe=$PWD\dist\PlanAgent.exe" `
@@ -85,13 +85,33 @@ jobs:
         run: |
           $msi = Join-Path $PWD 'dist\PlanAgent.msi'
           $log = Join-Path $PWD 'dist\install.log'
-          $p = Start-Process msiexec -ArgumentList @('/i', $msi, '/qn', '/l*v', $log) -Wait -PassThru
-          if ($p.ExitCode -ne 0) { throw "msiexec install exit $($p.ExitCode)" }
-          $exe = Join-Path ${env:ProgramFiles} 'Plan Agent\PlanAgent.exe'
-          if (-not (Test-Path -LiteralPath $exe)) { throw "PlanAgent.exe missing after install" }
-          $u = Start-Process msiexec -ArgumentList @('/x', $msi, '/qn') -Wait -PassThru
-          if ($u.ExitCode -ne 0) { throw "msiexec uninstall exit $($u.ExitCode)" }
+          cmd /c "msiexec /i `"$msi`" /qn /norestart /l*v `"$log`""
+          if ($LASTEXITCODE -ne 0) {
+            if (Test-Path -LiteralPath $log) { Get-Content -LiteralPath $log -Tail 80 }
+            throw "msiexec install exit $LASTEXITCODE"
+          }
+          $candidates = @(
+            (Join-Path $env:ProgramFiles 'Plan Agent\PlanAgent.exe'),
+            (Join-Path ${env:ProgramFiles(x86)} 'Plan Agent\PlanAgent.exe')
+          )
+          $exe = $candidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+          if (-not $exe) {
+            if (Test-Path -LiteralPath $log) { Get-Content -LiteralPath $log -Tail 120 }
+            Get-ChildItem -Path @($env:ProgramFiles, ${env:ProgramFiles(x86)}) -Filter PlanAgent.exe -Recurse -ErrorAction SilentlyContinue |
+              Select-Object -First 20 -ExpandProperty FullName
+            throw "PlanAgent.exe missing after install"
+          }
+          Write-Host "Installed $exe"
+          cmd /c "msiexec /x `"$msi`" /qn /norestart"
+          if ($LASTEXITCODE -ne 0) { throw "msiexec uninstall exit $LASTEXITCODE" }
           if (Test-Path -LiteralPath $exe) { throw "PlanAgent.exe still present after uninstall" }
+      - name: Upload install log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: plan-agent-install-log
+          path: dist/install.log
+          if-no-files-found: ignore
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:

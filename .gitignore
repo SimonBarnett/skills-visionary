@@ -3,3 +3,5 @@
 hook.json
 __pycache__/
 .pytest_cache/
+
+.bobiverse-seat

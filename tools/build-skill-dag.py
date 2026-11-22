@@ -35,9 +35,42 @@ TOPIC = {
     "plan-create-repo": "plan",
     "plan-bob-webhooks": "plan",
     "plan-enable-prs": "plan",
+    "plan-mcp-setup": "plan",
     "harvest-skills-visionary": "harvest",
     "harvest-agent-skills": "harvest",
 }
+
+
+def check_mirrors() -> int:
+    """FR #182: every .grok skill must have an equal catalog/<id>/SKILL.md mirror."""
+    errors: list[str] = []
+    if not SKILLS_ROOT.is_dir():
+        print(f"build-skill-dag --check: missing {SKILLS_ROOT}", flush=True)
+        return 1
+    for d in sorted(SKILLS_ROOT.iterdir()):
+        sk = d / "SKILL.md"
+        if not sk.is_file():
+            continue
+        mirror = CATALOG_ROOT / d.name / "SKILL.md"
+        if not mirror.is_file():
+            errors.append(f"missing catalog mirror: {mirror.relative_to(ROOT)}")
+            continue
+        src = sk.read_bytes()
+        dst = mirror.read_bytes()
+        if src != dst:
+            errors.append(
+                f"drift: {mirror.relative_to(ROOT)} != {sk.relative_to(ROOT)}"
+            )
+    if errors:
+        for e in errors:
+            print(f"build-skill-dag --check: {e}", flush=True)
+        print(
+            "build-skill-dag --check: FAIL — run: python tools/build-skill-dag.py",
+            flush=True,
+        )
+        return 1
+    print("build-skill-dag --check: ok", flush=True)
+    return 0
 
 
 def main() -> None:
@@ -145,4 +178,9 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) > 1 and sys.argv[1] in ("--check", "check"):
+        raise SystemExit(check_mirrors())
     main()
+

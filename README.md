@@ -13,7 +13,8 @@ everything else.
 
 Remote: https://github.com/SimonBarnett/skills-visionary  
 Vision: [`docs/vision.md`](docs/vision.md)  
-Vendor contract (bob-ear BOB-44/49): [`docs/vendor-contract-bob-ear.md`](docs/vendor-contract-bob-ear.md)
+Vendored Plan seat tree: [plan-agent/](plan-agent/) (from bobiverse; see plan-agent/SOURCE_SHA.txt)  
+Vendor contract (bob-ear BOB-44/49): [docs/vendor-contract-bob-ear.md](docs/vendor-contract-bob-ear.md)
 
 ## What you get
 

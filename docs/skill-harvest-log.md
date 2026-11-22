@@ -177,3 +177,10 @@ amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
 - Same turn: rewrite sibling FR bodies to implement-S1, clear BOB_BRIDGE_HOME loops board, then Start-BobBuildLoop.
 - FR indexes: docs/fr-index-*.md so CI feature-request-*.md validate skips them.
 
+## 2026-11-22 - FR #180 FIX worktree stale local origin/main
+
+- `git fetch origin --quiet` can update FETCH_HEAD while local refs/remotes/origin/main stays stale; rev-list then reports 0 behind while the PR is CONFLICTING/DIRTY.
+- Trust `git ls-remote origin refs/heads/main` (or FETCH_HEAD), update-ref the remote-tracking ref, merge, keep main entries then the tip FR entry, push.
+- Wincredman push fallback: `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push origin HEAD`.
+- Home skill and catalog mirror: `.grok/skills/harvest-skills-visionary/SKILL.md`.
+

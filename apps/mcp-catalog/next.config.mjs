@@ -8,12 +8,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/plan.msi',
+        source: '/PlanAgent.msi',
         destination: PLAN_AGENT_MSI_HREF,
         permanent: false,
       },
       {
-        source: '/plan.msi.sha256',
+        source: '/PlanAgent.msi.sha256',
         destination: `${PLAN_AGENT_MSI_HREF}.sha256`,
         permanent: false,
       },

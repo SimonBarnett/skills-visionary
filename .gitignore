@@ -9,3 +9,4 @@ launcher/out/
 *.user
 *.suo
 .vs/
+tools/out/

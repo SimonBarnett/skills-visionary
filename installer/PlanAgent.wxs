@@ -6,8 +6,7 @@
       Manufacturer="SimonBarnett"
       Version="$(var.ProductVersion)"
       UpgradeCode="8F3C2A10-4B6E-4D11-9C2A-0E5F1A7B1540"
-      Scope="perMachine"
-      Platform="x64">
+      Scope="perMachine">
     <MajorUpgrade DowngradeErrorMessage="A newer version of Plan Agent is already installed." />
     <MediaTemplate EmbedCab="yes" />
     <StandardDirectory Id="ProgramFiles64Folder">

@@ -118,3 +118,4 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - FIX README tip CONFLICTING on skill-harvest-log: fold origin/main, keep main entries then tip FR entry; file separate issue for unrelated main corruption.
 - Never write skill-harvest-log from PowerShell double-quoted strings with \\a/\\n/\\t path fragments; use single-quoted here-strings or WriteAllText.
 - When a webhook-host PR also rewrites visionary/SKILL.md, merge-tree the result onto current main and reject it if harvest or anti-omnibus paragraphs disappear.
+- The Plan standalone MSI is tools/out/PlanAgent.msi from tools/build_plan_agent_msi.py. Do not commit the built MSI.

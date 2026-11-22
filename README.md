@@ -12,7 +12,8 @@ success metrics, then run `plan-git-from-plan` without installing
 everything else.
 
 Remote: https://github.com/SimonBarnett/skills-visionary  
-Vision: [`docs/vision.md`](docs/vision.md)
+Vision: [`docs/vision.md`](docs/vision.md)  
+Vendored Plan seat tree: [`plan-agent/`](plan-agent/) (from bobiverse; see `plan-agent/SOURCE_SHA.txt`)
 
 ## What you get
 

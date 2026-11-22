@@ -1,0 +1,20 @@
+{
+  "contract_version": "1.0.0",
+  "product": "Plan Agent",
+  "vendor_repo": "SimonBarnett/skills-visionary",
+  "consumers": ["BOB-44", "BOB-49"],
+  "exe": "PlanAgent.exe",
+  "msi": "PlanAgent.msi",
+  "release_tag_prefix": "plan-v",
+  "urls": {
+    "landing": "https://plan.ntsa.uk",
+    "downloads": "https://plan.ntsa.uk/downloads",
+    "mcp": "https://plan.ntsa.uk/mcp",
+    "msi_latest": "https://github.com/SimonBarnett/skills-visionary/releases/latest/download/PlanAgent.msi",
+    "msi_sha256_latest": "https://github.com/SimonBarnett/skills-visionary/releases/latest/download/PlanAgent.msi.sha256",
+    "releases_latest": "https://github.com/SimonBarnett/skills-visionary/releases/latest",
+    "github": "https://github.com/SimonBarnett/skills-visionary"
+  },
+  "icon_path": "apps/plan_agent/assets/plan-gantt.ico",
+  "docs_path": "docs/vendor-contract-bob-ear.md"
+}

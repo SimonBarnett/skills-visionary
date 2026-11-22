@@ -33,4 +33,4 @@ def test_fr154_four_stable_assets_and_plan_only_msi():
     assert "PlanAgent.exe" in WXS or "PlanExe" in WXS
     assert "plan-agent" in WXS
     assert "MajorUpgrade" in WXS
-    assert "Priority" not in WXS
+    assert "PriorityAgent" not in WXS

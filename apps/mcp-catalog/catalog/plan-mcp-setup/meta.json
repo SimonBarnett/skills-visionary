@@ -1,0 +1,8 @@
+{
+  "name": "plan-mcp-setup",
+  "title": "plan mcp setup",
+  "description": "Connect an MCP client to the public Plan Agent catalog at https://plan.ntsa.uk/mcp. Use when the user says plan MCP, load plan.ntsa.uk, plan__list_catalog, plan__get_skill, or /plan-mcp-setup.",
+  "version": "1.0.0",
+  "topic": "plan",
+  "source": ".grok/skills/plan-mcp-setup/SKILL.md"
+}

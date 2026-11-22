@@ -12,7 +12,10 @@ success metrics, then run `plan-git-from-plan` without installing
 everything else.
 
 Remote: https://github.com/SimonBarnett/skills-visionary  
-Vision: [`docs/vision.md`](docs/vision.md)
+Vision: [`docs/vision.md`](docs/vision.md)  
+Vendored Plan seat tree: [plan-agent/](plan-agent/) (from bobiverse; see plan-agent/SOURCE_SHA.txt)  
+.NET launcher: [launcher/](launcher/) builds PlanAgent.exe (FR #153; mirrors priority-mcp PriorityAgent.exe)  
+Vendor contract (bob-ear BOB-44/49): [docs/vendor-contract-bob-ear.md](docs/vendor-contract-bob-ear.md)
 
 ## What you get
 
@@ -21,6 +24,7 @@ Vision: [`docs/vision.md`](docs/vision.md)
 2. **Plan-git helpers**  -  create a public SimonBarnett repo, point Bob at
    git events, and enable outside PRs (including Cursor).
 3. **Harvest**  -  send how-to-plan lessons back here (not plan content).
+4. **PlanAgent.exe**  -  dedicated Plan seat launcher (`dotnet publish` / CI artifact).
 
 ## Skills
 
@@ -97,9 +101,17 @@ python /path/to/skills-visionary/tools/validate-vision-pack.py docs/vision.md --
 
 CI: `.github/workflows/vision-pack.yml`.
 
-## Harvest honesty
+## Harvest honesty (VIS-05)
 
-Reusable how-to-plan playbooks land here as PRs  -  see
-[`docs/skill-harvest-log.md`](docs/skill-harvest-log.md). Plan content
+Reusable how-to-plan playbooks land here via **Bob intake** (and optional PRs)
+- see [`AGENTS.md`](AGENTS.md) and [`docs/skill-harvest-log.md`](docs/skill-harvest-log.md).
+
+```text
+Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind harvest -Title '...' -Body '...'
+Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary '...' -Lesson '...'
+Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Flush
+```
+
+**Never** harvest how-to-plan to `SimonBarnett/bobiverse`. Plan content
 (requirements, designs, FR lists) stays in the plan folder / product
 `docs/vision.md`, not in skill books.

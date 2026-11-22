@@ -1,5 +1,6 @@
 import { headers } from 'next/headers';
 import { catalogHealth, listSkills } from '../lib/catalog';
+import { PLAN_AGENT_MSI_HREF } from '../lib/downloads';
 import { catalogPublicOrigin } from '../lib/public-origin';
 
 export const runtime = 'nodejs';
@@ -82,10 +83,18 @@ npm run smoke   # local MCP`}</pre>
         {skills.map((s) => (
           <li key={s.id}>
             <strong>{s.id}</strong>
-            {s.meta.title ? ` — ${s.meta.title}` : ''}
+            {s.meta.title ? ` - ${s.meta.title}` : ''}
           </li>
         ))}
       </ul>
+      <h2>Downloads</h2>
+      <p>
+        Windows installer:{' '}
+        <a href={PLAN_AGENT_MSI_HREF} data-role="msi">
+          Download PlanAgent.msi
+        </a>{' '}
+        - <a href="/downloads">Downloads page</a>
+      </p>
       <h2>Also</h2>
       <ul>
         <li>

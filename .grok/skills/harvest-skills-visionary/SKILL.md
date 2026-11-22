@@ -102,6 +102,12 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 
 ## Harvested lessons (intake)
 
+- Connect Plan MCP in Grok Build with `grok mcp add --transport http plan https://plan.ntsa.uk/mcp` then `grok mcp doctor plan` (2 tools). Mid-session add can doctor-green while `plan__list_catalog` / `plan__get_skill` stay missing until MCP reconnect or a new session. Skill: `plan-mcp-setup`.
+- Cross-repo Plan themes (bobiverse tray + skills-visionary Plan agent + priority-mcp Priority agent): park **one GitHub issue per acceptance row** with a per-repo index markdown; do not one omnibus issue per repo. Phase-gate models webhook / Weights before tray start-arg consumers; Plan/Priority MSI FRs may build in parallel; bob-ear consume waits on vendor assets. How-to-plan only — product FR bodies stay in each repo's docs.
+- After park-only filing, when the operator says dispatch: rewrite every living FR issue body the same turn (drop Park-only / Do not bob-job), then Start-BobBuildLoop. Leaving park veto text on `feature-request` issues makes workers GIVEUP as if the item were not an FR. Loop state lives under `$env:BOB_BRIDGE_HOME\loops` (commonly `D:\ai\agentic_irc\loops`).
+- Name FR indexes `docs/fr-index-*.md`, not `docs/feature-request-*-index.md`, or skills-visionary `vision-pack` validate CI fails (index has no Shape/Success).
+- `validate-vision-pack.py` rejects Success rows whose how-measured lacks an observable (path like `docs/`, backtick command, CI/workflow cue). Patch how-measured before park; skills-visionary `vision-pack` validate CI is required — fix the pack, do not teach admin-merge.
+- Plan agent **product** binary/MSI/GANTT branding harvest and FRs live on **skills-visionary** / plan.ntsa.uk releases; bobiverse owns tray menu consume and bob-ear MSI embed. Do not treat `bob-worker --mode plan` as the long-term Plan product binary (VIS product slices).
 - When FR-F landing depends on FR-E Next scaffold and main only has DAG sync, co-implement both in one PR with Closes for each issue rather than GIVEUP on the dependency.
 - When product open issues are 0 after a closed stay-dark provider wave, Plan gap analysis targets vision UNKNOWN + parked drains + per-account enable docs - draft small FRs first and file one slice at a time (anti-omnibus); use detached origin/main worktree when the product clone is dirty/behind
 - When the operator explicitly says create all Phase-3 FRs, file many small Goal/Deliverables/Testable issues in one turn (one GitHub issue per FR) and close the park-process pointer with Refs - that satisfies anti-omnibus without leaving the backlog unfiled
@@ -119,3 +125,5 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - Never write skill-harvest-log from PowerShell double-quoted strings with \\a/\\n/\\t path fragments; use single-quoted here-strings or WriteAllText.
 - When a webhook-host PR also rewrites visionary/SKILL.md, merge-tree the result onto current main and reject it if harvest or anti-omnibus paragraphs disappear.
 - Plan agent revendoring: import bob/agents/plan + bobiverse-bob-plan into plan-agent/ with SOURCE_SHA.txt and windows build-plan-agent.yml (pytest/PSSA/SKILL FM)
+- VIS-02 settings flags land as apps/plan_agent CLI before VIS-01 wraps PlanAgent.exe; measure help/dry-run shows --model/--context/--effort
+

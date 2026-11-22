@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- FR #154: Plan agent only. No Priority agent files. -->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package
+      Name="Plan Agent"
+      Manufacturer="SimonBarnett"
+      Version="$(var.ProductVersion)"
+      UpgradeCode="8F3C2A10-4B6E-4D11-9C2A-0E5F1A7B1540"
+      Scope="perMachine">
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Plan Agent is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="Plan Agent">
+        <Component Id="CmpPlanAgentExe" Guid="8F3C2A10-4B6E-4D11-9C2A-0E5F1A7B1541">
+          <File Id="PlanAgentExe" Source="$(var.PlanExe)" KeyPath="yes" />
+        </Component>
+        <Directory Id="PlanAgentFiles" Name="plan-agent">
+          <Files Include="$(var.PlanRoot)\**" />
+        </Directory>
+      </Directory>
+    </StandardDirectory>
+  </Package>
+</Wix>

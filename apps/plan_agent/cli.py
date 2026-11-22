@@ -1,8 +1,10 @@
-"""Plan Agent CLI: accept model/context/effort (VIS-02 / FR #136).
+"""Plan Agent CLI: model/context/effort (VIS-02) + no-token quit (VIS-03).
 
 Aligned with bobiverse BOB-15 setting names (model, context, effort).
 Effort values match VALID_EFFORTS low/medium/high. Context is accepted
 on this Plan surface even when sibling CLIs mark it unsupported.
+
+VIS-03: when fuel is empty, show a dialog and quit (EXIT_OUT_OF_FUEL=10).
 """
 from __future__ import annotations
 
@@ -71,6 +73,14 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Print resolved settings as JSON and exit (no seat launch).",
     )
+    p.add_argument(
+        "--fuel-file",
+        default="",
+        help=(
+            "Path to fuel JSON (remaining_pct). When empty (0), show no-token "
+            "dialog and quit. Env BOB_PLAN_FUEL_FILE is the fallback."
+        ),
+    )
     return p
 
 
@@ -97,6 +107,16 @@ def main(argv: list[str] | None = None) -> int:
     model = str(args.model or "").strip()
     context = str(args.context or "").strip()
     effort = str(args.effort or "").strip()
+
+    # VIS-03: fuel-empty => dialog + quit before any start (including dry-run
+    # when a fuel file is supplied so the fixture path is exercised).
+    fuel_file = str(getattr(args, "fuel_file", "") or "").strip()
+    if fuel_file:
+        from fuel import enforce_fuel_or_quit
+
+        code = enforce_fuel_or_quit(fuel_path=fuel_file)
+        if code is not None:
+            return int(code)
 
     if args.dry_run:
         payload = dry_run_payload(model=model, context=context, effort=effort)

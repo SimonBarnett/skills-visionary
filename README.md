@@ -12,7 +12,8 @@ success metrics, then run `plan-git-from-plan` without installing
 everything else.
 
 Remote: https://github.com/SimonBarnett/skills-visionary  
-Vision: [`docs/vision.md`](docs/vision.md)
+Vision: [`docs/vision.md`](docs/vision.md)  
+Vendor contract (bob-ear BOB-44/49): [`docs/vendor-contract-bob-ear.md`](docs/vendor-contract-bob-ear.md)
 
 ## What you get
 

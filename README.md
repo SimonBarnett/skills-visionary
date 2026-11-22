@@ -14,6 +14,7 @@ everything else.
 Remote: https://github.com/SimonBarnett/skills-visionary  
 Vision: [`docs/vision.md`](docs/vision.md)  
 Vendored Plan seat tree: [plan-agent/](plan-agent/) (from bobiverse; see plan-agent/SOURCE_SHA.txt)  
+.NET launcher: [launcher/](launcher/) builds PlanAgent.exe (FR #153; mirrors priority-mcp PriorityAgent.exe)  
 Vendor contract (bob-ear BOB-44/49): [docs/vendor-contract-bob-ear.md](docs/vendor-contract-bob-ear.md)
 
 ## What you get
@@ -23,6 +24,7 @@ Vendor contract (bob-ear BOB-44/49): [docs/vendor-contract-bob-ear.md](docs/vend
 2. **Plan-git helpers**  -  create a public SimonBarnett repo, point Bob at
    git events, and enable outside PRs (including Cursor).
 3. **Harvest**  -  send how-to-plan lessons back here (not plan content).
+4. **PlanAgent.exe**  -  dedicated Plan seat launcher (`dotnet publish` / CI artifact).
 
 ## Skills
 

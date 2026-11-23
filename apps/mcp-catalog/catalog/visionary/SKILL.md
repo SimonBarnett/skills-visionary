@@ -190,6 +190,13 @@ the data, never to this skill book. No secrets in exports or commits.
 - Plan MCP skills load from `https://plan.ntsa.uk/mcp` (`plan-mcp-setup`). Plan distributable (exe/MSI/icon) FRs park on `SimonBarnett/skills-visionary`; tray/bob-ear consume FRs park on `SimonBarnett/bobiverse`.
 - **Park vs dispatch on GitHub issue bodies (CAST IRON):** never leave `Park-only` or `Do not bob-job` on a `feature-request` issue after the operator says dispatch. Workers read the issue body and GIVEUP / treat it as non-work. Same turn as dispatch: rewrite every sibling FR body to actionable implement-S1 text (keep vision-pack + index links), clear any failed `bob-build-loop` board under `$env:BOB_BRIDGE_HOME\loops` (often `D:\ai\agentic_irc\loops`, not only `~/.grok\bob-bridge\loops`), then start the loop. Prefer park intent only in the docs index / plan folder, not as a standing veto on the living FR issue.
 - FR index files must not match CI `docs/feature-request-*.md` globs (no Shape/Success). Name them `docs/fr-index-<slug>-YYYY-MM-DD.md` so `validate-vision-pack` skips them.
+- **FR digest park (CAST IRON — Plan Agent, every park):** the Plan Agent **must** open an **`fr-digest`** issue on **every** FR park, **even when there is only one child / one step**. Digests are how the operator **filters epics to release** — skipping the digest because the batch is small is forbidden. Same turn:
+  1. Ensure the target repo has label **`fr-digest`** (create if missing). Create the **digest issue first**: labels `fr-digest` + `hold` (+ `feature-request` if the repo uses it for parks). Body: `Kind: fr-digest`, link to theme vision + `fr-index-*.md`, short epic/batch summary, **Children** table (one row is fine), `Depends-on: (none)`. Digest is a go-gate / epic filter only — not an implementation ticket.
+  2. Theme vision pack + **one child vision pack per acceptance row** (anti-omnibus). A single-child park still gets the digest + that one child. Validate each child with `validate-vision-pack.py`. Index file is `fr-index-*.md`.
+  3. Create each child issue with `feature-request` + `hold`, vision/index/digest links, and **`Depends-on: #<digest>`** plus **intra-batch** `Depends-on: #N` when there are multiple children (enforceable refs only: `#N`, `owner/repo#N`, or `(none)` — never bare backlog ids).
+  4. Patch the digest **Children** table with real issue numbers + titles + vision links. Update the index map the same turn.
+  5. Docs-only park PR uses `Refs #digest #child…` (never `Closes`). Leave digest + children on **`hold`**. **Unhold the digest alone** releases children when the chair go-gate is live; until then `hold` is the practical gate. Do not bob-job until the operator unholds / dispatches.
+  6. Do **not** copy product issue maps or backlog ids into this skill — only the park procedure.
 - Parking FR docs: copy the drafts into a clean worktree from
   `origin/main` (not the dirty local clone), commit docs only, reference
   the implementation issues with `Refs #N` (never `Closes`), push a
@@ -252,3 +259,5 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
 - End a turn with new skills only in chat/temp/`~/.grok` and no home PR.
 - File an **omnibus** FR (many independent slices in one issue)  -  CAST
   IRON FR #90; unpaid / non-frontier seats cannot safely carry those.
+- Park FRs **without** an **`fr-digest`** issue  -  CAST IRON; even a
+  one-step park needs a digest so the operator can filter epics to release.

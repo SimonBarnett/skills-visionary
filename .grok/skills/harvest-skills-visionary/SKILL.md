@@ -125,7 +125,9 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - FIX worktree stale origin/main: `git fetch origin --quiet` can refresh `FETCH_HEAD` while `refs/remotes/origin/main` stays behind, so `git rev-list --left-right --count origin/main...HEAD` reports 0 behind while `gh pr view` says CONFLICTING/DIRTY. Trust `git ls-remote origin refs/heads/main` (or `FETCH_HEAD`), `git update-ref refs/remotes/origin/main <sha>`, merge, keep main entries then the tip FR entry, and push. If wincredman cannot persist, push with `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push origin HEAD`.
 - Never write skill-harvest-log from PowerShell double-quoted strings with \\a/\\n/\\t path fragments; use single-quoted here-strings or WriteAllText.
 - When a webhook-host PR also rewrites visionary/SKILL.md, merge-tree the result onto current main and reject it if harvest or anti-omnibus paragraphs disappear.
+- When a docs branch is deleted, retarget issue vision-pack links to main instead of restoring the dead ref.
 - Plan agent revendoring: import bob/agents/plan + bobiverse-bob-plan into plan-agent/ with SOURCE_SHA.txt and windows build-plan-agent.yml (pytest/PSSA/SKILL FM)
+
 - VIS-02 settings flags land as apps/plan_agent CLI before VIS-01 wraps PlanAgent.exe; measure help/dry-run shows --model/--context/--effort
 - VIS-09 bob-ear vendor contract: ship docs/vendor-contract-bob-ear.md with MSI/exe URLs, plan-v* scheme, and docs/vendor/*.json twin for BOB-44/49
 - A Plan seat start is not loaded until list_catalog and get_skill both return from https://plan.ntsa.uk/mcp.

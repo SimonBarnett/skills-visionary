@@ -11,7 +11,7 @@
     {
       "id": "child-a",
       "title": "EXAMPLE-A: first acceptance row",
-      "labels": ["feature-request", "hold"],
+      "labels": ["feature-request"],
       "depends_on": "#DIGEST"
     }
   ]

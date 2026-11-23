@@ -100,7 +100,30 @@ worker/fleet seats still route to bobiverse (FR #3959 a-search stub guard).
 If a harvest tip lands on bobiverse with Plan how-to-plan content: close it
 MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 
+## CAST IRON — mcp-catalog mirror (FR #198 / #182)
+
+`.grok/skills/<id>/SKILL.md` is the source of truth. Every tip that edits a
+skill book **must** refresh `apps/mcp-catalog/catalog/<id>/SKILL.md` in the
+**same tip** before open (or immediately via the `sync-skill-catalog`
+workflow). Intake tips that only commit the skill book leave the catalog
+drifted; `python tools/build-skill-dag.py --check` and `mcp-catalog-dag` CI
+fail (MRB FAIL class on harvest tips #189 / #191).
+
+After editing any `.grok/skills/**/SKILL.md` in a writable clone:
+
+```text
+python tools/build-skill-dag.py
+python tools/build-skill-dag.py --check
+```
+
+Commit both the skill book and the catalog mirror (and any
+`docs/skill-sources` DAG refresh) together. Do not open a harvest-lesson PR
+with only the skill-book path. The `sync-skill-catalog` GitHub Action will
+push the mirror onto in-repo PR heads that forgot; agents must still sync
+locally when they can.
+
 ## Harvested lessons (intake)
+- VIS-D1..D4 Depends-on park lessons (harvested under VIS-D5): grammar is `#N` / `owner/repo#N` / `(none)` (VIS-D1); Plan park stamps those on the GitHub issue body (VIS-D2); `validate-vision-pack.py` rejects bare backlog ids like BOB-06 (VIS-D3); explicit empty stamp is `Depends-on: (none)` (VIS-D4). Cite in docs/skill-harvest-log.md.
 
 - Connect Plan MCP in Grok Build with `grok mcp add --transport http plan https://plan.ntsa.uk/mcp` then `grok mcp doctor plan` (2 tools). Mid-session add can doctor-green while `plan__list_catalog` / `plan__get_skill` stay missing until MCP reconnect or a new session. Skill: `plan-mcp-setup`.
 - Cross-repo Plan themes (bobiverse tray + skills-visionary Plan agent + priority-mcp Priority agent): park **one GitHub issue per acceptance row** with a per-repo index markdown; do not one omnibus issue per repo. Phase-gate models webhook / Weights before tray start-arg consumers; Plan/Priority MSI FRs may build in parallel; bob-ear consume waits on vendor assets. How-to-plan only — product FR bodies stay in each repo's docs.
@@ -134,4 +157,9 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - VIS-08: expose PlanAgent.msi on plan.ntsa.uk HTML (home + /downloads) via lib/downloads.ts; asset publish is VIS-07
 - The Plan standalone MSI is tools/out/PlanAgent.msi from tools/build_plan_agent_msi.py. Do not commit the built MSI.
 - When a stacked Plan CLI PR conflicts on cli.py after the parent merged, keep both the settings flags and the fuel-empty quit.
+- VIS-07 PlanAgent.msi hostile MRB requires File table count >= 1 (MZ stub PlanAgent.exe ok); empty msilib.init_database alone FAILs.
+- FR #153 PlanAgent.exe is the .NET 8 seat launcher under launcher/; resolve plan-agent via --root or PLAN_AGENT_ROOT and exit 64 when AGENTS.md or .grok/skills is missing.
 - skills-visionary hold label + body Hold park: ACK then GIVEUP on-hold; do not implement VIS-G* until VIS-G1/BOB-G1 unheld
+- skills-visionary harvest tips must run python tools/build-skill-dag.py and commit apps/mcp-catalog mirrors in the same tip (FR #198); sync-skill-catalog workflow repairs in-repo PR heads that forgot.
+- Conflict keep-both resolve: never embed needles like `fr-digest` in PowerShell here-strings or `python -c` (PS backtick-f becomes form-feed `\x0c`); write resolve scripts to a `.py` file via .NET WriteAllText, run `check_conflict_markers` before every commit/push, never push with markers (MRB #205).
+- VIS-G2 park stamp: every child body Depends-on:#digest and digest Children table lists each #N; prove with tools/check_fr_digest_children_stamp.py and format_fr_digest_children_stamp.py.

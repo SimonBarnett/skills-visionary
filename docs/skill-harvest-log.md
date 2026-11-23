@@ -1,5 +1,16 @@
 # Skill harvest log
 
+## 2026-11-23 - Worker skill home + mocks-dir + catalog sync
+
+- Bob worker playbooks (e.g. search-while-writing / external API join)
+  park on the product repo (`bob/.grok/skills`), not skills-visionary;
+  Plan still opens `fr-digest` on that park.
+- No-UI / service parks: use `docs/mocks/<slug>/` + `--mocks-dir` when
+  sibling `docs/mocks/` lacks home/empty/error.
+- After editing visionary SKILL.md, run `tools/build-skill-dag.py` in the
+  same PR so MCP catalog mirrors do not drift.
+- Home: `.grok/skills/visionary/SKILL.md`.
+
 ## 2026-11-23 - CAST IRON always fr-digest on park
 
 - Plan Agent **must** create an `fr-digest` issue on **every** FR park,

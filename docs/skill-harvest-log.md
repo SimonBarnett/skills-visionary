@@ -1,5 +1,25 @@
 # Skill harvest log
 
+## 2026-11-23 - CAST IRON always fr-digest on park
+
+- Plan Agent **must** create an `fr-digest` issue on **every** FR park,
+  including single-child / one-step parks. Reason: operator filters
+  epics to release via digests. Skipping digest when “only one FR” is
+  forbidden. Updates the FR digest park playbook + Do-not list.
+- Home: `.grok/skills/visionary/SKILL.md`.
+
+## 2026-11-22 - FR digest batch park playbook
+
+- When parking a theme: create `fr-digest`+`hold` digest issue first
+  (vision + index links, Children table), then one held child issue per
+  acceptance row with `Depends-on: #<digest>` plus intra-batch `#N`
+  merge order; patch digest Children + `fr-index-*.md` same turn;
+  docs PR `Refs` only; unhold digest to release. Enforceable Depends-on
+  refs only (`#N` / `owner/repo#N` / `(none)`).
+- Home: `.grok/skills/visionary/SKILL.md` (Plan-seat repo hygiene).
+- Superseded in part by 2026-11-23: digest is always required, not only
+  when the operator asks or the batch is multi-slice.
+
 ## 2026-11-21 - FR #90 anti-omnibus FRs
 
 - Plan Agent CAST IRON: file one small GitHub issue per FR draft
@@ -164,3 +184,23 @@ install and vision-pack validator command. Tools still on old host tracked as #9
 Rewrote FR #84 / #86 entries after PowerShell double-quote escapes ate
 leading letters. Pin test forbids those corruptions and requires
 amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
+## 2026-11-21 - plan-mcp-setup + anti-omnibus multi-repo park lessons
+
+- New skill `.grok/skills/plan-mcp-setup`: `grok mcp add --transport http plan https://plan.ntsa.uk/mcp`, doctor, session reload for `plan__*` tools.
+- README: plan.ntsa.uk marked Live (was Upcoming); skills table includes plan-mcp-setup.
+- harvest-skills-visionary + visionary: multi-repo one-issue-per-row park, validate how-measured observables, Plan product vs bobiverse tray split.
+- Evidence: session parked VIS-01..09 / BOB / PRI indexes; MCP doctor 2 tools on plan.ntsa.uk.
+
+## 2026-11-21 - park-only issue body vs dispatch (bobiverse#8707)
+
+- Living feature-request issues must not keep Park-only / Do not bob-job after operator dispatch; workers GIVEUP.
+- Same turn: rewrite sibling FR bodies to implement-S1, clear BOB_BRIDGE_HOME loops board, then Start-BobBuildLoop.
+- FR indexes: docs/fr-index-*.md so CI feature-request-*.md validate skips them.
+
+## 2026-11-22 - FR #180 FIX worktree stale local origin/main
+
+- `git fetch origin --quiet` can update FETCH_HEAD while local refs/remotes/origin/main stays stale; rev-list then reports 0 behind while the PR is CONFLICTING/DIRTY.
+- Trust `git ls-remote origin refs/heads/main` (or FETCH_HEAD), update-ref the remote-tracking ref, merge, keep main entries then the tip FR entry, push.
+- Wincredman push fallback: `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push origin HEAD`.
+- Home skill and catalog mirror: `.grok/skills/harvest-skills-visionary/SKILL.md`.
+

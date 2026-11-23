@@ -1,5 +1,20 @@
 # Skill harvest log
 
+## 2026-11-23 - VIS-D1..D4 Depends-on park lessons (VIS-D5 harvest)
+
+- Theme: Depends-on preconditions (Plan stamps + Jeeves skip-until-closed).
+- **VIS-D1:** visionary skill states Depends-on grammar — `#N` same-repo,
+  `owner/repo#N` cross-repo, `(none)` when empty; distinct from hold/HOLD.
+- **VIS-D2:** Plan park emits enforceable Depends-on on the GitHub issue body
+  (digest + intra-batch `#N`), not bare backlog ids.
+- **VIS-D3:** `tools/validate-vision-pack.py` rejects backlog-id-only
+  Depends-on (e.g. bare `BOB-06` / `VIS-01`); CI vision-pack gate enforces.
+- **VIS-D4:** explicit no-preconditions stamp is `Depends-on: (none)` (never
+  omit when the park means no issue deps).
+- **VIS-D5 (this slice):** record the above in `docs/skill-harvest-log.md`
+  and cite VIS-D1..D4 from `harvest-skills-visionary`.
+- Home: `.grok/skills/harvest-skills-visionary/SKILL.md` (+ catalog mirror).
+
 ## 2026-11-23 - Worker skill home + mocks-dir + catalog sync
 
 - Bob worker playbooks (e.g. search-while-writing / external API join)

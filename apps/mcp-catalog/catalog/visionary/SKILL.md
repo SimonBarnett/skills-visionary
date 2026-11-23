@@ -253,6 +253,21 @@ the data, never to this skill book. No secrets in exports or commits.
   4. Patch the digest **Children** table with real issue numbers + titles + vision links. Update the index map the same turn.
   5. Docs-only park PR uses `Refs #digest #child…` (never `Closes`). Leave digest + children on **`hold`**. **Unhold the digest alone** releases children when the chair go-gate is live; until then `hold` is the practical gate. Do not bob-job until the operator unholds / dispatches.
   6. Do **not** copy product issue maps or backlog ids into this skill — only the park procedure.
+
+- **FR digest go-gate playbook (VIS-G3):** how Plan parks a batch so children
+  stay off the offer queue until a human releases the epic. Distinct from a
+  lone `hold` on one FR (that blocks only that issue) and from ordinary
+  **CLOSED Depends-on** (child waits until the parent issue is *closed*).
+  Digest go-gate = labels `fr-digest` + `hold` on **one digest per target
+  repo**; **unhold the digest alone** releases children (closing the digest
+  is optional). Order every park:
+  1. Create digest first (`fr-digest`+`hold`, Children table, `Depends-on: (none)`).
+  2. Create children with `Depends-on: #<digest>` (+ intra-batch `#N` as needed).
+  3. Patch digest Children table + `fr-index-*.md` the same turn; docs PR `Refs` only.
+  4. Leave digest (and children) on `hold` until the operator unholds / dispatches.
+  Chair/CI: product repos should fail or skip offer when an open child still
+  `Depends-on` a held `fr-digest` parent; do not treat an unheld open digest as
+  ordinary depends-open. Do not invent a second digest for the same repo/theme.
 - Parking FR docs: copy the drafts into a clean worktree from
   `origin/main` (not the dirty local clone), commit docs only, reference
   the implementation issues with `Refs #N` (never `Closes`), push a
@@ -317,6 +332,7 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
   IRON FR #90; unpaid / non-frontier seats cannot safely carry those.
 - Park FRs **without** an **`fr-digest`** issue  -  CAST IRON; even a
   one-step park needs a digest so the operator can filter epics to release.
+- Leave the visionary skill **silent** on the digest go-gate (VIS-G3)  -  Plan seats must see order, `fr-digest`+`hold`, unhold-releases, vs CLOSED Depends-on, and one digest per repo.
 - Put **Bob worker** job playbooks (FR/MRB runtime skills) into
   `skills-visionary`  -  those belong on the product repo
   (`bob/.grok/skills` etc.); this pack is Plan how-to-plan only.

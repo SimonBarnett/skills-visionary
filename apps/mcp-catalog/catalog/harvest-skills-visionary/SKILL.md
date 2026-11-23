@@ -156,4 +156,4 @@ locally when they can.
 - VIS-08: expose PlanAgent.msi on plan.ntsa.uk HTML (home + /downloads) via lib/downloads.ts; asset publish is VIS-07
 - The Plan standalone MSI is tools/out/PlanAgent.msi from tools/build_plan_agent_msi.py. Do not commit the built MSI.
 - When a stacked Plan CLI PR conflicts on cli.py after the parent merged, keep both the settings flags and the fuel-empty quit.
-
+- skills-visionary hold label + body Hold park: ACK then GIVEUP on-hold; do not implement VIS-G* until VIS-G1/BOB-G1 unheld

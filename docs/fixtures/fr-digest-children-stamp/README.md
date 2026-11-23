@@ -12,6 +12,6 @@ Pass pack for `tools/check_fr_digest_children_stamp.py`.
 - Child missing Depends-on digest.
 - Digest body empty of children (table missing child `#N`).
 
-`	ext
+```text
 python tools/check_fr_digest_children_stamp.py docs/fixtures/fr-digest-children-stamp/park-stamp.json
-`
+```

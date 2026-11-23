@@ -101,6 +101,7 @@ If a harvest tip lands on bobiverse with Plan how-to-plan content: close it
 MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 
 ## Harvested lessons (intake)
+- VIS-D1..D4 Depends-on park lessons (harvested under VIS-D5): grammar is `#N` / `owner/repo#N` / `(none)` (VIS-D1); Plan park stamps those on the GitHub issue body (VIS-D2); `validate-vision-pack.py` rejects bare backlog ids like BOB-06 (VIS-D3); explicit empty stamp is `Depends-on: (none)` (VIS-D4). Cite in docs/skill-harvest-log.md.
 
 - Connect Plan MCP in Grok Build with `grok mcp add --transport http plan https://plan.ntsa.uk/mcp` then `grok mcp doctor plan` (2 tools). Mid-session add can doctor-green while `plan__list_catalog` / `plan__get_skill` stay missing until MCP reconnect or a new session. Skill: `plan-mcp-setup`.
 - Cross-repo Plan themes (bobiverse tray + skills-visionary Plan agent + priority-mcp Priority agent): park **one GitHub issue per acceptance row** with a per-repo index markdown; do not one omnibus issue per repo. Phase-gate models webhook / Weights before tray start-arg consumers; Plan/Priority MSI FRs may build in parallel; bob-ear consume waits on vendor assets. How-to-plan only — product FR bodies stay in each repo's docs.

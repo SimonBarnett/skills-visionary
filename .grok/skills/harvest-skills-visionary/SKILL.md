@@ -134,4 +134,4 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - VIS-08: expose PlanAgent.msi on plan.ntsa.uk HTML (home + /downloads) via lib/downloads.ts; asset publish is VIS-07
 - The Plan standalone MSI is tools/out/PlanAgent.msi from tools/build_plan_agent_msi.py. Do not commit the built MSI.
 - When a stacked Plan CLI PR conflicts on cli.py after the parent merged, keep both the settings flags and the fuel-empty quit.
-
+- skills-visionary harvest tips must run python tools/build-skill-dag.py and commit apps/mcp-catalog mirrors in the same tip (FR #198); sync-skill-catalog workflow repairs in-repo PR heads that forgot.

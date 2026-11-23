@@ -1,15 +1,5 @@
 # Skill harvest log
 
-<<<<<<< HEAD
-## 2026-11-23 - FR #198 harvest tips sync mcp-catalog
-
-- Every tip that edits `.grok/skills/**/SKILL.md` must run
-  `python tools/build-skill-dag.py` and commit the catalog mirror in the
-  same tip (or rely on `.github/workflows/sync-skill-catalog.yml`).
-- Stops MRB FAIL class on intake tips that only touched the skill book
-  (#189 / #191 companions).
-- Home: `.grok/skills/harvest-skills-visionary/SKILL.md` + catalog mirror.
-=======
 ## 2026-11-23 - Worker skill home + mocks-dir + catalog sync
 
 - Bob worker playbooks (e.g. search-while-writing / external API join)
@@ -20,7 +10,15 @@
 - After editing visionary SKILL.md, run `tools/build-skill-dag.py` in the
   same PR so MCP catalog mirrors do not drift.
 - Home: `.grok/skills/visionary/SKILL.md`.
->>>>>>> origin/main
+
+## 2026-11-23 - FR #198 harvest tips sync mcp-catalog
+
+- Every tip that edits `.grok/skills/**/SKILL.md` must run
+  `python tools/build-skill-dag.py` and commit the catalog mirror in the
+  same tip (or rely on `.github/workflows/sync-skill-catalog.yml`).
+- Stops MRB FAIL class on intake tips that only touched the skill book
+  (#189 / #191 companions).
+- Home: `.grok/skills/harvest-skills-visionary/SKILL.md` + catalog mirror.
 
 ## 2026-11-23 - CAST IRON always fr-digest on park
 

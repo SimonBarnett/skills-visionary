@@ -100,6 +100,28 @@ worker/fleet seats still route to bobiverse (FR #3959 a-search stub guard).
 If a harvest tip lands on bobiverse with Plan how-to-plan content: close it
 MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 
+## CAST IRON — mcp-catalog mirror (FR #198 / #182)
+
+`.grok/skills/<id>/SKILL.md` is the source of truth. Every tip that edits a
+skill book **must** refresh `apps/mcp-catalog/catalog/<id>/SKILL.md` in the
+**same tip** before open (or immediately via the `sync-skill-catalog`
+workflow). Intake tips that only commit the skill book leave the catalog
+drifted; `python tools/build-skill-dag.py --check` and `mcp-catalog-dag` CI
+fail (MRB FAIL class on harvest tips #189 / #191).
+
+After editing any `.grok/skills/**/SKILL.md` in a writable clone:
+
+```text
+python tools/build-skill-dag.py
+python tools/build-skill-dag.py --check
+```
+
+Commit both the skill book and the catalog mirror (and any
+`docs/skill-sources` DAG refresh) together. Do not open a harvest-lesson PR
+with only the skill-book path. The `sync-skill-catalog` GitHub Action will
+push the mirror onto in-repo PR heads that forgot; agents must still sync
+locally when they can.
+
 ## Harvested lessons (intake)
 - VIS-D1..D4 Depends-on park lessons (harvested under VIS-D5): grammar is `#N` / `owner/repo#N` / `(none)` (VIS-D1); Plan park stamps those on the GitHub issue body (VIS-D2); `validate-vision-pack.py` rejects bare backlog ids like BOB-06 (VIS-D3); explicit empty stamp is `Depends-on: (none)` (VIS-D4). Cite in docs/skill-harvest-log.md.
 

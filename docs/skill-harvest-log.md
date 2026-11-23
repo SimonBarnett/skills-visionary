@@ -26,6 +26,15 @@
   same PR so MCP catalog mirrors do not drift.
 - Home: `.grok/skills/visionary/SKILL.md`.
 
+## 2026-11-23 - FR #198 harvest tips sync mcp-catalog
+
+- Every tip that edits `.grok/skills/**/SKILL.md` must run
+  `python tools/build-skill-dag.py` and commit the catalog mirror in the
+  same tip (or rely on `.github/workflows/sync-skill-catalog.yml`).
+- Stops MRB FAIL class on intake tips that only touched the skill book
+  (#189 / #191 companions).
+- Home: `.grok/skills/harvest-skills-visionary/SKILL.md` + catalog mirror.
+
 ## 2026-11-23 - CAST IRON always fr-digest on park
 
 - Plan Agent **must** create an `fr-digest` issue on **every** FR park,

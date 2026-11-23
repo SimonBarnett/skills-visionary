@@ -40,6 +40,10 @@ jobs:
         working-directory: apps/mcp-catalog
         run: |
           npm install
+          # FR #222: committed data/dag.json must match catalog before Amplify/CI sync masks drift
+          node scripts/check-dag.mjs
+          npm run sync-dag
+          git diff --exit-code -- data/
           npm run build
           npm test
           npm run smoke

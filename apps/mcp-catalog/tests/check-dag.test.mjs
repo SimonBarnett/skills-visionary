@@ -21,6 +21,14 @@ function runNode(script, cwd = appRoot) {
   });
 }
 
+// FR #222: committed data/dag.json must already match catalog.
+// Amplify/CI run sync during build, which hid stale commits (plan-mcp-setup).
+test('committed check-dag exits 0 without re-sync (FR #222)', () => {
+  const check = runNode(checkScript);
+  assert.equal(check.status, 0, check.stderr || check.stdout);
+  assert.match(check.stdout, /check-dag: ok/);
+});
+
 test('sync + check-dag exit 0 on clean tree', () => {
   const sync = runNode(syncScript);
   assert.equal(sync.status, 0, sync.stderr || sync.stdout);

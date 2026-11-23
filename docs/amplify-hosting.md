@@ -231,7 +231,8 @@ the paste-ready harness for that gate.
 
 ## Live evidence (FR-I)
 
-**Status (2026-11-21):** live. FR-H (#85) deployed.
+**Status (2026-11-23):** live. FR-H (#85) deployed. Refreshed for FR #222
+(`plan-mcp-setup` in catalog + committed DAG; `listCatalogCount` 8).
 
 | Item | Value |
 | --- | --- |
@@ -247,7 +248,7 @@ the paste-ready harness for that gate.
 ```json
 {
   "origin": "https://plan.ntsa.uk",
-  "when": "2026-11-21T13:40:01.975Z",
+  "when": "2026-11-23T20:25:08.853Z",
   "homeStatus": 200,
   "mcpGetTools": [
     "list_catalog",
@@ -258,7 +259,7 @@ the paste-ready harness for that gate.
     "version": "0.1.0"
   },
   "protocolVersion": "2024-11-05",
-  "listCatalogCount": 7,
+  "listCatalogCount": 8,
   "listCatalogHost": "https://plan.ntsa.uk",
   "sampleSkillNames": [
     "harvest-agent-skills",
@@ -267,6 +268,7 @@ the paste-ready harness for that gate.
     "plan-create-repo",
     "plan-enable-prs",
     "plan-git-from-plan",
+    "plan-mcp-setup",
     "visionary"
   ]
 }

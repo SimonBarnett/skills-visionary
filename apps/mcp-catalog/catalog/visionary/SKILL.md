@@ -142,6 +142,7 @@ Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
    the FR markdown; mocks when UI.
 2. Commit `docs/feature-request-<slug>-YYYY-MM-DD.md` (and mocks) on
    the **existing** target repo.
+<<<<<<< HEAD
 3. Open the GitHub issue with an **explicit Depends-on** stamp (VIS-D4 /
    FR #150): use `Depends-on: (none)` when there are no preconditions —
    never silently omit the line. Build dispatch (`bob-job-loop`) is a
@@ -163,6 +164,63 @@ Fixture pack: `docs/fixtures/depends-on-none/`.
 
 Distinct from hold / HOLD: `(none)` is still a Depends-on stamp, not a
 hold.
+=======
+3. Open the GitHub issue with a **Depends-on** stamp on the **issue body**
+   (VIS-D2 / FR #148)  -  not only in vision markdown. Build dispatch
+   (ob-job-loop) is a build-seat concern  -  Plan seats do not install
+   that pack.
+4. Stamp **Depends-on** on every child issue body using the grammar below
+   (VIS-D1 / FR #147). See also docs/depends-on-grammar.md.
+
+## Depends-on grammar (CAST IRON --- VIS-D1 / FR #147)
+
+Plan must identify FR preconditions on the **GitHub issue body** for
+**any SimonBarnett product repo** (not bobiverse-only). Enforceable
+stamps only --- Jeeves skips offer while a Depends-on issue stays OPEN.
+
+**Grammar (LOCKED):**
+
+- Same-repo: Depends-on: #N
+- Cross-repo: Depends-on: owner/repo#N (example: SimonBarnett/bobiverse#9147)
+- No preconditions: Depends-on: (none)
+- Several refs: comma or whitespace separated on one Depends-on line
+
+**Distinct from hold / HOLD:**
+
+- Depends-on: is a precondition stamp for the chair skip-until-closed
+  gate.
+- Label hold / on-hold or a line-anchored HOLD (...): body stamp
+  is a human go-gate. Do not use HOLD text as a substitute for
+  Depends-on refs.
+
+**Rejected (later VIS-D3):** bare backlog ids alone (BOB-N, theme
+codes) are not enforceable Depends-on refs. Prefer issue numbers.
+
+Durable copy: docs/depends-on-grammar.md.
+
+## Park emits Depends-on on the issue body (CAST IRON --- VIS-D2 / FR #148)
+
+When filing a parked FR (intake or gh issue create), the **GitHub issue
+body** must include a Depends-on line in the first ~500 characters.
+
+**Grammar:** Depends-on: #N same-repo; owner/repo#N cross-repo;
+(none) when empty. Distinct from hold / HOLD labels and stamps.
+
+**How:**
+
+1. Build the body with
+   python tools/format_depends_on_park_issue_body.py --feature-id ... --theme ... --vision-pack-url ... --index-url ... --depends-on ... --dry-run
+   (or equivalent text that starts with **Depends-on:** ...).
+2. Pass that string as Report-BobiverseIntakeIssue.ps1 -Body (or
+   --body-file for gh). Do **not** leave Depends-on only inside
+   docs/feature-request-*.md.
+3. Digest issues use Depends-on: (none). Children use
+   Depends-on: #<digest> plus any intra-batch #N / owner/repo#N.
+
+Evidence fixtures: docs/evidence/vis-d2-park-emits-depends-on.md and
+	ests/fixtures/depends-on-park/.
+
+>>>>>>> origin/main
 
 ## Plan-seat inputs (workbooks on network drives)
 
@@ -215,10 +273,25 @@ the data, never to this skill book. No secrets in exports or commits.
 - **FR digest park (CAST IRON — Plan Agent, every park):** the Plan Agent **must** open an **`fr-digest`** issue on **every** FR park, **even when there is only one child / one step**. Digests are how the operator **filters epics to release** — skipping the digest because the batch is small is forbidden. Same turn:
   1. Ensure the target repo has label **`fr-digest`** (create if missing). Create the **digest issue first**: labels `fr-digest` + `hold` (+ `feature-request` if the repo uses it for parks). Body: `Kind: fr-digest`, link to theme vision + `fr-index-*.md`, short epic/batch summary, **Children** table (one row is fine), `Depends-on: (none)`. Digest is a go-gate / epic filter only — not an implementation ticket.
   2. Theme vision pack + **one child vision pack per acceptance row** (anti-omnibus). A single-child park still gets the digest + that one child. Validate each child with `validate-vision-pack.py`. Index file is `fr-index-*.md`.
-  3. Create each child issue with `feature-request` + `hold`, vision/index/digest links, and **`Depends-on: #<digest>`** plus **intra-batch** `Depends-on: #N` when there are multiple children (enforceable refs only: `#N`, `owner/repo#N`, or `(none)` — never bare backlog ids).
+  3. Create each child issue with `feature-request` + `hold`, vision/index/digest links, and **`Depends-on: #<digest>`** plus **intra-batch** `Depends-on: #N` when there are multiple children (enforceable refs only: `#N`, `owner/repo#N`, or `(none)` — never bare backlog ids). Put that Depends-on line on the **GitHub issue body** via intake `-Body` / `format_depends_on_park_issue_body.py` (VIS-D2) — vision markdown alone is not enough.
   4. Patch the digest **Children** table with real issue numbers + titles + vision links. Update the index map the same turn.
   5. Docs-only park PR uses `Refs #digest #child…` (never `Closes`). Leave digest + children on **`hold`**. **Unhold the digest alone** releases children when the chair go-gate is live; until then `hold` is the practical gate. Do not bob-job until the operator unholds / dispatches.
   6. Do **not** copy product issue maps or backlog ids into this skill — only the park procedure.
+
+- **FR digest go-gate playbook (VIS-G3):** how Plan parks a batch so children
+  stay off the offer queue until a human releases the epic. Distinct from a
+  lone `hold` on one FR (that blocks only that issue) and from ordinary
+  **CLOSED Depends-on** (child waits until the parent issue is *closed*).
+  Digest go-gate = labels `fr-digest` + `hold` on **one digest per target
+  repo**; **unhold the digest alone** releases children (closing the digest
+  is optional). Order every park:
+  1. Create digest first (`fr-digest`+`hold`, Children table, `Depends-on: (none)`).
+  2. Create children with `Depends-on: #<digest>` (+ intra-batch `#N` as needed).
+  3. Patch digest Children table + `fr-index-*.md` the same turn; docs PR `Refs` only.
+  4. Leave digest (and children) on `hold` until the operator unholds / dispatches.
+  Chair/CI: product repos should fail or skip offer when an open child still
+  `Depends-on` a held `fr-digest` parent; do not treat an unheld open digest as
+  ordinary depends-open. Do not invent a second digest for the same repo/theme.
 - Parking FR docs: copy the drafts into a clean worktree from
   `origin/main` (not the dirty local clone), commit docs only, reference
   the implementation issues with `Refs #N` (never `Closes`), push a
@@ -283,8 +356,12 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
   IRON FR #90; unpaid / non-frontier seats cannot safely carry those.
 - Park FRs **without** an **`fr-digest`** issue  -  CAST IRON; even a
   one-step park needs a digest so the operator can filter epics to release.
+<<<<<<< HEAD
 - Park an FR **without** a Depends-on line  -  CAST IRON VIS-D4 / FR #150;
   when there are no deps stamp `Depends-on: (none)` (silent omission fails).
+=======
+- Leave the visionary skill **silent** on the digest go-gate (VIS-G3)  -  Plan seats must see order, `fr-digest`+`hold`, unhold-releases, vs CLOSED Depends-on, and one digest per repo.
+>>>>>>> origin/main
 - Put **Bob worker** job playbooks (FR/MRB runtime skills) into
   `skills-visionary`  -  those belong on the product repo
   (`bob/.grok/skills` etc.); this pack is Plan how-to-plan only.

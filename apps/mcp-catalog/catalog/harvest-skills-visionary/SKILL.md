@@ -138,4 +138,5 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - VIS-07 PlanAgent.msi hostile MRB requires File table count >= 1 (MZ stub PlanAgent.exe ok); empty msilib.init_database alone FAILs.
 - FR #153 PlanAgent.exe is the .NET 8 seat launcher under launcher/; resolve plan-agent via --root or PLAN_AGENT_ROOT and exit 64 when AGENTS.md or .grok/skills is missing.
 - skills-visionary hold label + body Hold park: ACK then GIVEUP on-hold; do not implement VIS-G* until VIS-G1/BOB-G1 unheld
+- skills-visionary harvest tips must run python tools/build-skill-dag.py and commit apps/mcp-catalog mirrors in the same tip (FR #198); sync-skill-catalog workflow repairs in-repo PR heads that forgot.
 - Conflict keep-both resolve: never embed needles like `fr-digest` in PowerShell here-strings or `python -c` (PS backtick-f becomes form-feed `\x0c`); write resolve scripts to a `.py` file via .NET WriteAllText, run `check_conflict_markers` before every commit/push, never push with markers (MRB #205).

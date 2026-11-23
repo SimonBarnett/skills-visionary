@@ -1,0 +1,28 @@
+{
+  "theme": "Example FR digest go-gate park (no double-park)",
+  "order": ["digest", "child-a", "child-b"],
+  "digest": {
+    "title": "Digest: Example theme",
+    "labels": ["digest", "fr-digest", "hold", "feature-request"],
+    "kind": "fr-digest",
+    "depends_on": "(none)",
+    "number": 100
+  },
+  "children": [
+    {
+      "id": "child-a",
+      "number": 101,
+      "title": "EXAMPLE-A: first acceptance row",
+      "labels": ["feature-request"],
+      "depends_on": "#100"
+    },
+    {
+      "id": "child-b",
+      "number": 102,
+      "title": "EXAMPLE-B: sequenced after A",
+      "labels": ["feature-request", "hold"],
+      "depends_on": "#100, #101",
+      "body": "Depends-on: #100, #101\n\n**Child-hold (intra-batch):** wait for EXAMPLE-A (#101) before offer; digest Depends-on alone is not enough.\n"
+    }
+  ]
+}

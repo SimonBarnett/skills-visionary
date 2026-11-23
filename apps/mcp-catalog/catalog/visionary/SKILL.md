@@ -142,8 +142,27 @@ Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
    the FR markdown; mocks when UI.
 2. Commit `docs/feature-request-<slug>-YYYY-MM-DD.md` (and mocks) on
    the **existing** target repo.
-3. Open the GitHub issue. Build dispatch (`bob-job-loop`) is a build-seat
-   concern  -  Plan seats do not install that pack.
+3. Open the GitHub issue with an **explicit Depends-on** stamp (VIS-D4 /
+   FR #150): use `Depends-on: (none)` when there are no preconditions —
+   never silently omit the line. Build dispatch (`bob-job-loop`) is a
+   build-seat concern  -  Plan seats do not install that pack.
+
+## Explicit no-preconditions stamp (CAST IRON — VIS-D4 / FR #150)
+
+Every parked FR issue body (and the vision pack Depends-on field) must
+include a Depends-on line.
+
+- Has preconditions: `Depends-on: #N` and/or `owner/repo#N`
+- **No preconditions: `Depends-on: (none)`** — required, not optional
+- **Fail-when:** silent omission of Depends-on (empty body / pack with
+  no stamp)
+
+Digest issues also use `Depends-on: (none)`. Check with
+`python tools/check_depends_on_stamp.py [--require-none] <files>`.
+Fixture pack: `docs/fixtures/depends-on-none/`.
+
+Distinct from hold / HOLD: `(none)` is still a Depends-on stamp, not a
+hold.
 
 ## Plan-seat inputs (workbooks on network drives)
 
@@ -264,6 +283,8 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
   IRON FR #90; unpaid / non-frontier seats cannot safely carry those.
 - Park FRs **without** an **`fr-digest`** issue  -  CAST IRON; even a
   one-step park needs a digest so the operator can filter epics to release.
+- Park an FR **without** a Depends-on line  -  CAST IRON VIS-D4 / FR #150;
+  when there are no deps stamp `Depends-on: (none)` (silent omission fails).
 - Put **Bob worker** job playbooks (FR/MRB runtime skills) into
   `skills-visionary`  -  those belong on the product repo
   (`bob/.grok/skills` etc.); this pack is Plan how-to-plan only.

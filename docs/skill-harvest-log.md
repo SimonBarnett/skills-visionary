@@ -1,5 +1,25 @@
 # Skill harvest log
 
+## 2026-11-23 - CAST IRON always fr-digest on park
+
+- Plan Agent **must** create an `fr-digest` issue on **every** FR park,
+  including single-child / one-step parks. Reason: operator filters
+  epics to release via digests. Skipping digest when “only one FR” is
+  forbidden. Updates the FR digest park playbook + Do-not list.
+- Home: `.grok/skills/visionary/SKILL.md`.
+
+## 2026-11-22 - FR digest batch park playbook
+
+- When parking a theme: create `fr-digest`+`hold` digest issue first
+  (vision + index links, Children table), then one held child issue per
+  acceptance row with `Depends-on: #<digest>` plus intra-batch `#N`
+  merge order; patch digest Children + `fr-index-*.md` same turn;
+  docs PR `Refs` only; unhold digest to release. Enforceable Depends-on
+  refs only (`#N` / `owner/repo#N` / `(none)`).
+- Home: `.grok/skills/visionary/SKILL.md` (Plan-seat repo hygiene).
+- Superseded in part by 2026-11-23: digest is always required, not only
+  when the operator asks or the batch is multi-slice.
+
 ## 2026-11-21 - FR #90 anti-omnibus FRs
 
 - Plan Agent CAST IRON: file one small GitHub issue per FR draft

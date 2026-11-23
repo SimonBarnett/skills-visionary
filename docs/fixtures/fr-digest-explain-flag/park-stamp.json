@@ -1,0 +1,21 @@
+{
+  "theme": "Example FR digest go-gate park",
+  "labels": [
+    "digest",
+    "fr-digest",
+    "hold",
+    "feature-request"
+  ],
+  "body_file": "digest-issue-body.md",
+  "digest": {
+    "number": 100,
+    "title": "Digest: Example theme",
+    "labels": [
+      "digest",
+      "fr-digest",
+      "hold",
+      "feature-request"
+    ],
+    "body_file": "digest-issue-body.md"
+  }
+}

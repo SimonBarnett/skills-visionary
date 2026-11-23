@@ -142,8 +142,28 @@ Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
    the FR markdown; mocks when UI.
 2. Commit `docs/feature-request-<slug>-YYYY-MM-DD.md` (and mocks) on
    the **existing** target repo.
-3. Open the GitHub issue. Build dispatch (`bob-job-loop`) is a build-seat
-   concern  -  Plan seats do not install that pack.
+3. Open the GitHub issues in digest-first order (VIS-G1 / FR #155):
+   create the **`fr-digest` + `hold`** digest issue **before** any
+   child FR. Build dispatch (`bob-job-loop`) is a build-seat concern
+    -  Plan seats do not install that pack.
+
+## Create fr-digest on hold first (CAST IRON — VIS-G1 / FR #155)
+
+At every batch park (including a one-child park), Plan opens **one
+digest per target repo** with labels **`fr-digest` + `hold`** before
+any child issue.
+
+- Ensure label `fr-digest` exists on the target repo (create if missing)
+- Digest body: `Kind: fr-digest`, vision + `fr-index-*.md` links,
+  Children table, `Depends-on: (none)`
+- **Fail-when:** children created with no digest, or digest without
+  `hold` / without `fr-digest`
+- Check: `python tools/check_fr_digest_create_hold.py <park-manifest.json>`
+- Fixture pack: `docs/fixtures/fr-digest-create-hold/`
+
+Unhold of the digest alone is the go-gate that releases children
+(Jeeves / chair). Closing the digest is optional. Sibling slices
+VIS-G2 (children stamp) and VIS-G3 (full playbook) build on this.
 
 ## Plan-seat inputs (workbooks on network drives)
 
@@ -264,6 +284,9 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
   IRON FR #90; unpaid / non-frontier seats cannot safely carry those.
 - Park FRs **without** an **`fr-digest`** issue  -  CAST IRON; even a
   one-step park needs a digest so the operator can filter epics to release.
+- Create child FRs **before** the digest, or open a digest **without**
+  `hold` / without `fr-digest`  -  CAST IRON VIS-G1 / FR #155 (digest
+  first with both labels).
 - Put **Bob worker** job playbooks (FR/MRB runtime skills) into
   `skills-visionary`  -  those belong on the product repo
   (`bob/.grok/skills` etc.); this pack is Plan how-to-plan only.

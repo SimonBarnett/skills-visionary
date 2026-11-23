@@ -153,6 +153,59 @@ def shape_has_locked(shape: str) -> bool:
     return False
 
 
+
+DEPENDS_ON_LINE_RE = re.compile(
+    r"(?im)^(?:\*\*Depends-on:\*\*|Depends-on:)\s*(.+?)\s*$"
+)
+# Enforceable refs: #N or owner/repo#N. (none) is explicit empty.
+DEPENDS_ON_NONE_RE = re.compile(r"^\(none\)$", re.IGNORECASE)
+DEPENDS_ON_ISSUE_RE = re.compile(
+    r"^(?:[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)?#\d+$"
+)
+
+def iter_depends_on_values(text: str) -> list[str]:
+    """Return raw Depends-on values from pack header lines (may be empty)."""
+    return [m.group(1).strip() for m in DEPENDS_ON_LINE_RE.finditer(text)]
+
+
+def validate_depends_on(text: str, errors: list[str]) -> bool:
+    """FR #149 / VIS-D3: refuse backlog-id-only Depends-on (e.g. bare BOB-06).
+
+    Missing Depends-on is allowed (older packs). Present values must be
+    `(none)`, `#N`, and/or `owner/repo#N` tokens — never sole/mixed
+    bare backlog ids.
+    """
+    values = iter_depends_on_values(text)
+    if not values:
+        return True
+    ok = True
+    for raw in values:
+        if not raw:
+            errors.append("depends-on: empty value; use (none) or #N / owner/repo#N")
+            ok = False
+            continue
+        if DEPENDS_ON_NONE_RE.match(raw):
+            continue
+        tokens = [t.strip() for t in raw.split(",") if t.strip()]
+        if not tokens:
+            errors.append("depends-on: empty value; use (none) or #N / owner/repo#N")
+            ok = False
+            continue
+        bad: list[str] = []
+        for tok in tokens:
+            if DEPENDS_ON_ISSUE_RE.match(tok):
+                continue
+            bad.append(tok)
+        if bad:
+            errors.append(
+                "depends-on: backlog-id-only or non-issue ref not allowed: "
+                + ", ".join(bad)
+                + " (use #N, owner/repo#N, or (none); VIS-D3 / FR #149)"
+            )
+            ok = False
+    return ok
+
+
 def validate_shape(shape: str, errors: list[str]) -> bool:
     if not shape.strip():
         errors.append("shape: missing ## Shape section")
@@ -367,6 +420,7 @@ def validate_pack(vision_path: Path, mocks_dir: Path, historical: bool = False) 
     shape_ok = validate_shape(shape_sec, errors)
     validate_success(success_sec, errors)
     validate_mermaid(text, errors)
+    validate_depends_on(text, errors)
 
     shape_unknown = shape_is_unknown(shape_sec)
     if shape_ok and not shape_unknown:

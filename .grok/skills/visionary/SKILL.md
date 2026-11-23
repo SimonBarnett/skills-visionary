@@ -144,30 +144,59 @@ Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
    the **existing** target repo.
 3. Open the GitHub issue with a **Depends-on** stamp on the **issue body**
    (VIS-D2 / FR #148)  -  not only in vision markdown. Build dispatch
-   (`bob-job-loop`) is a build-seat concern  -  Plan seats do not install
+   (ob-job-loop) is a build-seat concern  -  Plan seats do not install
    that pack.
+4. Stamp **Depends-on** on every child issue body using the grammar below
+   (VIS-D1 / FR #147). See also docs/depends-on-grammar.md.
 
-## Park emits Depends-on on the issue body (CAST IRON — VIS-D2 / FR #148)
+## Depends-on grammar (CAST IRON --- VIS-D1 / FR #147)
 
-When filing a parked FR (intake or `gh issue create`), the **GitHub issue
+Plan must identify FR preconditions on the **GitHub issue body** for
+**any SimonBarnett product repo** (not bobiverse-only). Enforceable
+stamps only --- Jeeves skips offer while a Depends-on issue stays OPEN.
+
+**Grammar (LOCKED):**
+
+- Same-repo: Depends-on: #N
+- Cross-repo: Depends-on: owner/repo#N (example: SimonBarnett/bobiverse#9147)
+- No preconditions: Depends-on: (none)
+- Several refs: comma or whitespace separated on one Depends-on line
+
+**Distinct from hold / HOLD:**
+
+- Depends-on: is a precondition stamp for the chair skip-until-closed
+  gate.
+- Label hold / on-hold or a line-anchored HOLD (...): body stamp
+  is a human go-gate. Do not use HOLD text as a substitute for
+  Depends-on refs.
+
+**Rejected (later VIS-D3):** bare backlog ids alone (BOB-N, theme
+codes) are not enforceable Depends-on refs. Prefer issue numbers.
+
+Durable copy: docs/depends-on-grammar.md.
+
+## Park emits Depends-on on the issue body (CAST IRON --- VIS-D2 / FR #148)
+
+When filing a parked FR (intake or gh issue create), the **GitHub issue
 body** must include a Depends-on line in the first ~500 characters.
 
-**Grammar:** `Depends-on: #N` same-repo; `owner/repo#N` cross-repo;
-`(none)` when empty. Distinct from hold / HOLD labels and stamps.
+**Grammar:** Depends-on: #N same-repo; owner/repo#N cross-repo;
+(none) when empty. Distinct from hold / HOLD labels and stamps.
 
 **How:**
 
 1. Build the body with
-   `python tools/format_depends_on_park_issue_body.py --feature-id … --theme … --vision-pack-url … --index-url … --depends-on … --dry-run`
-   (or equivalent text that starts with `**Depends-on:** …`).
-2. Pass that string as `Report-BobiverseIntakeIssue.ps1 -Body` (or
-   `--body-file` for `gh`). Do **not** leave Depends-on only inside
-   `docs/feature-request-*.md`.
-3. Digest issues use `Depends-on: (none)`. Children use
-   `Depends-on: #<digest>` plus any intra-batch `#N` / `owner/repo#N`.
+   python tools/format_depends_on_park_issue_body.py --feature-id ... --theme ... --vision-pack-url ... --index-url ... --depends-on ... --dry-run
+   (or equivalent text that starts with **Depends-on:** ...).
+2. Pass that string as Report-BobiverseIntakeIssue.ps1 -Body (or
+   --body-file for gh). Do **not** leave Depends-on only inside
+   docs/feature-request-*.md.
+3. Digest issues use Depends-on: (none). Children use
+   Depends-on: #<digest> plus any intra-batch #N / owner/repo#N.
 
-Evidence fixtures: `docs/evidence/vis-d2-park-emits-depends-on.md` and
-`tests/fixtures/depends-on-park/`.
+Evidence fixtures: docs/evidence/vis-d2-park-emits-depends-on.md and
+	ests/fixtures/depends-on-park/.
+
 
 ## Plan-seat inputs (workbooks on network drives)
 

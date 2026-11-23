@@ -137,3 +137,4 @@ MOVED citing the skills-visionary tip (or re-file here), never leave both open.
 - VIS-07 PlanAgent.msi hostile MRB requires File table count >= 1 (MZ stub PlanAgent.exe ok); empty msilib.init_database alone FAILs.
 - FR #153 PlanAgent.exe is the .NET 8 seat launcher under launcher/; resolve plan-agent via --root or PLAN_AGENT_ROOT and exit 64 when AGENTS.md or .grok/skills is missing.
 - skills-visionary hold label + body Hold park: ACK then GIVEUP on-hold; do not implement VIS-G* until VIS-G1/BOB-G1 unheld
+- MRB of fix(mrb-N) companion after parent tip already MERGED: PASS-supersede, close companion unmerged citing covering tip URL, DONE with covering PR (FR #5142 / twin supersede)

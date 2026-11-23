@@ -1,5 +1,16 @@
 # Skill harvest log
 
+## 2026-11-22 - FR digest batch park playbook
+
+- When the operator asks for digest / dependency-ordered park of a
+  multi-slice theme: create `fr-digest`+`hold` digest issue first
+  (vision + index links, Children table), then one held child issue per
+  acceptance row with `Depends-on: #<digest>` plus intra-batch `#N`
+  merge order; patch digest Children + `fr-index-*.md` same turn;
+  docs PR `Refs` only; unhold digest to release. Enforceable Depends-on
+  refs only (`#N` / `owner/repo#N` / `(none)`).
+- Home: `.grok/skills/visionary/SKILL.md` (Plan-seat repo hygiene).
+
 ## 2026-11-21 - FR #90 anti-omnibus FRs
 
 - Plan Agent CAST IRON: file one small GitHub issue per FR draft

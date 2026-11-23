@@ -1,0 +1,45 @@
+# FR #198: harvest (and other) tips that edit .grok/skills must refresh
+# apps/mcp-catalog/catalog mirrors in the same tip. Intake tips often commit
+# only the skill book; this job runs build-skill-dag.py and pushes the mirror
+# when the PR head is in-repo and drifted.
+name: sync-skill-catalog
+
+on:
+  pull_request:
+    paths:
+      - ".grok/skills/**"
+      - "apps/mcp-catalog/catalog/**"
+      - "tools/build-skill-dag.py"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Refresh catalog mirrors (FR #198 / #182)
+        run: python tools/build-skill-dag.py
+      - name: Commit and push mirror if drifted
+        run: |
+          if git diff --quiet -- apps/mcp-catalog/catalog docs/skill-sources; then
+            echo "catalog already in sync"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/mcp-catalog/catalog docs/skill-sources
+          git commit -m "chore(catalog): sync mcp-catalog mirrors after .grok/skills edit (FR #198)"
+          git push origin "HEAD:${{ github.head_ref }}"
+      - name: Verify mirrors (FR #182)
+        run: python tools/build-skill-dag.py --check

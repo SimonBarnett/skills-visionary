@@ -163,3 +163,4 @@ locally when they can.
 - skills-visionary harvest tips must run python tools/build-skill-dag.py and commit apps/mcp-catalog mirrors in the same tip (FR #198); sync-skill-catalog workflow repairs in-repo PR heads that forgot.
 - Conflict keep-both resolve: never embed needles like `fr-digest` in PowerShell here-strings or `python -c` (PS backtick-f becomes form-feed `\x0c`); write resolve scripts to a `.py` file via .NET WriteAllText, run `check_conflict_markers` before every commit/push, never push with markers (MRB #205).
 - VIS-G2 park stamp: every child body Depends-on:#digest and digest Children table lists each #N; prove with tools/check_fr_digest_children_stamp.py and format_fr_digest_children_stamp.py.
+- mrb_merge_gate HOLD_TEXT_RE trips on prose on hold inside MONITORING comments; post hold cleared / ok to merge after confirming linked FR unlabeled, then re-run gate before merge.

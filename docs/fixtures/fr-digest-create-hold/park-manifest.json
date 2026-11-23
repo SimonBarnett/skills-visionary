@@ -1,0 +1,18 @@
+{
+  "theme": "Example FR digest go-gate park",
+  "order": ["digest", "child-a"],
+  "digest": {
+    "title": "Digest: Example theme",
+    "labels": ["fr-digest", "hold", "feature-request"],
+    "kind": "fr-digest",
+    "depends_on": "(none)"
+  },
+  "children": [
+    {
+      "id": "child-a",
+      "title": "EXAMPLE-A: first acceptance row",
+      "labels": ["feature-request", "hold"],
+      "depends_on": "#DIGEST"
+    }
+  ]
+}

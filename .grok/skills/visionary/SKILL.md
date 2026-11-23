@@ -273,6 +273,7 @@ the data, never to this skill book. No secrets in exports or commits.
   5. Docs-only park PR uses `Refs #digest #child…` (never `Closes`). Leave digest + children on **`hold`**. **Unhold the digest alone** releases children when the chair go-gate is live; until then `hold` is the practical gate. Do not bob-job until the operator unholds / dispatches.
   6. Do **not** copy product issue maps or backlog ids into this skill — only the park procedure.
 
+- **Create fr-digest on hold first (VIS-G1 / FR #155):** at every batch park, open the digest with labels `fr-digest` + `hold` **before** any child issue. Prove with `python tools/check_fr_digest_create_hold.py docs/fixtures/fr-digest-create-hold/park-manifest.json` (fixture under `docs/fixtures/fr-digest-create-hold/`). Fail-when: children before digest, or digest without hold/fr-digest.
 - **Digest explains vision + docs link + Digest flag (VIS-G4 / FR #190):** when Plan creates the digest issue, the body must open with `Kind: fr-digest` / `Digest: true`, a `## Vision` summary (product intent, success criteria, out of scope), and a stable docs link (**Docs:** / vision pack / index URL) before the Children table. Apply labels `digest` (preferred) and `fr-digest` plus `hold` at create (issues-only; never on PRs). Format with `format_fr_digest_explain_flag.py`; prove with `python tools/check_fr_digest_explain_flag.py docs/fixtures/fr-digest-explain-flag/park-stamp.json` (fixture under `docs/fixtures/fr-digest-explain-flag/`). Fail-when: digest is only a child list; missing flag/docs/vision; digest/hold labels on PRs.
 - **Children Depends-on digest; digest body lists children (VIS-G2 / FR #156):** after the digest exists, every child issue body must carry `Depends-on: #<digest>` (plus intra-batch `#N` as needed) via `format_depends_on_park_issue_body.py` / `format_fr_digest_children_stamp.py`. Same turn, patch the digest **Children** table so each child `#N` appears (no leftover `(pending)` rows). Prove the pack with `python tools/check_fr_digest_children_stamp.py docs/fixtures/fr-digest-children-stamp/park-stamp.json` (fixture under `docs/fixtures/fr-digest-children-stamp/`). Fail-when: child missing Depends-on digest, or digest body empty of children.
 - **FR digest go-gate playbook (VIS-G3):** how Plan parks a batch so children
@@ -351,6 +352,7 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
 - End a turn with new skills only in chat/temp/`~/.grok` and no home PR.
 - File an **omnibus** FR (many independent slices in one issue)  -  CAST
   IRON FR #90; unpaid / non-frontier seats cannot safely carry those.
+- Create child FRs **before** the digest, or open a digest **without** `hold` / without `fr-digest`  -  CAST IRON VIS-G1 / FR #155 (digest first with both labels).
 - Park FRs **without** an **`fr-digest`** issue  -  CAST IRON; even a
   one-step park needs a digest so the operator can filter epics to release.
 - Park an FR **without** a Depends-on line  -  CAST IRON VIS-D4 / FR #150;

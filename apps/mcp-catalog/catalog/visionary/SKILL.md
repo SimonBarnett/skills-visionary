@@ -144,6 +144,34 @@ Helpers: `tools/New-BobGitWebhook.ps1`, `tools/Grant-CursorGitHubApp.ps1`.
    the **existing** target repo.
 3. Open the GitHub issue. Build dispatch (`bob-job-loop`) is a build-seat
    concern  -  Plan seats do not install that pack.
+4. Stamp **Depends-on** on every child issue body using the grammar below
+   (VIS-D1 / FR #147). See also `docs/depends-on-grammar.md`.
+
+## Depends-on grammar (CAST IRON — VIS-D1 / FR #147)
+
+Plan must identify FR preconditions on the **GitHub issue body** for
+**any SimonBarnett product repo** (not bobiverse-only). Enforceable
+stamps only — Jeeves skips offer while a Depends-on issue stays OPEN.
+
+**Grammar (LOCKED):**
+
+- Same-repo: `Depends-on: #N`
+- Cross-repo: `Depends-on: owner/repo#N` (example: `SimonBarnett/bobiverse#9147`)
+- No preconditions: `Depends-on: (none)`
+- Several refs: comma or whitespace separated on one Depends-on line
+
+**Distinct from hold / HOLD:**
+
+- `Depends-on:` is a precondition stamp for the chair skip-until-closed
+  gate.
+- Label `hold` / `on-hold` or a line-anchored `HOLD (...):` body stamp
+  is a human go-gate. Do not use HOLD text as a substitute for
+  Depends-on refs.
+
+**Rejected (later VIS-D3):** bare backlog ids alone (`BOB-N`, theme
+codes) are not enforceable Depends-on refs. Prefer issue numbers.
+
+Durable copy: `docs/depends-on-grammar.md`.
 
 ## Plan-seat inputs (workbooks on network drives)
 

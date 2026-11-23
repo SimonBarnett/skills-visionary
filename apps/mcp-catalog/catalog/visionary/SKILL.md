@@ -273,6 +273,7 @@ the data, never to this skill book. No secrets in exports or commits.
   5. Docs-only park PR uses `Refs #digest #child…` (never `Closes`). Leave digest + children on **`hold`**. **Unhold the digest alone** releases children when the chair go-gate is live; until then `hold` is the practical gate. Do not bob-job until the operator unholds / dispatches.
   6. Do **not** copy product issue maps or backlog ids into this skill — only the park procedure.
 
+- **Children Depends-on digest; digest body lists children (VIS-G2 / FR #156):** after the digest exists, every child issue body must carry `Depends-on: #<digest>` (plus intra-batch `#N` as needed) via `format_depends_on_park_issue_body.py` / `format_fr_digest_children_stamp.py`. Same turn, patch the digest **Children** table so each child `#N` appears (no leftover `(pending)` rows). Prove the pack with `python tools/check_fr_digest_children_stamp.py docs/fixtures/fr-digest-children-stamp/park-stamp.json` (fixture under `docs/fixtures/fr-digest-children-stamp/`). Fail-when: child missing Depends-on digest, or digest body empty of children.
 - **FR digest go-gate playbook (VIS-G3):** how Plan parks a batch so children
   stay off the offer queue until a human releases the epic. Distinct from a
   lone `hold` on one FR (that blocks only that issue) and from ordinary
@@ -353,6 +354,7 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
   one-step park needs a digest so the operator can filter epics to release.
 - Park an FR **without** a Depends-on line  -  CAST IRON VIS-D4 / FR #150;
   when there are no deps stamp `Depends-on: (none)` (silent omission fails).
+- Park children **without** `Depends-on: #<digest>` or leave the digest Children table as `(pending)` after create (VIS-G2 / FR #156) --- run `check_fr_digest_children_stamp.py`.
 - Leave the visionary skill **silent** on the digest go-gate (VIS-G3)  -  Plan seats must see order, `fr-digest`+`hold`, unhold-releases, vs CLOSED Depends-on, and one digest per repo.
 - Put **Bob worker** job playbooks (FR/MRB runtime skills) into
   `skills-visionary`  -  those belong on the product repo

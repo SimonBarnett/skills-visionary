@@ -164,3 +164,4 @@ locally when they can.
 - Conflict keep-both resolve: never embed needles like `fr-digest` in PowerShell here-strings or `python -c` (PS backtick-f becomes form-feed `\x0c`); write resolve scripts to a `.py` file via .NET WriteAllText, run `check_conflict_markers` before every commit/push, never push with markers (MRB #205).
 - VIS-G2 park stamp: every child body Depends-on:#digest and digest Children table lists each #N; prove with tools/check_fr_digest_children_stamp.py and format_fr_digest_children_stamp.py.
 - FIX CONFLICTING skills-visionary visionary SKILL: take main prose, re-pin tip-unique check tool + Do-not; rebuild catalog hashes
+- Committed mcp-catalog data/dag.json must include every catalog skill; CI check-dag then sync-dag + git diff --exit-code so Amplify sync cannot hide drift.

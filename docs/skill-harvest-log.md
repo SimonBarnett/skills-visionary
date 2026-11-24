@@ -257,3 +257,13 @@ amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
 - Fail-when: manual-only Testable; implement PR without named CI evidence.
 - Digest parents remain go-gates (no product CI Testable required).
 - Updated visionary + plan-git-from-plan; catalog mirror via build-skill-dag.
+
+## 2026-11-24 - Plan session harvest (file-all + CI + gitannounce)
+
+- Consolidated how-to-plan CAST IRON from jeeves-mcp Plan session:
+  held digest file-all + Depends-on; CI tests named in every FR Testable.
+- plan-bob-webhooks: FR #88 gitannounce listen when ircBob holds ear nick;
+  seed ~/.grok/ergo/connect.password from bob install (never invent PASS);
+  announce nick case-insensitive (:jeeves! / :Jeeves!, FR #228); Plan-seat
+  sync FROM tip (do not promote seat honesty-box -Repo bobiverse).
+- Supersedes open harvest PRs #231 and #232 on this pack.

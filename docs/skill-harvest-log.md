@@ -248,3 +248,12 @@ amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
 - Why: workers otherwise NACK/GIVEUP on slices that cannot run yet (token waste).
 - Updated `.grok/skills/visionary/SKILL.md` and `.grok/skills/plan-git-from-plan/SKILL.md`.
 - Absorbs intake lesson PR #230.
+
+## 2026-11-24 - Plan CAST IRON CI tests on every FR
+
+- Operator: Plan must include CI tests for every FR.
+- Rule: each child FR Testable names the CI surface (pytest path,
+  Actions workflow/job, npm test, …); Deliverables add/extend those tests.
+- Fail-when: manual-only Testable; implement PR without named CI evidence.
+- Digest parents remain go-gates (no product CI Testable required).
+- Updated visionary + plan-git-from-plan; catalog mirror via build-skill-dag.

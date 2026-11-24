@@ -78,7 +78,7 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
      `github:` set to **this new product repo** (same pattern as
      agentic_build). AUTOMATIC harvest of later learnings is PR-only.
 
-5. **CAST IRON — held digest + all child FRs** (visionary file-all):
+5. **CAST IRON — held digest + all child FRs** (visionary file-all + CI):
    - Ensure labels `feature-request`, `fr-digest`, `hold` exist
      (`gh label create … --force`).
    - Push the vision commit first (webhook already green).
@@ -91,6 +91,10 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
      `Depends-on: #N` / `owner/repo#N` so workers never NACK blocked
      work. Cross-repo children (e.g. bobiverse vendor) use
      `Depends-on: SimonBarnett/<product>#<digest>`.
+   - **CAST IRON CI tests:** every child **Testable** names the CI
+     surface (pytest path, Actions workflow/job, `npm test`, …);
+     Deliverables add/extend those tests. Fail-when Testable is
+     manual-only.
    - Patch the digest Children table with real numbers the same turn.
    - Confirm Jeeves announced digest + children on `#bobiverse`
      (gitannounce / `bob_git_hook.py --replay-missed` if needed).
@@ -142,6 +146,8 @@ Never cite `-Repo SimonBarnett/bobiverse` for how-to-plan harvest.
 - Restart IRC.
 - Stamp UAT.
 - Add `cursoragent` / `cursor[bot]` as collaborators.
+- File a child FR with **Testable** that names no CI check/command
+  (CAST IRON CI tests on every FR — see visionary).
 
 ## FR #24: headless Plan, seed FRs, stubs
 

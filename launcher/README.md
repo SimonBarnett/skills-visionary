@@ -18,7 +18,9 @@ complexity. There is no code dependency on priority-mcp.
 1. `--root <dir>` or env `PLAN_AGENT_ROOT`
 2. `<exeDir>/plan-agent`
 3. `<exeDir>/copy/plan-agent`
-4. Repo-relative candidates from the exe / cwd (`../plan-agent`, `plan-agent`)
+4. Repo-relative candidates from the exe / cwd (`../plan-agent`, `../../plan-agent`, `plan-agent`)
+5. Bob Pack layout (FR #226 / bobiverse #9661): `<exeDir>/../../plan` and `<cwd>/../../plan`
+   when the exe lives under `vendor/plan/` (install `\plan` seat tree)
 
 ## Build
 

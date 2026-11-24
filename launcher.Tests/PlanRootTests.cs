@@ -68,6 +68,42 @@ public class PlanRootTests
     }
 
     [Fact]
+    public void Resolve_finds_install_plan_from_vendor_plan_exe_dir()
+    {
+        // FR #226: <install>\vendor\plan\PlanAgent.exe → <install>\plan
+        string install = NewTemp();
+        try
+        {
+            string exeDir = Path.Combine(install, "vendor", "plan");
+            string plan = Path.Combine(install, "plan");
+            Directory.CreateDirectory(exeDir);
+            SeedPlanRoot(plan);
+            var r = PlanRoot.Resolve(overrideRoot: null, exeDir: exeDir, cwd: null);
+            Assert.NotNull(r.Root);
+            Assert.Equal(Path.GetFullPath(plan), r.Root, ignoreCase: true);
+            Assert.Equal("candidate", r.Detail);
+        }
+        finally { DeleteTemp(install); }
+    }
+
+    [Fact]
+    public void Resolve_finds_install_plan_from_vendor_plan_cwd()
+    {
+        string install = NewTemp();
+        try
+        {
+            string cwd = Path.Combine(install, "vendor", "plan");
+            string plan = Path.Combine(install, "plan");
+            Directory.CreateDirectory(cwd);
+            SeedPlanRoot(plan);
+            var r = PlanRoot.Resolve(overrideRoot: null, exeDir: null, cwd: cwd);
+            Assert.NotNull(r.Root);
+            Assert.Equal(Path.GetFullPath(plan), r.Root, ignoreCase: true);
+        }
+        finally { DeleteTemp(install); }
+    }
+
+    [Fact]
     public void Resolve_no_candidate_lists_tried_paths()
     {
         string empty = NewTemp();
@@ -78,6 +114,10 @@ public class PlanRootTests
             Assert.Contains("not found", r.Detail!, StringComparison.OrdinalIgnoreCase);
             Assert.Contains("Tried:", r.Detail!, StringComparison.Ordinal);
             Assert.True(r.Candidates.Count >= 1);
+            Assert.Contains(
+                Path.GetFullPath(Path.Combine(empty, "..", "..", "plan")),
+                r.Candidates,
+                StringComparer.OrdinalIgnoreCase);
         }
         finally { DeleteTemp(empty); }
     }

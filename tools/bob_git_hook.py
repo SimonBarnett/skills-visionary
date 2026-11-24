@@ -226,12 +226,21 @@ def _tail_lines(path: Path, max_bytes: int = 2_000_000) -> list:
     return data.decode("utf-8", "replace").splitlines()
 
 
+def _is_jeeves_prefix(ln: str) -> bool:
+    """True when the IRC prefix nick is Jeeves (Ergo nicks are case-insensitive).
+
+    Live chair logs often use ``:jeeves!``; matching only ``:Jeeves!`` false-fails
+    the plan-bob-webhooks announce gate (FR #228).
+    """
+    return ln.lower().startswith(":jeeves!")
+
+
 def announce_seen(needle: str, log_paths: Iterable) -> str | None:
     """Return the Jeeves #bobiverse line containing ``needle`` (last match)."""
     hit = None
     for p in log_paths:
         for ln in _tail_lines(Path(p)):
-            if "PRIVMSG #bobiverse :" in ln and ln.startswith(":Jeeves!") and needle in ln:
+            if "PRIVMSG #bobiverse :" in ln and _is_jeeves_prefix(ln) and needle in ln:
                 hit = ln
     return hit
 

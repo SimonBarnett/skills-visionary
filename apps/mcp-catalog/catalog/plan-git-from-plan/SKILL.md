@@ -78,18 +78,30 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
      `github:` set to **this new product repo** (same pattern as
      agentic_build). AUTOMATIC harvest of later learnings is PR-only.
 
-5. Open a GitHub issue titled from the spec, body linking those paths,
-   label `feature-request` (`gh label create feature-request --force`
-   first; a new repo has no such label and `gh issue create --label` fails).
-   Push. Confirm Jeeves announced `GIT issues SimonBarnett/<name> opened #N`
-   on `#bobiverse` (`~/.agentic-irc-bobiverse/irc.log`). If not, run
-   `python tools/bob_git_hook.py SimonBarnett/<name> --replay-missed`.
-   Tell the human the issue URL + SHA + the Jeeves line.
+5. **CAST IRON — held digest + all child FRs** (visionary file-all):
+   - Ensure labels `feature-request`, `fr-digest`, `hold` exist
+     (`gh label create … --force`).
+   - Push the vision commit first (webhook already green).
+   - Create **Digest:** parent with labels `feature-request` +
+     `fr-digest` + `hold`, body `Depends-on: (none)`, Children table,
+     “Unhold this digest to release children.”
+   - File **every** prepared Phase-0 / backlog slice as its own issue
+     (anti-omnibus: one Goal/Deliverables/Testable each). Each child
+     starts with plain `Depends-on: #<digest>` plus prior-slice
+     `Depends-on: #N` / `owner/repo#N` so workers never NACK blocked
+     work. Cross-repo children (e.g. bobiverse vendor) use
+     `Depends-on: SimonBarnett/<product>#<digest>`.
+   - Patch the digest Children table with real numbers the same turn.
+   - Confirm Jeeves announced digest + children on `#bobiverse`
+     (gitannounce / `bob_git_hook.py --replay-missed` if needed).
+   - **Fail-when:** only FR-A filed and the rest left as unfiled drafts
+     (unless the operator explicitly said park-as-drafts / file-one).
 
 6. **Stop for Plan seats.** Do not run `bob-job-loop` /
    `bob-build-dispatch` unless a build seat with the build pack is
    intentionally next. Plan's job ends when git + hooks + PR path are
-   ready and the vision pack is on the remote.
+   ready, the vision pack is on the remote, and the **held digest +
+   all child FRs** are filed. Operator unholds the digest to release.
 
 ## Quick command checklist
 

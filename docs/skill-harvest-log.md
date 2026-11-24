@@ -239,3 +239,12 @@ amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
 - Wincredman push fallback: `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push origin HEAD`.
 - Home skill and catalog mirror: `.grok/skills/harvest-skills-visionary/SKILL.md`.
 
+
+## 2026-11-24 - Plan CAST IRON file-all under held digest
+
+- Operator correction (jeeves-mcp Phase 0): Plan must file ALL related FRs
+  under a held Digest (`fr-digest`+`hold`) with plain `Depends-on: #<digest>`
+  (+ prior-slice Depends-on), not FR-A-only with unfiled drafts.
+- Why: workers otherwise NACK/GIVEUP on slices that cannot run yet (token waste).
+- Updated `.grok/skills/visionary/SKILL.md` and `.grok/skills/plan-git-from-plan/SKILL.md`.
+- Absorbs intake lesson PR #230.

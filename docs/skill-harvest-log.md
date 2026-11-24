@@ -267,3 +267,11 @@ amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
   announce nick case-insensitive (:jeeves! / :Jeeves!, FR #228); Plan-seat
   sync FROM tip (do not promote seat honesty-box -Repo bobiverse).
 - Supersedes open harvest PRs #231 and #232 on this pack.
+
+## 2026-11-24 - CAST IRON digests MUST start on hold
+
+| Field | Value |
+|---|---|
+| Lesson | Every fr-digest (epic and nested phase digests) must be created with label hold; VIS-G5 no-hold applies only to implementation children. |
+| Evidence | bobiverse nested park #9794-#9799 filed without hold were searched; fixed by adding hold. Operator: digests MUST start on hold. |
+| Books | visionary |

@@ -80,7 +80,7 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
 
 5. **CAST IRON — held digest + all child FRs** (visionary file-all + CI):
    - Ensure labels `feature-request`, `fr-digest`, `hold` exist
-     (`gh label create … --force`).
+     (`gh label create feature-request --force`; also `fr-digest` / `hold`).
    - Push the vision commit first (webhook already green).
    - Create **Digest:** parent with labels `feature-request` +
      `fr-digest` + `hold`, body `Depends-on: (none)`, Children table,

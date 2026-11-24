@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""VIS-G1 / FR #155: digest must be created first with fr-digest + hold.
+"""VIS-G1 / FR #155 + CAST IRON digests-must-hold: every digest needs fr-digest + hold.
 
-Fail-when: children with no digest, or digest without hold.
+Fail-when: children with no digest, or any digest without hold (including
+nested phase digests listed under digests[]).
 """
 from __future__ import annotations
 
@@ -26,38 +27,52 @@ def _norm_labels(raw: Any) -> set[str]:
     return set()
 
 
-def check_manifest(data: dict[str, Any]) -> list[str]:
-    """Return human error strings (empty = ok)."""
+def _check_one_digest(digest: dict[str, Any], *, label: str) -> list[str]:
     errs: list[str] = []
-    digest = data.get("digest")
-    children = data.get("children") or []
-    order = data.get("order") or []
-
     if not isinstance(digest, dict) or not digest:
-        errs.append("children with no digest: park missing digest object")
+        errs.append(f"{label}: empty digest object")
         return errs
-
     labels = _norm_labels(digest.get("labels"))
     missing = REQUIRED_DIGEST_LABELS - labels
     if missing:
         errs.append(
-            "digest without hold/fr-digest: missing labels "
+            f"{label}: digest without hold/fr-digest: missing labels "
             + ", ".join(sorted(missing))
         )
+    return errs
+
+
+def check_manifest(data: dict[str, Any]) -> list[str]:
+    """Return human error strings (empty = ok)."""
+    errs: list[str] = []
+    digest = data.get("digest")
+    digests = data.get("digests") or []
+    children = data.get("children") or []
+    order = data.get("order") or []
+
+    if digests and not isinstance(digests, list):
+        errs.append("digests must be a JSON array when present")
+        return errs
+
+    if digest:
+        errs.extend(_check_one_digest(digest, label="digest"))
+    for i, d in enumerate(digests):
+        name = str((d or {}).get("id") or (d or {}).get("title") or f"digests[{i}]")
+        errs.extend(_check_one_digest(d if isinstance(d, dict) else {}, label=name))
+
+    if not digest and not digests:
+        errs.append("children with no digest: park missing digest object")
+        return errs
 
     if children and not order:
         errs.append("park order missing: cannot prove digest created first")
     elif order:
         first = str(order[0]).strip().lower()
-        if first not in {"digest", "fr-digest"}:
+        if first not in {"digest", "fr-digest"} and not first.startswith("digest"):
             errs.append(
                 f"digest not first: order starts with {order[0]!r} "
                 "(create digest before children)"
             )
-
-    if children and "digest" not in labels and missing:
-        # already reported missing labels; keep fail-when explicit
-        pass
 
     return errs
 

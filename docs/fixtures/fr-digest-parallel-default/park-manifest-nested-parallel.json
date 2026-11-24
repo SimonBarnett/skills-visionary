@@ -1,0 +1,38 @@
+{
+  "theme": "Nested phase digests + parallel children (FR #243)",
+  "order": ["digest", "digest-phase-0", "child-a", "child-b"],
+  "digest": {
+    "id": "epic",
+    "number": 200,
+    "title": "Digest: Nested epic",
+    "labels": ["digest", "fr-digest", "hold", "feature-request"],
+    "kind": "fr-digest",
+    "depends_on": "(none)"
+  },
+  "digests": [
+    {
+      "id": "digest-phase-0",
+      "number": 201,
+      "title": "Digest: Phase 0",
+      "labels": ["digest", "fr-digest", "hold", "feature-request"],
+      "kind": "fr-digest",
+      "depends_on": "#200"
+    }
+  ],
+  "children": [
+    {
+      "id": "child-a",
+      "number": 202,
+      "title": "Phase0-A",
+      "labels": ["feature-request"],
+      "depends_on": "#201"
+    },
+    {
+      "id": "child-b",
+      "number": 203,
+      "title": "Phase0-B",
+      "labels": ["feature-request"],
+      "depends_on": "#201"
+    }
+  ]
+}

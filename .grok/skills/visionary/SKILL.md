@@ -74,9 +74,12 @@ Poetry is not a target. If you cannot score it later, it is UNKNOWN.
 > prepared Phase-0 / backlog slice as its own child with plain
 > `Depends-on: #<digest>` plus prior-slice `Depends-on: #N` /
 > `owner/repo#N`. That stops workers NACK/GIVEUP-wasting tokens on
-> work that cannot run yet. **Do not** default to filing only FR-A and
-> leaving the rest as unfiled drafts. Unfiled drafts are only when the
-> operator explicitly says park-as-drafts / file-one.
+> work that cannot run yet. **CAST IRON — digests MUST start on hold:**
+> every digest issue (epic and nested phase digests) gets `hold` at
+> create; omit hold only on implementation children (VIS-G5). **Do not**
+> default to filing only FR-A and leaving the rest as unfiled drafts.
+> Unfiled drafts are only when the operator explicitly says
+> park-as-drafts / file-one.
 >
 > **CAST IRON  -  CI tests on every FR (operator 2026-11-24).**
 > Every child FR **Testable** section **must name the CI surface**: the
@@ -314,31 +317,33 @@ the data, never to this skill book. No secrets in exports or commits.
 - **Park vs dispatch on GitHub issue bodies (CAST IRON):** never leave `Park-only` or `Do not bob-job` on a `feature-request` issue after the operator says dispatch. Workers read the issue body and GIVEUP / treat it as non-work. Same turn as dispatch: rewrite every sibling FR body to actionable implement-S1 text (keep vision-pack + index links), clear any failed `bob-build-loop` board under `$env:BOB_BRIDGE_HOME\loops` (often `D:\ai\agentic_irc\loops`, not only `~/.grok\bob-bridge\loops`), then start the loop. Prefer park intent only in the docs index / plan folder, not as a standing veto on the living FR issue.
 - FR index files must not match CI `docs/feature-request-*.md` globs (no Shape/Success). Name them `docs/fr-index-<slug>-YYYY-MM-DD.md` so `validate-vision-pack` skips them.
 - **FR digest park (CAST IRON — Plan Agent, every park):** the Plan Agent **must** open an **`fr-digest`** issue on **every** FR park, **even when there is only one child / one step**. Digests are how the operator **filters epics to release** — skipping the digest because the batch is small is forbidden. Same turn:
-  1. Ensure the target repo has label **`fr-digest`** (create if missing). Create the **digest issue first**: labels `digest` (preferred) + `fr-digest` + `hold` (+ `feature-request` if the repo uses it for parks). Body: `Kind: fr-digest`, link to theme vision + `fr-index-*.md`, short epic/batch summary, **Children** table (one row is fine), `Depends-on: (none)`. Digest is a go-gate / epic filter only — not an implementation ticket. Digest body should say **Unhold this digest to release children.**
+  1. Ensure the target repo has label **`fr-digest`** (create if missing). Create the **digest issue first**: labels `digest` (preferred) + `fr-digest` + **`hold`** (+ `feature-request` if the repo uses it for parks). **CAST IRON:** every digest starts on `hold` — no exceptions for “phase digests” or nested digests. Body: `Kind: fr-digest`, link to theme vision + `fr-index-*.md`, short epic/batch summary, **Children** table (one row is fine), `Depends-on: (none)` for the epic (phase digests Depends-on epic + prior phase). Digest is a go-gate / epic filter only — not an implementation ticket. Digest body should say **Unhold this digest to release children.**
   2. Theme vision pack + **one child vision pack per acceptance row** (anti-omnibus). A single-child park still gets the digest + that one child. Validate each child with `validate-vision-pack.py`. Index file is `fr-index-*.md`.
-  3. Create each child issue with **`feature-request` only** (default: **no per-child `hold`**), vision/index/digest links, and **`Depends-on: #<digest>`** plus **intra-batch** `Depends-on: #N` when there are multiple children (enforceable refs only: `#N`, `owner/repo#N`, or `(none)` — never bare backlog ids). Put that Depends-on line on the **GitHub issue body** via intake `-Body` / `format_depends_on_park_issue_body.py` (VIS-D2) — vision markdown alone is not enough. **VIS-G5 / FR #220:** do **not** double-park (`digest hold` + every child `hold`) when the vision says unhold-digest releases children — Depends-on digest is the sole default go-gate.
+  3. Create each **implementation** child with **`feature-request` only** (default: **no per-child `hold`**), vision/index/digest links, and **`Depends-on: #<digest>` only by default** (FR #243 / VIS-G6 **parallel** — unrelated children do **not** chain `#N`). Enforceable refs only: `#N`, `owner/repo#N`, or `(none)` — never bare backlog ids. Add sibling `#N` / linear chains **only** with `**Sequencing (intra-batch):**` or `**Child-hold (intra-batch):**` in the child body. Put that Depends-on line on the **GitHub issue body** via intake `-Body` / `format_depends_on_park_issue_body.py` (VIS-D2) — vision markdown alone is not enough. **VIS-G5 / FR #220:** do **not** double-park (`digest hold` + every **implementation** child `hold`) when the vision says unhold-digest releases children — Depends-on digest is the sole default go-gate for children. Digests themselves still require `hold`.
   4. Patch the digest **Children** table with real issue numbers + titles + vision links. Update the index map the same turn.
-  5. Docs-only park PR uses `Refs #digest #child…` (never `Closes`). Leave the **digest** on **`hold`**. Children stay offer-blocked via `Depends-on: #<digest>` while the digest is held/OPEN (BOB-G1). **Unhold the digest alone** releases children. Do not bob-job until the operator unholds / dispatches.
+  5. Docs-only park PR uses `Refs #digest #child…` (never `Closes`). Leave **every digest** on **`hold`** until the operator unholds / dispatches. Children stay offer-blocked via `Depends-on: #<digest>` while the digest is held/OPEN (BOB-G1). **Unhold the digest alone** releases that digest’s children. Do not bob-job until the operator unholds / dispatches.
   6. Do **not** copy product issue maps or backlog ids into this skill — only the park procedure.
 
-- **Create fr-digest on hold first (VIS-G1 / FR #155):** at every batch park, open the digest with labels `fr-digest` + `hold` **before** any child issue. Prove with `python tools/check_fr_digest_create_hold.py docs/fixtures/fr-digest-create-hold/park-manifest.json` (fixture under `docs/fixtures/fr-digest-create-hold/`). Fail-when: children before digest, or digest without hold/fr-digest.
-- **No double-park child hold (VIS-G5 / FR #220):** default children = `feature-request` + `Depends-on: #<digest>` **without** `hold`. Child `hold` / `on-hold` only when true intra-batch sequencing needs a second gate beyond the digest — then stamp `**Child-hold (intra-batch):** <reason>` in the child body. Prove with `python tools/check_fr_digest_no_double_park.py docs/fixtures/fr-digest-no-double-park/park-manifest.json` (fixture under `docs/fixtures/fr-digest-no-double-park/`). Fail-when: every child gets `hold` solely because the digest is held; unhold-digest alone cannot release them.
+- **CAST IRON — Digests MUST start on hold (operator 2026-11-24 / VIS-G1):** every digest issue — the epic **and** every nested phase digest — is created with labels `fr-digest` + **`hold`** (prefer also `digest`) **in the same `gh issue create`**. Digests are go-gates, never searchable implementation FRs. **Fail-when:** any open digest lacks `hold` (chair can search/offer it). Nested parks: main digest `hold` **and** each phase digest `hold` at create; do not omit hold on phase digests. Prove with `python tools/check_fr_digest_create_hold.py docs/fixtures/fr-digest-create-hold/park-manifest.json` (and the nested fixture). Create digests **before** implementation children.
+- **No double-park child hold (VIS-G5 / FR #220):** default **implementation** children = `feature-request` + `Depends-on: #<digest>` **without** `hold`. VIS-G5 does **not** waive hold on digests. Child `hold` / `on-hold` only when true intra-batch sequencing needs a second gate beyond the digest — then stamp `**Child-hold (intra-batch):** <reason>` in the child body. Prove with `python tools/check_fr_digest_no_double_park.py docs/fixtures/fr-digest-no-double-park/park-manifest.json` (fixture under `docs/fixtures/fr-digest-no-double-park/`). Fail-when: every implementation child gets `hold` solely because the digest is held; unhold-digest alone cannot release them.
 - **Digest explains vision + docs link + Digest flag (VIS-G4 / FR #190):** when Plan creates the digest issue, the body must open with `Kind: fr-digest` / `Digest: true`, a `## Vision` summary (product intent, success criteria, out of scope), and a stable docs link (**Docs:** / vision pack / index URL) before the Children table. Apply labels `digest` (preferred) and `fr-digest` plus `hold` at create (issues-only; never on PRs). Format with `format_fr_digest_explain_flag.py`; prove with `python tools/check_fr_digest_explain_flag.py docs/fixtures/fr-digest-explain-flag/park-stamp.json` (fixture under `docs/fixtures/fr-digest-explain-flag/`). Fail-when: digest is only a child list; missing flag/docs/vision; digest/hold labels on PRs.
-- **Children Depends-on digest; digest body lists children (VIS-G2 / FR #156):** after the digest exists, every child issue body must carry `Depends-on: #<digest>` (plus intra-batch `#N` as needed) via `format_depends_on_park_issue_body.py` / `format_fr_digest_children_stamp.py`. Same turn, patch the digest **Children** table so each child `#N` appears (no leftover `(pending)` rows). Prove the pack with `python tools/check_fr_digest_children_stamp.py docs/fixtures/fr-digest-children-stamp/park-stamp.json` (fixture under `docs/fixtures/fr-digest-children-stamp/`). Fail-when: child missing Depends-on digest, or digest body empty of children.
+- **Children Depends-on digest; digest body lists children (VIS-G2 / FR #156):** after the digest exists, every child issue body must carry `Depends-on: #<digest>` (parallel default; plus intra-batch `#N` **only** with Sequencing/Child-hold stamp) via `format_depends_on_park_issue_body.py` / `format_fr_digest_children_stamp.py`. Same turn, patch the digest **Children** table so each child `#N` appears (no leftover `(pending)` rows). Prove the pack with `python tools/check_fr_digest_children_stamp.py docs/fixtures/fr-digest-children-stamp/park-stamp.json` (fixture under `docs/fixtures/fr-digest-children-stamp/`). Fail-when: child missing Depends-on digest, or digest body empty of children.
 - **FR digest go-gate playbook (VIS-G3):** how Plan parks a batch so children
   stay off the offer queue until a human releases the epic. Distinct from a
   lone `hold` on one FR (that blocks only that issue) and from ordinary
   **CLOSED Depends-on** (child waits until the parent issue is *closed*).
-  Digest go-gate = labels `fr-digest` + `hold` on **one digest per target
-  repo**; **unhold the digest alone** releases children (closing the digest
-  is optional; BOB-G1). Order every park:
-  1. Create digest first (`fr-digest`+`hold`, Children table, `Depends-on: (none)`).
-  2. Create children with `Depends-on: #<digest>` (+ intra-batch `#N` as needed) and **no per-child hold** by default (VIS-G5).
+  Digest go-gate = labels `fr-digest` + `hold` on **every digest** (epic and
+  each nested phase digest); **unhold that digest alone** releases its
+  children (closing the digest is optional; BOB-G1). Order every park:
+  1. Create each digest with `fr-digest`+`hold` (Children table; epic
+     `Depends-on: (none)`; phase digests Depends-on epic + prior phase).
+  2. Create implementation children with `Depends-on: #<digest>` only (parallel default FR #243); add `#N` chains only with Sequencing/Child-hold stamp; **no per-child hold** by default (VIS-G5).
   3. Patch digest Children table + `fr-index-*.md` the same turn; docs PR `Refs` only.
-  4. Leave the **digest** on `hold` until the operator unholds / dispatches; do not stack child `hold` unless `**Child-hold (intra-batch):**` applies.
+  4. Leave **every digest** on `hold` until the operator unholds / dispatches; do not stack implementation-child `hold` unless `**Child-hold (intra-batch):**` applies.
   Chair/CI: product repos should fail or skip offer when an open child still
-  `Depends-on` a held `fr-digest` parent; do not treat an unheld open digest as
-  ordinary depends-open. Do not invent a second digest for the same repo/theme.
+  `Depends-on` a held `fr-digest` parent; an open digest **without** `hold`
+  is a park bug (searchable). Do not invent a second digest for the same
+  repo/theme without nesting rules.
 - Parking FR docs: copy the drafts into a clean worktree from
   `origin/main` (not the dirty local clone), commit docs only, reference
   the implementation issues with `Refs #N` (never `Closes`), push a
@@ -411,6 +416,8 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
   prose only)  -  CAST IRON CI tests on every FR; name pytest path,
   workflow/job, or equivalent command the implementer must green.
 - Create child FRs **before** the digest, or open a digest **without** `hold` / without `fr-digest`  -  CAST IRON VIS-G1 / FR #155 (digest first with both labels).
+- Force **linear** child `Depends-on: #N` chains for **unrelated** FRs with no Sequencing/Child-hold stamp — CAST IRON FR #243 parallel default.
+- Open **any** digest (epic **or** nested phase digest) **without** `hold` at create  -  CAST IRON (operator 2026-11-24): digests MUST start on hold; phase digests are digests.
 - Park FRs **without** an **`fr-digest`** issue  -  CAST IRON; even a
   one-step park needs a digest so the operator can filter epics to release.
 - **Double-park** every child with `hold` when they already `Depends-on: #<digest>` and the digest says unhold-releases-children  -  CAST IRON VIS-G5 / FR #220; run `check_fr_digest_no_double_park.py`.

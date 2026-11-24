@@ -11,6 +11,20 @@ description: >
 
 # Bob webhooks from plan (Plan seats)
 
+> **CAST IRON RULE - HARVEST AND FILE EVERYTHING (read this first, every time).**
+> 1. ALWAYS harvest skills you learn and file EVERY issue / FR / bug / gap you find to the intake webhook in the
+>    SAME turn. Never leave a finding unfiled, never "note it for later", never skip it because it is small.
+> 2. File with the intake webhook (no secret or login needed; `POST https://bob.ntsa.uk/bob/v1/intake`; offline it is
+>    queued locally and retried):
+>    `..\scripts\Report-BobiverseIntakeIssue.ps1 -Repo SimonBarnett/skills-visionary -Kind issue -Title "short title" -Body "what / where / evidence / fix"`
+>    (`-Kind issue|fr|skill|harvest`; always pass an explicit `-Repo owner/name`).
+>    How-to-plan / Plan process lessons use **`-Repo SimonBarnett/skills-visionary`** (FR #42).
+>    Use `-Repo SimonBarnett/bobiverse` only for fleet-tooling docs, never for Plan playbooks.
+> 3. BEFORE finishing ANY debugging session run the harvest step:
+>    `..\scripts\Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Summary "what broke / what fixed it" -Lesson "one learned playbook line"`
+>    then `..\scripts\Invoke-BobiverseHarvest.ps1 -Repo SimonBarnett/skills-visionary -Flush`.
+> 4. Never put a token, password, SASL/NickServ secret, key or private hostname in a filing, a skill or a log.
+
 Self-contained harvest from `agentic_build` skills
 `setup-github-webhooks` and `bob-digest-webhook` (URL table only).
 No IRC restart. No digest producer code.
@@ -52,18 +66,21 @@ It is the single source of truth for the hook and exits 0 only when:
 1. The hook matches the fleet config **exactly** (creates it if absent, PATCHes
    drift, never adds a second one, leaves unrelated hooks alone):
    url `https://bob.ntsa.uk/bob/v1/git`, `content_type` `json`,
-   `insecure_ssl` `0`, events `issues`,`pull_request`,`push`, active.
+   `insecure_ssl` `0`, events `issues`,`pull_request`,`push`,`issue_comment`,
+   active (FR #4711 when the receiver supports comment events).
 2. A `ping` delivery returned **2xx** (the receiver answers 204).
 3. Items opened before the hook existed are replayed as `opened` events
    (automatic when this run created the hook; else `--replay-missed`).
 4. Jeeves' `GIT ping SimonBarnett/<name>` (and each replayed
-   `GIT issues|pull_request ... opened #N`) line is seen in
-   `~/.agentic-irc-bobiverse/irc.log`, or the replayed item is in the
+   `GIT issues|pull_request ... opened #N`) line is seen in a local
+   `#bobiverse` `irc.log` (default candidates include
+   `~/.agentic-irc-gitannounce/irc.log` and
+   `~/.agentic-irc-bobiverse/irc.log`), or the replayed item is in the
    digest unaccepted queue.
 
 Exit 1 = hook or ping failed; exit 2 = Jeeves announce not seen. Either
 way, **webhook setup is NOT done**. Do not tell the human it is, and do
-not push or open the issue yet.
+not push or open the issue yet. **Do not weaken this gate.**
 
 Fix for a repo that was already set up late (after the fact):
 
@@ -155,8 +172,9 @@ gh api repos/SimonBarnett/<name>/hooks/<id>/deliveries --jq '.[0] | {event,statu
 
 Before `gh repo create` / the webhook gate:
 
-1. Confirm `~/.agentic-irc-bobiverse/irc.log` is receiving `:Jeeves!`
-   `PRIVMSG #bobiverse` lines (not only `NICKNAME_RESERVED`).
+1. Confirm a local `#bobiverse` `irc.log` is receiving Jeeves
+   `PRIVMSG #bobiverse` lines (not only `NICKNAME_RESERVED`). Nick
+   compare is case-insensitive (`:Jeeves!` or `:jeeves!` — FR #228).
 2. If the local ear nick is reserved, fix the nick (or use another
    machine's log via `--irc-log`) so announce_seen can work.
 3. Fallback: when GitHub records a **2xx ping** delivery and the local
@@ -165,7 +183,59 @@ Before `gh repo create` / the webhook gate:
    Replay items still use the digest-queue fallback.
 4. Keep **refuse-to-push / refuse-to-open-issue** until the gate exits 0.
 
+## FR #88: gitannounce listen when ircBob holds the ear nick
+
+When `ircBob` is Running as `Bob-<machine>` (NickServ `bob-<machine>`), a
+second client that tries `bob-<machine>` / `bob-<machine>_l` without that
+SASL gets `NICKNAME_RESERVED` and never joins. Then
+`~/.agentic-irc-bobiverse/irc.log` only shows 433 loops and
+`bob_git_hook.py` stays **exit 2** even after ping 204. **Do not weaken
+the announce gate.**
+
+Repair (keep the gate):
+
+1. Seed Ergo guest PASS once (never print or commit the value):
+
+```powershell
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.grok\ergo" | Out-Null
+# Copy from the local bob install only when the guest PASS file is missing:
+#   Copy-Item -Force <ai root>\bob\config\ergo.password "$env:USERPROFILE\.grok\ergo\connect.password"
+# Prefer an existing ~/.grok/ergo/connect.password. Never invent an Ergo PASS.
+```
+
+2. Start a free-nick listener into a dedicated home:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\Start-BobiverseGitAnnounceListen.ps1
+# wait until ~/.agentic-irc-gitannounce/irc.log shows JOIN #bobiverse
+python tools/bob_git_hook.py SimonBarnett/<name> --irc-log $env:USERPROFILE\.agentic-irc-gitannounce\irc.log
+```
+
+Use nick `gitannounce-<machine>` with **server PASS only** (no ear
+NickServ). Prefer `C:\ai\bob\scripts\irc_agent.py` with `BOB_IRC_PASSWORD`
+from `~/.grok\ergo\connect.password`. Never mint a fresh NickServ GUID
+for a registered `bob-*` account. Pack copy of the helper:
+`tools/Start-BobiverseGitAnnounceListen.ps1` (also under `plan-agent/tools/`).
+
+Default log candidates already include
+`~/.agentic-irc-gitannounce/irc.log` then
+`~/.agentic-irc-bobiverse/irc.log`.
+
+If the listen log shows `JOIN #bobiverse` and no `NICKNAME_RESERVED`, but
+`bob_git_hook.py` still exits 2 with zero Jeeves PRIVMSG lines, the chair
+is not draining `chair-outbox.txt` — fix the chair; do not weaken this
+gate.
+
+`gh pr create` from a non-default branch needs `--head <branch>` when
+GitHub cannot infer the head.
+
 ## FR #42: harvest repo for Plan process
 
 How-to-plan harvest / intake examples use `-Repo SimonBarnett/skills-visionary`.
 Do not cite `-Repo SimonBarnett/bobiverse` for Plan playbooks (fleet tooling only).
+
+**Plan-seat sync:** after a skills-visionary harvest merges, copy tip
+`.grok/skills/*` onto `<ai root>\bob\plan\.grok\skills\` (include
+`plan-mcp-setup` when missing). Never promote a stale seat copy that
+still shows honesty-box `-Repo SimonBarnett/bobiverse` for Plan process
+lessons back onto tip.

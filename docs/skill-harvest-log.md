@@ -239,3 +239,12 @@ amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
 - Wincredman push fallback: `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push origin HEAD`.
 - Home skill and catalog mirror: `.grok/skills/harvest-skills-visionary/SKILL.md`.
 
+
+## 2026-11-24 - Plan CAST IRON CI tests on every FR
+
+- Operator: Plan must include CI tests for every FR.
+- Rule: each child FR Testable names the CI surface (pytest path,
+  Actions workflow/job, npm test, …); Deliverables add/extend those tests.
+- Fail-when: manual-only Testable; implement PR without named CI evidence.
+- Digest parents remain go-gates (no product CI Testable required).
+- Updated visionary + plan-git-from-plan; catalog mirror via build-skill-dag.

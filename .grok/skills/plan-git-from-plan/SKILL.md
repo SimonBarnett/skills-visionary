@@ -78,13 +78,16 @@ python tools/validate-vision-pack.py docs/vision.md --mocks-dir docs/mocks
      `github:` set to **this new product repo** (same pattern as
      agentic_build). AUTOMATIC harvest of later learnings is PR-only.
 
-5. Open a GitHub issue titled from the spec, body linking those paths,
-   label `feature-request` (`gh label create feature-request --force`
-   first; a new repo has no such label and `gh issue create --label` fails).
-   Push. Confirm Jeeves announced `GIT issues SimonBarnett/<name> opened #N`
-   on `#bobiverse` (`~/.agentic-irc-bobiverse/irc.log`). If not, run
+5. Open GitHub issues for the Phase-0 pack (held digest + children per
+   visionary CAST IRON). Every **child** body uses Goal / Deliverables /
+   **Testable** and **CAST IRON CI tests:** Testable must name the CI
+   surface (pytest path, Actions workflow/job name, `npm test`, …);
+   Deliverables include add/extend those tests. Fail-when Testable is
+   manual-only. Labels: `feature-request` (`gh label create … --force`
+   first on a new repo). Push. Confirm Jeeves announced
+   `GIT issues SimonBarnett/<name> opened #N` on `#bobiverse`. If not,
    `python tools/bob_git_hook.py SimonBarnett/<name> --replay-missed`.
-   Tell the human the issue URL + SHA + the Jeeves line.
+   Tell the human the issue URLs + SHA + the Jeeves lines.
 
 6. **Stop for Plan seats.** Do not run `bob-job-loop` /
    `bob-build-dispatch` unless a build seat with the build pack is
@@ -130,6 +133,8 @@ Never cite `-Repo SimonBarnett/bobiverse` for how-to-plan harvest.
 - Restart IRC.
 - Stamp UAT.
 - Add `cursoragent` / `cursor[bot]` as collaborators.
+- File a child FR with **Testable** that names no CI check/command
+  (CAST IRON CI tests on every FR — see visionary).
 
 ## FR #24: headless Plan, seed FRs, stubs
 

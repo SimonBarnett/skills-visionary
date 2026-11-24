@@ -45,6 +45,16 @@ Poetry is not a target. If you cannot score it later, it is UNKNOWN.
 > map in the plan folder. Prefer Goal / Deliverables / Testable (or
 > What / Where / Evidence / Fix) bodies a junior model can execute
 > without re-planning the product.
+>
+> **CAST IRON  -  CI tests on every FR (operator 2026-11-24).**
+> Every child FR **Testable** section **must name the CI surface**: the
+> pytest module / pin test path, `npm test` script, GitHub Actions
+> workflow or **job name**, or other command that CI will run for this
+> slice. Deliverables must include adding or extending those tests when
+> they do not exist yet. **Fail-when:** Testable is only manual click /
+> prose with no CI check or command; implement PR lands without the
+> named CI evidence (MRB treats missing CI as FAIL). Digest parents are
+> go-gates only and do not need product CI Testable rows.
 
 ### New product
 
@@ -244,7 +254,12 @@ the data, never to this skill book. No secrets in exports or commits.
   after the operator approves filing, open **one GitHub issue per small
   FR draft** (Goal / Deliverables / Testable  -  sized for unpaid /
   non-frontier FR seats), **never one omnibus**; keep a draft-code ->
-  issue-number map in the plan folder.
+  issue-number map in the plan folder. **CAST IRON CI tests:** each
+  child Testable names the CI check/command (pytest path, workflow/job
+  name, `npm test`, …); Deliverables include add/extend those tests.
+  Fail-when Testable is manual-only or the implement PR has no named CI
+  evidence.
+
 - Multi-host public plan (bob.ntsa.uk and mcp.ntsa.uk) plus a visual system: file the first FR as the shared visual system and HTML mocks. Leave host-specific downloads, commands, and agent-download slices as unfiled drafts. Cross-repo mcp work stays on priority-mcp drafts, not a bobiverse omnibus.
 - If the operator says nobody knows about an old LAN port, plan a quiet removal. Do not write a deprecation brochure.
 - Market or currency hold: lock the gate in docs, then one small FR per held id that sets registry enabled false without deleting folders. Mark open enable issues and PRs hold / not-planned, and retarget enablement floor pins. Docs park uses Refs, not Closes. Do not copy the product keep/hold id list into this skill.
@@ -353,6 +368,9 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
 - End a turn with new skills only in chat/temp/`~/.grok` and no home PR.
 - File an **omnibus** FR (many independent slices in one issue)  -  CAST
   IRON FR #90; unpaid / non-frontier seats cannot safely carry those.
+- File a child FR whose **Testable** has **no CI check/command** (manual
+  prose only)  -  CAST IRON CI tests on every FR; name pytest path,
+  workflow/job, or equivalent command the implementer must green.
 - Create child FRs **before** the digest, or open a digest **without** `hold` / without `fr-digest`  -  CAST IRON VIS-G1 / FR #155 (digest first with both labels).
 - Park FRs **without** an **`fr-digest`** issue  -  CAST IRON; even a
   one-step park needs a digest so the operator can filter epics to release.

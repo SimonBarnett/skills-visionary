@@ -23,8 +23,31 @@ PR worker. TipForm **Plan** seats load **this pack only**
 
 ## Before anything else
 
+### CAST IRON — opening intake (ask first)
+
+At the **start** of a Plan session, before drafting a vision pack, parking,
+or `gh repo create`, ask the operator (unless the same turn already answers
+both clearly):
+
+1. **What are we building?** — one plain sentence of product intent (or the
+   change they want in the world).
+2. **New repo or feature request?** — create a **new** public
+   `SimonBarnett/<name>` repo, **or** write an FR against an **existing**
+   repo? If FR: **which `owner/repo`?**
+
+Do not assume new-product vs FR from vibe. Do not start `plan-create-repo`
+or an existing-repo gap analysis until path (2) is answered. Prefer a short
+multiple-choice ask when the harness supports it (`ask_user_question` /
+equivalent); otherwise ask in plain chat and wait.
+
+Skip the ask only when the operator already named the product intent **and**
+either “new repo” or an explicit existing `owner/repo` in that request.
+
+### Gates before park / create
+
 Refuse park / git-create / dispatch until:
 
+- Opening intake (above) is answered or clearly already present
 - Shape is LOCKED (service | website | app) or UNKNOWN
 - At least one success row has metric, target, how-measured, fail-when
   (or the whole Success section is UNKNOWN)
@@ -367,6 +390,9 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
 
 ## Do not
 
+- Jump into a vision pack, park, or `gh repo create` without the opening
+  intake (what we are building; new repo vs FR on which existing repo)
+  when those answers are missing.
 - Start park/create with no vision pack (new product or FR).
 - `gh repo create` on a feature-request path.
 - Invent instance URLs, secrets, or review PDFs.

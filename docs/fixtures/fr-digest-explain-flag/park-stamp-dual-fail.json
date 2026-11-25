@@ -1,0 +1,9 @@
+{
+  "theme": "dual-label fail fixture FR #253",
+  "labels": [
+    "digest",
+    "fr-digest",
+    "hold"
+  ],
+  "body": "Kind: fr-digest\nDigest: true\n\n**Docs:** docs/example.md\n\n## Vision\n\nProduct intent success criteria and out of scope for dual label fail fixture.\n\n## Children\n\n| id | issue |\n|---|---|\n| A | #1 |\n"
+}

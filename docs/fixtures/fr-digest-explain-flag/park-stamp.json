@@ -1,7 +1,6 @@
 {
   "theme": "Example FR digest go-gate park",
   "labels": [
-    "digest",
     "fr-digest",
     "hold",
     "feature-request"
@@ -11,7 +10,6 @@
     "number": 100,
     "title": "Digest: Example theme",
     "labels": [
-      "digest",
       "fr-digest",
       "hold",
       "feature-request"

@@ -1,11 +1,19 @@
 {
   "theme": "Fail-when linear chain without sequencing stamp",
-  "order": ["digest", "child-a", "child-b"],
+  "order": [
+    "digest",
+    "child-a",
+    "child-b"
+  ],
   "digest": {
     "id": "epic",
     "number": 100,
     "title": "Digest: Linear fail",
-    "labels": ["digest", "fr-digest", "hold", "feature-request"],
+    "labels": [
+      "fr-digest",
+      "hold",
+      "feature-request"
+    ],
     "kind": "fr-digest",
     "depends_on": "(none)"
   },
@@ -14,14 +22,18 @@
       "id": "child-a",
       "number": 101,
       "title": "A",
-      "labels": ["feature-request"],
+      "labels": [
+        "feature-request"
+      ],
       "depends_on": "#100"
     },
     {
       "id": "child-b",
       "number": 102,
       "title": "B forced after A",
-      "labels": ["feature-request"],
+      "labels": [
+        "feature-request"
+      ],
       "depends_on": "#100, #101",
       "body": "Depends-on: #100, #101\n"
     }

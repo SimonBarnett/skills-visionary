@@ -2,7 +2,7 @@
 """VIS-G4 / FR #190: digest body explains vision + docs link + Digest flag.
 
 Fail-when: digest is only a child list; missing Kind/Digest stamp; missing docs
-URL; missing digest/fr-digest label; digest/hold labels on a PR-shaped stamp.
+URL; missing fr-digest label; dual digest+fr-digest; digest/hold labels on a PR-shaped stamp.
 """
 from __future__ import annotations
 
@@ -99,8 +99,12 @@ def check_stamp(data: dict[str, Any]) -> list[str]:
         )
 
     labs = _labels(data)
-    if not (labs & {"digest", "fr-digest"}):
-        errs.append("missing Digest label: need label digest and/or fr-digest")
+    if "fr-digest" not in labs:
+        errs.append("missing Digest label: need label fr-digest (FR #253; do not use digest alone)")
+    if "digest" in labs and "fr-digest" in labs:
+        errs.append("dual Digest labels: remove digest; keep fr-digest only (FR #253)")
+    if "digest" in labs and "fr-digest" not in labs:
+        errs.append("legacy digest label without fr-digest: use fr-digest only (FR #253)")
 
     return errs
 

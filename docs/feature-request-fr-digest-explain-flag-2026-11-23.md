@@ -69,7 +69,7 @@ Other backlog IDs in this theme. Editing parked VIS-D*. VIS-G1 create-order mech
 ## LOCKED
 
 - One acceptance row
-- Label `digest` preferred; keep `fr-digest` for compatibility; `Kind: fr-digest` / `Digest: true` in body
+- Label `fr-digest` only (do not also add `digest`; FR #253); `Kind: fr-digest` / `Digest: true` in body
 - Vision summary + stable docs link required before Children table
 - Never stamp `digest` / `hold` on PRs
 

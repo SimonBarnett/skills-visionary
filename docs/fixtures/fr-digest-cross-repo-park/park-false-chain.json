@@ -4,7 +4,9 @@
     "repo": "SimonBarnett/bobiverse",
     "number": 9856,
     "title": "Digest",
-    "labels": ["digest", "fr-digest"],
+    "labels": [
+      "fr-digest"
+    ],
     "body_file": "digest-body-chain.md"
   },
   "children": [

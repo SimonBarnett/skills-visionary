@@ -17,7 +17,7 @@ the digest ticket itself.
 **Index:** docs/fr-index-fr-digest-go-gate-2026-11-21.md
 
 Digest go-gate for this batch. Children are not assignable until this
-issue is **unheld**. Labels at create: `digest` + `fr-digest` + `hold`.
+issue is **unheld**. Labels at create: `fr-digest` + `hold` (no `digest`).
 
 ## Children
 

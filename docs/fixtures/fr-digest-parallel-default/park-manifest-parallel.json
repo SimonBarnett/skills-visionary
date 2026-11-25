@@ -1,11 +1,19 @@
 {
   "theme": "Parallel default under digest",
-  "order": ["digest", "child-a", "child-b"],
+  "order": [
+    "digest",
+    "child-a",
+    "child-b"
+  ],
   "digest": {
     "id": "epic",
     "number": 100,
     "title": "Digest: Parallel theme",
-    "labels": ["digest", "fr-digest", "hold", "feature-request"],
+    "labels": [
+      "fr-digest",
+      "hold",
+      "feature-request"
+    ],
     "kind": "fr-digest",
     "depends_on": "(none)"
   },
@@ -14,14 +22,18 @@
       "id": "child-a",
       "number": 101,
       "title": "A: independent slice",
-      "labels": ["feature-request"],
+      "labels": [
+        "feature-request"
+      ],
       "depends_on": "#100"
     },
     {
       "id": "child-b",
       "number": 102,
       "title": "B: independent slice",
-      "labels": ["feature-request"],
+      "labels": [
+        "feature-request"
+      ],
       "depends_on": "#100"
     }
   ]

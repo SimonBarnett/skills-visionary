@@ -1,0 +1,3 @@
+## Lesson
+
+- Plan must stamp hold only on the parent fr-digest; dependents (implementation FRs and nested/phase digests) stay unheld; Depends-on parent blocks Jeeves dispatch visionary SKILL VIS-G1/G5 amend; skills-visionary PR #251; bobiverse repair...

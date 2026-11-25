@@ -35,11 +35,16 @@ public static class PlanRoot
             // Publish layout: launcher/out/PlanAgent.exe with plan-agent two levels up.
             yield return Path.GetFullPath(Path.Combine(exeDir, "..", "..", "plan-agent"));
             yield return Path.GetFullPath(Path.Combine(exeDir, "..", "plan-agent"));
+            // Bob install Pack layout (bobiverse #9661 / FR #226): vendor\plan\PlanAgent.exe
+            // → <install>\plan (AGENTS.md + .grok/skills). Bare double-click without TipForm --root.
+            yield return Path.GetFullPath(Path.Combine(exeDir, "..", "..", "plan"));
         }
         if (!string.IsNullOrWhiteSpace(cwd))
         {
             yield return Path.Combine(cwd, "plan-agent");
             yield return Path.GetFullPath(Path.Combine(cwd, "..", "plan-agent"));
+            // Same Pack layout when cwd is vendor\plan (explorer / Start-Process WorkingDirectory).
+            yield return Path.GetFullPath(Path.Combine(cwd, "..", "..", "plan"));
         }
     }
 

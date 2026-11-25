@@ -1,0 +1,3 @@
+## Lesson
+
+- Cross-repo Plan park used digest-of-digests (bobiverse epic held; nested webhook + priority-mcp digests unheld with Depends-on). Plan seat filing for multi-repo themes. bobiverse#9980 hold; #9981 and priority-mcp#811 unheld; children fea...

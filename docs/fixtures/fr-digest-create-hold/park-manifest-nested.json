@@ -1,10 +1,18 @@
 {
   "theme": "Nested digests must all start on hold",
-  "order": ["digest", "digest-phase-0", "child-a"],
+  "order": [
+    "digest",
+    "digest-phase-0",
+    "child-a"
+  ],
   "digest": {
     "id": "epic",
     "title": "Digest: Example epic",
-    "labels": ["digest", "fr-digest", "hold", "feature-request"],
+    "labels": [
+      "fr-digest",
+      "hold",
+      "feature-request"
+    ],
     "kind": "fr-digest",
     "depends_on": "(none)"
   },
@@ -12,7 +20,11 @@
     {
       "id": "digest-phase-0",
       "title": "Digest: Phase 0 scaffold",
-      "labels": ["digest", "fr-digest", "hold", "feature-request"],
+      "labels": [
+        "fr-digest",
+        "hold",
+        "feature-request"
+      ],
       "kind": "fr-digest",
       "depends_on": "#EPIC"
     }
@@ -21,7 +33,9 @@
     {
       "id": "child-a",
       "title": "EXAMPLE-A: first acceptance row",
-      "labels": ["feature-request"],
+      "labels": [
+        "feature-request"
+      ],
       "depends_on": "#PHASE0"
     }
   ]

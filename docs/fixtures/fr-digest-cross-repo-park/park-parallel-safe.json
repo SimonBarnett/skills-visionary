@@ -4,7 +4,10 @@
     "repo": "SimonBarnett/bobiverse",
     "number": 9856,
     "title": "Digest: Nested + cross-repo Depends-on",
-    "labels": ["digest", "fr-digest", "feature-request"],
+    "labels": [
+      "fr-digest",
+      "feature-request"
+    ],
     "body_file": "digest-body-parallel.md"
   },
   "children": [

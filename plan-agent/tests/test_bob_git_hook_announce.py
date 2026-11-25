@@ -46,6 +46,19 @@ def test_announce_seen_requires_jeeves_privmsg(tmp_path):
     assert hook.announce_seen("GIT ping SimonBarnett/missing", [log]) is None
 
 
+def test_fr228_announce_seen_accepts_lowercase_jeeves_nick(tmp_path):
+    log = tmp_path / "irc.log"
+    needle = "GIT ping SimonBarnett/jeeves-mcp"
+    log.write_text(
+        f":jeeves!~u@host PRIVMSG #bobiverse :{needle}\n",
+        encoding="utf-8",
+    )
+    hit = hook.announce_seen(needle, [log])
+    assert hit is not None
+    assert hit.lower().startswith(":jeeves!")
+    assert "PRIVMSG #bobiverse :" in hit
+
+
 def test_diagnose_nickname_reserved_when_log_is_only_collisions(tmp_path):
     log = tmp_path / "irc.log"
     lines = []

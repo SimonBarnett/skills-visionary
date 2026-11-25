@@ -151,6 +151,23 @@ def test_announce_seen_requires_jeeves_on_bobiverse(tmp_path):
     assert bgh.announce_seen(bgh.announce_needle("ping", REPO), [log]) is None
 
 
+def test_fr228_announce_seen_accepts_lowercase_jeeves_nick(tmp_path):
+    """Ergo nicks are case-insensitive; live chair logs as :jeeves! not :Jeeves!."""
+    log = tmp_path / "irc.log"
+    needle = "GIT ping SimonBarnett/jeeves-mcp"
+    log.write_text(
+        ":bob-x!~u@h PRIVMSG #bobiverse :GIT ping SimonBarnett/jeeves-mcp fake\n"
+        f":jeeves!~u@host PRIVMSG #bobiverse :{needle} Encourage flow. by SimonBarnett\n",
+        encoding="utf-8",
+    )
+    line = bgh.announce_seen(needle, [log])
+    assert line is not None
+    assert "PRIVMSG #bobiverse :" in line
+    assert needle in line
+    assert line.lower().startswith(":jeeves!")
+    assert bgh.announce_seen("GIT ping SimonBarnett/missing", [log]) is None
+
+
 def test_main_replays_pre_hook_issue_and_verifies_announce(tmp_path):
     log = tmp_path / "irc.log"
     log.write_text(

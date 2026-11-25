@@ -1,0 +1,3 @@
+## Lesson
+
+- Parked bobiverse held digest #10000 with children #10001-#10003 and docs PR #10004 Refs-only. plan/work/plan-20261125-174956; Format-BobTrayXaiWeeklyRow FR #7907 suffix; Get-BobTrayTitle #Bobiverse (mid). Operator locks --- Agents Cursor...

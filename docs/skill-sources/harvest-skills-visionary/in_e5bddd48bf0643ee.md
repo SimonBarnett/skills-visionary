@@ -1,0 +1,3 @@
+## Lesson
+
+- From bob install sparse worktree, root docs/ is excluded by .git/info/exclude /*. plan/work/*/repo-bobiverse docs park. gitcust park --- force-add under jeeves/docs/gitcust/; gh pr create needed -R and --head when cwd is not the branch t...

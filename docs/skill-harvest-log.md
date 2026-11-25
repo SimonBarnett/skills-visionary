@@ -275,3 +275,7 @@ amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
 | Lesson | Every fr-digest (epic and nested phase digests) must be created with label hold; VIS-G5 no-hold applies only to implementation children. |
 | Evidence | bobiverse nested park #9794-#9799 filed without hold were searched; fixed by adding hold. Operator: digests MUST start on hold. |
 | Books | visionary |
+
+## 2026-11-25 — CAST IRON parent-digest hold only
+
+Plan sets `hold` **only** on the **parent** `fr-digest`. Nested/phase digests and implementation children stay unheld; plain `Depends-on: #<parent>` blocks Jeeves dispatch. Evidence: unheld bobiverse #9794–#9799 and nondigest #9129–#9133/#9140/#9416; parents #9793/#9972 keep hold. Skill: visionary VIS-G1/G5 amend.

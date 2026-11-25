@@ -1,0 +1,3 @@
+## Lesson
+
+- Operator asked to add a requirement to an already-filed digest; chose amend existing child FR rather than new sibling. Plan park after issues exist. Amended priority-mcp#813 under digest #811; patched digest Vision/Children title same tu...

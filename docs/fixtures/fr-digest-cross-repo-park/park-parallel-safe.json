@@ -1,0 +1,28 @@
+{
+  "theme": "Cross-repo parallel under bobiverse digest",
+  "digest": {
+    "repo": "SimonBarnett/bobiverse",
+    "number": 9856,
+    "title": "Digest: Nested + cross-repo Depends-on",
+    "labels": ["digest", "fr-digest", "feature-request"],
+    "body_file": "digest-body-parallel.md"
+  },
+  "children": [
+    {
+      "id": "fr-a",
+      "repo": "SimonBarnett/bobiverse",
+      "number": 9857,
+      "title": "Walk Depends-on",
+      "depends_on": "SimonBarnett/bobiverse#9856",
+      "body": "Depends-on: SimonBarnett/bobiverse#9856\n"
+    },
+    {
+      "id": "fr-e",
+      "repo": "SimonBarnett/skills-visionary",
+      "number": 243,
+      "title": "Plan nested digests",
+      "depends_on": "SimonBarnett/bobiverse#9856",
+      "body": "Depends-on: SimonBarnett/bobiverse#9856\n"
+    }
+  ]
+}

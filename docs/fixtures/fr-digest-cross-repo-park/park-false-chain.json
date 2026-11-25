@@ -1,0 +1,28 @@
+{
+  "theme": "Fail-when unrelated siblings chained across repos",
+  "digest": {
+    "repo": "SimonBarnett/bobiverse",
+    "number": 9856,
+    "title": "Digest",
+    "labels": ["digest", "fr-digest"],
+    "body_file": "digest-body-chain.md"
+  },
+  "children": [
+    {
+      "id": "fr-e",
+      "repo": "SimonBarnett/skills-visionary",
+      "number": 243,
+      "title": "Plan nested",
+      "depends_on": "SimonBarnett/bobiverse#9856",
+      "body": "Depends-on: SimonBarnett/bobiverse#9856\n"
+    },
+    {
+      "id": "fr-f",
+      "repo": "SimonBarnett/skills-visionary",
+      "number": 244,
+      "title": "Cross-repo park forced after E",
+      "depends_on": "SimonBarnett/bobiverse#9856, SimonBarnett/skills-visionary#243",
+      "body": "Depends-on: SimonBarnett/bobiverse#9856, SimonBarnett/skills-visionary#243\n"
+    }
+  ]
+}

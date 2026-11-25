@@ -165,3 +165,6 @@ locally when they can.
 - VIS-G2 park stamp: every child body Depends-on:#digest and digest Children table lists each #N; prove with tools/check_fr_digest_children_stamp.py and format_fr_digest_children_stamp.py.
 - FIX CONFLICTING skills-visionary visionary SKILL: take main prose, re-pin tip-unique check tool + Do-not; rebuild catalog hashes
 - Committed mcp-catalog data/dag.json must include every catalog skill; CI check-dag then sync-dag + git diff --exit-code so Amplify sync cannot hide drift.
+<!-- harvest-tip:intake-in_6874daafa33e4903 -->
+- CAST IRON: Plan agent merges all docs PRs automatically without MRB; non-docs PRs keep normal MRB
+<!-- harvest-lessons-eof -->

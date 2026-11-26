@@ -287,3 +287,11 @@ Plan sets `hold` **only** on the **parent** `fr-digest`. Nested/phase digests an
 | Lesson | Parent Digest for a shared thin CLI lives on the CLI home repo (priority-mcp); bobiverse/airc gets a vendor nested Digest with Depends-on. Close consumer omnibus when Parent+D0 filed. Secrets only under C:\passwords / CredMan. agentic_fomprep is renamed/deprecated to priority-mcp. |
 | Evidence | Plan park priority-mcp#834/#835/#836/#837; closed bobiverse#6026; Depends-on bobiverse#9128 for airc relay; docs PR #833 merged. |
 | Books | visionary |
+
+## 2026-11-26 - Anti-omnibus = small FRs; ALWAYS file ALL Digests+FRs
+
+| Field | Value |
+|---|---|
+| Lesson | Anti-omnibus means small Goal/Deliverables/Testable FRs safe for non-frontier seats. After approve, ALWAYS create ALL nested Digests AND ALL child FRs the same turn; never treat anti-omnibus as permission to leave drafts. Patch every Digest Children table same turn. |
+| Evidence | Operator correction mid WCF verbs park (priority-mcp#834 tree + bobiverse#10025); Plan had deferred child FRs as "anti-omnibus"; corrected by filing #836-#858 + bobiverse#10026-#10029 and strengthening visionary CAST IRON. |
+| Books | visionary |

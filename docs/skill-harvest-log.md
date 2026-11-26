@@ -303,3 +303,11 @@ Plan sets `hold` **only** on the **parent** `fr-digest`. Nested/phase digests an
 | Lesson | Plan merges every docs/skill-doc PR in the same turn with no MRB and no CI wait. Use gh pr merge --squash --admin when branch protection requires checks. Never leave docs PRs on --auto. |
 | Evidence | Operator 2026-11-26 CAST IRON after skills-visionary harvest waited on CI; FR #252 amended. |
 | Books | visionary |
+
+## 2026-11-26 - Digest Children must be in the issue body
+
+| Field | Value |
+|---|---|
+| Lesson | After filing child FRs, patch the digest issue body Children table with real #N (gh issue edit). A comment-only Children stamp leaves the body as (later)/(pending) and looks like missing FRs. |
+| Evidence | bobiverse#10025 body still (later) while #10026-#10029 were open; operator flagged missing FRs; body patched. |
+| Books | visionary |

@@ -58,7 +58,7 @@ def test_fr190_check_rejects_pr_labels():
 def test_fr190_check_accepts_stamp():
     errs = chk.check_stamp(
         {
-            "labels": ["digest", "fr-digest", "hold"],
+            "labels": ["fr-digest", "hold"],
             "body": (
                 "Kind: fr-digest\n"
                 "Digest: true\n\n"
@@ -72,10 +72,27 @@ def test_fr190_check_accepts_stamp():
     assert errs == []
 
 
+def test_fr190_check_rejects_dual_digest_labels():
+    errs = chk.check_stamp(
+        {
+            "labels": ["digest", "fr-digest", "hold"],
+            "body": (
+                "Kind: fr-digest\n"
+                "Digest: true\n\n"
+                "## Vision\n\n"
+                "Product intent and success criteria with out of scope noted clearly.\n\n"
+                "**Docs:** https://example.test/docs/vision.md\n"
+            ),
+        }
+    )
+    assert any("dual Digest labels" in e for e in errs)
+
+
 def test_fr190_fixture_pack_passes_cli():
     assert (FIXTURE / "README.md").is_file()
     stamp = json.loads(_text(FIXTURE / "park-stamp.json"))
-    assert "digest" in stamp["labels"]
+    assert "fr-digest" in stamp["labels"]
+    assert "digest" not in stamp["labels"]
     proc = subprocess.run(
         [sys.executable, str(TOOL), str(FIXTURE / "park-stamp.json")],
         cwd=str(ROOT),
@@ -103,9 +120,10 @@ def test_fr190_format_body_and_labels():
     assert "## Vision" in body
     assert "**Docs:**" in body
     assert "| #3 |" in body
-    assert "digest" in fmt.digest_create_labels()
-    assert "fr-digest" in fmt.digest_create_labels()
-    assert "hold" in fmt.digest_create_labels()
+    labels = fmt.digest_create_labels()
+    assert "fr-digest" in labels
+    assert "hold" in labels
+    assert "digest" not in labels
 
 
 def test_fr190_visionary_cast_iron_vis_g4():
@@ -130,4 +148,5 @@ def test_fr190_cli_format_labels():
     )
     assert proc.returncode == 0, proc.stderr
     labs = json.loads(proc.stdout)
-    assert "digest" in labs and "fr-digest" in labs
+    assert "fr-digest" in labs and "hold" in labs
+    assert "digest" not in labs

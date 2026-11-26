@@ -60,23 +60,24 @@ Refuse park / git-create / dispatch until:
 Poetry is not a target. If you cannot score it later, it is UNKNOWN.
 
 > **CAST IRON  -  Anti-omnibus FRs (FR #90) + held digest file-all.**
-> Fleet FR seats are often unpaid / non-frontier models. The Plan Agent
-> **must** file **small, well-documented** GitHub issues that one such
-> seat can finish in a single job: one Goal, concrete Deliverables, and
-> Testable acceptance. **Never** one omnibus issue that bundles many
-> independent slices. Split the pack; keep a draft-code -> issue-number
-> map in the plan folder. Prefer Goal / Deliverables / Testable (or
-> What / Where / Evidence / Fix) bodies a junior model can execute
-> without re-planning the product.
+> **Anti-omnibus means small FRs** (one Goal / Deliverables / Testable)
+> that unpaid / **non-frontier** seats can finish in a single job —
+> **not** “file fewer issues” and **not** “defer FRs as drafts”.
+> **Never** one omnibus issue that bundles many independent slices.
 >
-> **Same turn after approve:** open a **held** `Digest:` parent
-> (`fr-digest` + `hold`, `Depends-on: (none)`), then file **every**
-> prepared Phase-0 / backlog slice as its own child with plain
-> `Depends-on: #<digest>` plus prior-slice `Depends-on: #N` /
-> `owner/repo#N`. That stops workers NACK/GIVEUP-wasting tokens on
-> work that cannot run yet. **Do not** default to filing only FR-A and
-> leaving the rest as unfiled drafts. Unfiled drafts are only when the
-> operator explicitly says park-as-drafts / file-one.
+> **Same turn after approve — ALWAYS file ALL Digests AND ALL FRs:**
+> 1. Held parent `Digest:` (`fr-digest` + `hold`).
+> 2. **Every** nested/phase Digest (no `hold` on nested).
+> 3. **Every** child FR under those Digests (small, CI Testable named).
+> Plain `Depends-on: #<digest>` (+ prior-slice / `owner/repo#N`) on each
+> child. Patch every Digest Children table the same turn.
+>
+> **Fail-when:** filing only D0 / FR-A and leaving Digests or FRs as
+> unfiled drafts; treating “anti-omnibus” as permission to defer.
+> Unfiled drafts **only** when the operator explicitly says
+> park-as-drafts / file-one (rare). Prefer Goal / Deliverables / Testable
+> bodies a junior model can execute without re-planning the product.
+> Keep a draft-code -> issue-number map in the plan folder.
 >
 > **CAST IRON  -  CI tests on every FR (operator 2026-11-24).**
 > Every child FR **Testable** section **must name the CI surface**: the
@@ -305,7 +306,7 @@ the data, never to this skill book. No secrets in exports or commits.
 - When docs/mocks/home.html already exists for another surface, park the new wireframes in docs/mocks/<slug>/home.html, empty.html, and error.html. Point validate-vision-pack.py --mocks-dir at that subfolder. Do not overwrite the existing trio. Before filing, read open issues that share the UI noun and compare the Goal line. A page required to drop a field is a different slice from a page that must show that field. Do not merge those drafts into one issue.
 - When the owner replaces a published hostname after feature issues are open, close every still-open issue that requires the old hostname or forbids the new path, and file one net-new slice. Comment each closed issue with the successor number. If the old hostname issue has already merged, comment it and leave it closed. Amend the parked vision in a docs pull request that uses Refs so the new slice stays open. Do not leave the old URL issue and the new path issue both open. Do not reopen a merged hostname issue.
 - When the operator asks for anti-omnibus filing and one open issue already bundles several testable deliverables, file one issue per deliverable in that turn. Comment the bundle with every successor number, then close the bundle. Do not leave the bundle and the slices both open. Park the mirrors in a docs pull request that uses Refs so the slices stay open.
-- **CAST IRON file-all under held digest (operator 2026-11-24):** after approve, default is file **every** prepared slice the same turn under a held `Digest:` (`fr-digest`+`hold`). Still one issue per slice — never one omnibus body. Each child: plain `Depends-on: #<digest>` plus prior-slice Depends-on so the chair blocks offer until prerequisites close (no token-waste NACK). Cross-repo children use `Depends-on: owner/repo#digest`. Patch the digest Children table the same turn. **Fail-when:** filing only FR-A and leaving Phase-0 backlog as unfiled drafts. Unfiled drafts only when the operator explicitly says park-as-drafts / file-one. Open with `gh issue create` or `Report-BobiverseIntakeIssue.ps1 -Kind fr -Repo owner/name` (unique IdempotencyKey). Do not copy the filed issue map into this skill.
+- **CAST IRON file-all under held digest (operator 2026-11-24 + 2026-11-26):** after approve, same turn file **every nested Digest** and **every child FR** under a held parent `Digest:` (`fr-digest`+`hold`). Anti-omnibus = **small** Goal/Deliverables/Testable FRs for non-frontier seats — **always create all Digests and all FRs**; never defer FRs because the pack is large. Each child: plain `Depends-on: #<digest>` plus prior-slice Depends-on (no token-waste NACK). Cross-repo: `Depends-on: owner/repo#digest`. Patch every Digest Children table the same turn. **Fail-when:** only D0/FR-A filed; Digests without their FRs; “anti-omnibus” used to leave drafts. Unfiled drafts only when operator explicitly says park-as-drafts / file-one. Open with `gh issue create` or intake `-Kind fr`. Do not copy the filed issue map into this skill.
 - Shared theme across several product repos: one issue per acceptance row **per repo**, plus an index markdown that maps IDs to issue URLs after create. Cross-link depends-on. Park-only until the operator says dispatch. Success how-measured must pass `tools/validate-vision-pack.py` (observable path/command); shared `docs/mocks/<slug>/` with `--mocks-dir` when Shape is LOCKED.
 - Plan MCP skills load from `https://plan.ntsa.uk/mcp` (`plan-mcp-setup`). Plan distributable (exe/MSI/icon) FRs park on `SimonBarnett/skills-visionary`; tray/bob-ear consume FRs park on `SimonBarnett/bobiverse`.
 - **Worker skill vs Plan skill home (CAST IRON):** playbooks that **Bob FR/MRB workers** load at job time (external APIs, shop IRC, search-while-writing) park under the **product** repo skill tree (e.g. `SimonBarnett/bobiverse` → `bob/.grok/skills/…`). Do **not** put those worker skills in `skills-visionary`. Plan seats own vision packs, digests, Depends-on, and how-to-plan harvests only. If the operator says “worker needs X”, file the FR on the worker’s home repo, still with an **`fr-digest`**.
@@ -364,7 +365,8 @@ the data, never to this skill book. No secrets in exports or commits.
   or with the operator's merged PR list, before writing the gap.
   Read a path with `git show origin/main:<path>` or a disposable worktree.
   Do not ff-merge `origin/main` into an unrelated local feature branch.
-- New FR packs name the product repo `SimonBarnett/priority-mcp`. `gh --repo SimonBarnett/agentic_fomprep` still resolves. A local git remote may still say `agentic_fomprep.git`.
+- New FR packs name the product repo `SimonBarnett/priority-mcp`. `gh --repo SimonBarnett/agentic_fomprep` still resolves. A local git remote may still say `agentic_fomprep.git`. Treat `agentic_fomprep` as **deprecated / renamed** to `priority-mcp` — do not file new Digests or FRs under the old name.
+- **CLI source-of-truth vs vendor consumer (how-to-plan):** when one repo owns a thin CLI and another only vendors it (example: Priority WCF verbs — Parent Digest + CLI on `priority-mcp`, airc vendor transport Digest on `bobiverse`), put the **held Parent Digest on the CLI home**. Consumer work is a **nested Digest** with `Depends-on: owner/repo#parent` (and any host Digests such as AIRC-HIDE). Close a superseded omnibus on the consumer repo when Parent + first nested (D0) exist on the CLI home — do not keep both the omnibus and the Digest tree open. Secrets for connection/token files stay under `C:\passwords` (outside git) or CredMan; never print or commit passwords.
 - When `docs/fr/ISSUED.tsv` already indexes an older pack, write the new
   index at `docs/fr/<slug>/ISSUED.tsv`. Do not replace the root file.
 - When a per-machine installer offers a per-user CLI, and two CLIs can
@@ -414,8 +416,9 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
 - End a turn with new skills only in chat/temp/`~/.grok` and no home PR.
 - File an **omnibus** FR (many independent slices in one issue)  -  CAST
   IRON FR #90; unpaid / non-frontier seats cannot safely carry those.
-- Leave prepared Phase-0 / backlog slices as **unfiled drafts** after
-  approve while filing only FR-A  -  CAST IRON file-all under held digest
+- Leave prepared Digests or FRs as **unfiled drafts** after approve
+  (filing only D0 / FR-A, or “anti-omnibus so defer”)  -  CAST IRON
+  file-all: **always create all Digests and all small FRs** same turn
   (unless the operator explicitly says park-as-drafts / file-one).
 - File a child FR whose **Testable** has **no CI check/command** (manual
   prose only)  -  CAST IRON CI tests on every FR; name pytest path,

@@ -364,7 +364,8 @@ the data, never to this skill book. No secrets in exports or commits.
   or with the operator's merged PR list, before writing the gap.
   Read a path with `git show origin/main:<path>` or a disposable worktree.
   Do not ff-merge `origin/main` into an unrelated local feature branch.
-- New FR packs name the product repo `SimonBarnett/priority-mcp`. `gh --repo SimonBarnett/agentic_fomprep` still resolves. A local git remote may still say `agentic_fomprep.git`.
+- New FR packs name the product repo `SimonBarnett/priority-mcp`. `gh --repo SimonBarnett/agentic_fomprep` still resolves. A local git remote may still say `agentic_fomprep.git`. Treat `agentic_fomprep` as **deprecated / renamed** to `priority-mcp` — do not file new Digests or FRs under the old name.
+- **CLI source-of-truth vs vendor consumer (how-to-plan):** when one repo owns a thin CLI and another only vendors it (example: Priority WCF verbs — Parent Digest + CLI on `priority-mcp`, airc vendor transport Digest on `bobiverse`), put the **held Parent Digest on the CLI home**. Consumer work is a **nested Digest** with `Depends-on: owner/repo#parent` (and any host Digests such as AIRC-HIDE). Close a superseded omnibus on the consumer repo when Parent + first nested (D0) exist on the CLI home — do not keep both the omnibus and the Digest tree open. Secrets for connection/token files stay under `C:\passwords` (outside git) or CredMan; never print or commit passwords.
 - When `docs/fr/ISSUED.tsv` already indexes an older pack, write the new
   index at `docs/fr/<slug>/ISSUED.tsv`. Do not replace the root file.
 - When a per-machine installer offers a per-user CLI, and two CLIs can

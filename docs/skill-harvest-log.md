@@ -279,3 +279,11 @@ amplify.yml / appRoot / nvm / npm / apps/ / tests/ literals.
 ## 2026-11-25 — CAST IRON parent-digest hold only
 
 Plan sets `hold` **only** on the **parent** `fr-digest`. Nested/phase digests and implementation children stay unheld; plain `Depends-on: #<parent>` blocks Jeeves dispatch. Evidence: unheld bobiverse #9794–#9799 and nondigest #9129–#9133/#9140/#9416; parents #9793/#9972 keep hold. Skill: visionary VIS-G1/G5 amend.
+
+## 2026-11-26 - Cross-repo CLI Digest home + C:\passwords
+
+| Field | Value |
+|---|---|
+| Lesson | Parent Digest for a shared thin CLI lives on the CLI home repo (priority-mcp); bobiverse/airc gets a vendor nested Digest with Depends-on. Close consumer omnibus when Parent+D0 filed. Secrets only under C:\passwords / CredMan. agentic_fomprep is renamed/deprecated to priority-mcp. |
+| Evidence | Plan park priority-mcp#834/#835/#836/#837; closed bobiverse#6026; Depends-on bobiverse#9128 for airc relay; docs PR #833 merged. |
+| Books | visionary |

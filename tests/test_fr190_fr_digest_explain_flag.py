@@ -148,4 +148,5 @@ def test_fr190_cli_format_labels():
     )
     assert proc.returncode == 0, proc.stderr
     labs = json.loads(proc.stdout)
-    assert "digest" in labs and "fr-digest" in labs
+    assert "fr-digest" in labs and "hold" in labs
+    assert "digest" not in labs

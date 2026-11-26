@@ -324,7 +324,7 @@ the data, never to this skill book. No secrets in exports or commits.
 
 - **CAST IRON — fr-digest label only (FR #253 / operator 2026-11-25):** Plan digest issues use label **`fr-digest` only**. Do **not** also add `digest` (duplication). Parent: `fr-digest` + `hold` (+ `feature-request` when used). Nested digests: `fr-digest` without `hold`. Same-turn repair: if both labels were stamped, remove `digest` and keep `fr-digest`. Prove with `python tools/check_fr_digest_explain_flag.py` (requires `fr-digest`, rejects dual `digest`+`fr-digest`). Fail-when: Plan dual-stamps `digest` and `fr-digest` on a digest issue.
 - **CAST IRON — installation FRs vs coding (operator 2026-11-25 / FR #267):** An FR **may** specify **installation**. An **installation FR** MUST NOT contain **coding tasks that do not need to be machine-pinned**. Keep install/ops/host steps (fleet install, service restart, pin/`require_machine`/`needs-<machine>` live proof) in the installation issue. Put portable code/docs/tests in a **separate** child under the same digest (usually unpinned / any seat). When order matters: code child first, installation child `Depends-on: #<code>`. Fail-when: one FR mixes any-seat coding with machine-pinned install work.
-- **CAST IRON — merge all docs PRs automatically (FR #252 / operator 2026-11-25):** After Plan opens a **docs** PR (vision park, FR index, mocks, skill-doc park, README/docs-only amend), Plan **merges it automatically** without creating or waiting for MRB. Applies to **every** Plan docs PR in the session. Non-docs product/code PRs keep normal MRB when required. Fail-when: Plan leaves docs park PRs open for MRB, or claims the no-MRB exception for non-docs tips.
+- **CAST IRON — merge all docs PRs automatically without CI (FR #252 / operator 2026-11-25 + 2026-11-26):** After Plan opens a **docs** PR (vision park, FR index, mocks, skill-doc park, README/docs-only amend, how-to-plan harvest), Plan **merges it in the same turn** — **no MRB**, **no waiting for CI**, **no `--auto`**. Use `gh pr merge <n> --squash --admin` (or repo default + `--admin`) when branch protection requires status checks. Applies to **every** Plan docs/skill-doc PR in the session. Non-docs product/code PRs keep normal CI + MRB when required. Fail-when: Plan leaves docs PRs open for CI/MRB/operator merge; uses `--auto` and walks away; or claims the no-CI exception for non-docs tips.
 - **CAST IRON — hold only on the parent digest (operator 2026-11-25):**
  Plan **must** set `hold` **only** on the **parent** `fr-digest`. Dependent issues (implementation FRs **and** nested/phase digests) **do not** get `hold`. Plain `Depends-on: #<parent-digest>` is the dispatch gate — Jeeves must not offer/assign while that Depends-on target is OPEN/held. Fail-when: Plan stamps `hold` on every child or on nested digests “because they are digests”; or removes Depends-on and relies on child `hold` alone.
 - **Create parent fr-digest on hold first (VIS-G1 / FR #155):** at every batch park, open the **parent** digest with labels `fr-digest` + `hold` **before** any child issue. Prove with `python tools/check_fr_digest_create_hold.py docs/fixtures/fr-digest-create-hold/park-manifest.json` (fixture under `docs/fixtures/fr-digest-create-hold/`). Fail-when: children before digest, or **parent** digest without hold/fr-digest. Nested digests created later are dependents: `fr-digest` OK, **`hold` forbidden** by default.
@@ -351,10 +351,12 @@ the data, never to this skill book. No secrets in exports or commits.
   `origin/main` (not the dirty local clone), commit docs only, reference
   the implementation issues with `Refs #N` (never `Closes`), push a
   branch, `gh pr create`. **CAST IRON (FR #252):** Plan **merges all docs
-  PRs automatically** (squash or repo default) **without** an MRB job.
-  Covers every Plan docs PR in the session (park, index, mocks, skill-doc
-  amend), not only the first. Non-docs product/code PRs keep normal MRB
-  when the fleet requires it. The code FRs stay open.
+  PRs in the same turn** (squash or repo default) **without** MRB and
+  **without waiting for CI** — `gh pr merge --squash --admin` when
+  protection blocks. Covers every Plan docs PR in the session (park,
+  index, mocks, skill-doc amend), not only the first. Non-docs
+  product/code PRs keep normal CI + MRB when the fleet requires it. The
+  code FRs stay open.
 - Before the status reply, re-query each filed issue. A still-open line
   written at create time goes stale when workers merge the first slices
   in that window. `Refs` on the docs park does not keep an issue open
@@ -428,7 +430,7 @@ A tip whose only file is `docs/intake-harvest` never enters review. To unblock a
   one-step park needs a digest so the operator can filter epics to release.
 - Mix **portable coding** (any-seat code/docs/tests) into an **installation** FR that needs machine pin / host ops  -  CAST IRON FR #267; split install vs code children under the digest.
 - Dual-stamp digest issues with both `digest` and `fr-digest`  -  CAST IRON FR #253; use **`fr-digest` only**.
-- Leave Plan **docs** PRs open for MRB / operator merge  -  CAST IRON FR #252; merge all docs PRs automatically without MRB (non-docs keep normal MRB).
+- Leave Plan **docs** PRs open for CI / MRB / operator merge, or use `--auto` and wait  -  CAST IRON FR #252; merge all docs PRs same turn with `--admin` when needed (non-docs keep normal CI + MRB).
 - Put `hold` on **dependent** issues
  (implementation FRs or nested/phase digests) when they already `Depends-on: #<parent-digest>`  -  CAST IRON operator 2026-11-25 / VIS-G5; **only the parent digest** gets `hold`; Depends-on blocks Jeeves dispatch. Run `check_fr_digest_no_double_park.py`.
 - Park an FR **without** a Depends-on line  -  CAST IRON VIS-D4 / FR #150;

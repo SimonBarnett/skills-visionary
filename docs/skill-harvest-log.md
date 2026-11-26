@@ -295,3 +295,11 @@ Plan sets `hold` **only** on the **parent** `fr-digest`. Nested/phase digests an
 | Lesson | Anti-omnibus means small Goal/Deliverables/Testable FRs safe for non-frontier seats. After approve, ALWAYS create ALL nested Digests AND ALL child FRs the same turn; never treat anti-omnibus as permission to leave drafts. Patch every Digest Children table same turn. |
 | Evidence | Operator correction mid WCF verbs park (priority-mcp#834 tree + bobiverse#10025); Plan had deferred child FRs as "anti-omnibus"; corrected by filing #836-#858 + bobiverse#10026-#10029 and strengthening visionary CAST IRON. |
 | Books | visionary |
+
+## 2026-11-26 - Merge docs PRs without waiting for CI
+
+| Field | Value |
+|---|---|
+| Lesson | Plan merges every docs/skill-doc PR in the same turn with no MRB and no CI wait. Use gh pr merge --squash --admin when branch protection requires checks. Never leave docs PRs on --auto. |
+| Evidence | Operator 2026-11-26 CAST IRON after skills-visionary harvest waited on CI; FR #252 amended. |
+| Books | visionary |

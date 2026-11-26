@@ -319,3 +319,12 @@ Plan sets `hold` **only** on the **parent** `fr-digest`. Nested/phase digests an
 | Lesson | File the child FR on the digest the operator named (that repo); patch digest body Children; re-query the body to confirm the new #N row. Do not park airc/bobiverse install FRs on priority-mcp because the session was mid another epic. |
 | Evidence | Operator: airc on bobiverse, not priority-mcp; filed AIRC-HIDE-06 #10030 under #9128; first Children body edit missed the row until rewrite + re-query. |
 | Books | visionary |
+
+
+## 2026-11-26 - ask.ntsa.uk cross-repo park (no airc)
+
+| Field | Value |
+|---|---|
+| Lesson | New product ask.ntsa.uk: Parent Digest + app folder on priority-mcp; Jeeves webhook nested Digest on bobiverse; Depends-on bobiverse#9143 (BOB-SOFA); web.config holds model+Medatech URL+creds (example only in git); file-all Digests+FRs; no airc. |
+| Evidence | priority-mcp#860–#885 + docs PR #886; bobiverse#10031–#10034 + docs #10036. |
+| Books | visionary |

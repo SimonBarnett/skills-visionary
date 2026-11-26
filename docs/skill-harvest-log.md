@@ -311,3 +311,11 @@ Plan sets `hold` **only** on the **parent** `fr-digest`. Nested/phase digests an
 | Lesson | After filing child FRs, patch the digest issue body Children table with real #N (gh issue edit). A comment-only Children stamp leaves the body as (later)/(pending) and looks like missing FRs. |
 | Evidence | bobiverse#10025 body still (later) while #10026-#10029 were open; operator flagged missing FRs; body patched. |
 | Books | visionary |
+
+## 2026-11-26 - Operator-named digest + re-query Children body
+
+| Field | Value |
+|---|---|
+| Lesson | File the child FR on the digest the operator named (that repo); patch digest body Children; re-query the body to confirm the new #N row. Do not park airc/bobiverse install FRs on priority-mcp because the session was mid another epic. |
+| Evidence | Operator: airc on bobiverse, not priority-mcp; filed AIRC-HIDE-06 #10030 under #9128; first Children body edit missed the row until rewrite + re-query. |
+| Books | visionary |

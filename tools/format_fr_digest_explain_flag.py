@@ -2,8 +2,9 @@
 """VIS-G4 / FR #190: build digest issue body with vision summary + docs + Digest flag.
 
 Plan park uses this for the digest GitHub issue body (intake -Body / gh issue create).
-Labels at create: digest + fr-digest + hold (+ feature-request when the repo uses it).
-Never stamp digest/hold on PRs.
+Labels at create: fr-digest + hold (+ feature-request when the repo uses it).
+FR #253: fr-digest only — never dual-stamp digest + fr-digest. Never stamp
+digest/hold on PRs.
 """
 from __future__ import annotations
 
@@ -22,7 +23,7 @@ except Exception:  # pragma: no cover - optional during partial trees
     format_children_table = None  # type: ignore
 
 
-DIGEST_CREATE_LABELS = ("digest", "fr-digest", "hold", "feature-request")
+DIGEST_CREATE_LABELS = ("fr-digest", "hold", "feature-request")
 
 
 def format_digest_issue_body(
@@ -59,7 +60,7 @@ def format_digest_issue_body(
         f"**Index:** {index_url}",
         "",
         "Digest go-gate for this batch. Children are not assignable until this",
-        "issue is **unheld**. Labels at create: `digest` + `fr-digest` + `hold`.",
+        "issue is **unheld**. Labels at create: `fr-digest` + `hold` (FR #253: no `digest`).",
         "",
     ]
     if children_rows is not None and format_children_table is not None:

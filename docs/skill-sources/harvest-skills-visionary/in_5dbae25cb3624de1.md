@@ -1,0 +1,3 @@
+## Lesson
+
+- Parked SimonBarnett/bobiverse Weights New Digest as held fr-digest #9991 with children #9992-#9996 and docs PR #9997 Refs-only. Plan seat C:\ai\bob\plan\work\plan-20261125-153552; visionary anti-omnibus + VIS-G5 hold-only-on-parent. Live...

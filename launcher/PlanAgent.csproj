@@ -18,5 +18,7 @@
     <DebugType>none</DebugType>
     <!-- Keep InformationalVersion exactly as stamped by build.ps1 / CI (no +dirty sha append). -->
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <!-- FR #281: vendored PlanAgent.exe carries the GANTT icon at release -->
+    <ApplicationIcon>..\apps\plan_agent\assets\plan-gantt.ico</ApplicationIcon>
   </PropertyGroup>
 </Project>

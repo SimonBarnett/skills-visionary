@@ -75,6 +75,11 @@ jobs:
           dotnet restore launcher.Tests/PlanAgent.Tests.csproj
           dotnet test launcher.Tests/PlanAgent.Tests.csproj -c Release --no-restore
 
+      - name: Verify PlanAgent.exe embeds GANTT icon (FR #281)
+        run: |
+          pip install pefile
+          python tools/check_pe_icon_resource.py launcher/out/PlanAgent.exe
+
       - name: Check --version and --smoke
         shell: pwsh
         env:

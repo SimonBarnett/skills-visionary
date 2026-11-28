@@ -19,6 +19,8 @@ def test_fr153_launcher_project_pins():
     assert "PublishSingleFile" in text
     assert "SelfContained" in text
     assert "win-x64" in text
+    assert "ApplicationIcon" in text
+    assert "plan-gantt.ico" in text
     assert (LAUNCHER / "Program.cs").is_file()
     assert (LAUNCHER / "PlanRoot.cs").is_file()
     assert (LAUNCHER / "Get-LauncherReleaseVersion.ps1").is_file()

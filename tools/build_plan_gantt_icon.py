@@ -1,8 +1,6 @@
 """VIS-06 / FR #281: Plan Agent GANTT icon (ICO + PNG) from checked-in source art."""
 from __future__ import annotations
 
-import io
-import struct
 import sys
 from pathlib import Path
 
@@ -27,26 +25,6 @@ def resize_master(master: Image.Image, size: int) -> Image.Image:
     return master.resize((size, size), Image.Resampling.LANCZOS)
 
 
-def write_ico(path: Path, images: list[Image.Image]) -> None:
-    """PNG-compressed multi-size ICO (Windows-friendly)."""
-    entries: list[tuple[int, int, int, int, bytes]] = []
-    offset = 6 + 16 * len(images)
-    for im in images:
-        buf = io.BytesIO()
-        im.save(buf, format="PNG")
-        data = buf.getvalue()
-        w, h = im.size
-        entries.append((0 if w >= 256 else w, 0 if h >= 256 else h, len(data), offset, data))
-        offset += len(data)
-    out = bytearray()
-    out += struct.pack("<HHH", 0, 1, len(entries))
-    for w, h, size, off, _ in entries:
-        out += struct.pack("<BBBBHHII", w, h, 0, 0, 1, 32, size, off)
-    for *_, data in entries:
-        out += data
-    path.write_bytes(out)
-
-
 def main(argv: list[str] | None = None) -> int:
     del argv
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -55,7 +33,8 @@ def main(argv: list[str] | None = None) -> int:
     ico = OUT_DIR / "plan-gantt.ico"
     png = OUT_DIR / "plan-gantt.png"
     images[-1].save(png)
-    write_ico(ico, images)
+    # BMP-style ICO so .NET ApplicationIcon (PlanAgent.exe) embeds RT_GROUP_ICON (FR #281).
+    master.save(ico, format="ICO", sizes=[(s, s) for s in SIZES])
     print(f"source {SOURCE} ({SOURCE.stat().st_size} bytes)")
     print(f"wrote {ico} ({ico.stat().st_size} bytes)")
     print(f"wrote {png} ({png.stat().st_size} bytes)")

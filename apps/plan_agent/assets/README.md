@@ -6,6 +6,8 @@
 | `plan-gantt.ico` | Windows exe / systray (16–256 px) |
 | `plan-gantt.png` | Docs / landing (256 px) |
 
+`plan-gantt.ico` uses BMP-style entries so `PlanAgent.csproj` `ApplicationIcon` embeds in release `PlanAgent.exe` (FR #281).
+
 Rebuild derived icons from the checked-in source:
 
 ```text

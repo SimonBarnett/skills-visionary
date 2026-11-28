@@ -1,6 +1,6 @@
 # Plan Agent launcher
 
-`PlanAgent.exe` is a Windows console launcher for the Plan seat. It mirrors
+`PlanAgent.exe` is a Windows console launcher for the Plan seat (embedded GANTT icon from `apps/plan_agent/assets/plan-gantt.ico`, FR #281). It mirrors
 SimonBarnett/priority-mcp `PriorityAgent.exe` conventions (net8 self-contained
 single-file win-x64, Version / FileVersion / InformationalVersion, `--version`,
 `--smoke`, `--dry-run`, `--help`) without Priority ERP / WCF / customer

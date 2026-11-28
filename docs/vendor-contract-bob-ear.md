@@ -15,10 +15,11 @@ download hosts or exe names in tray/MSI work.
 |-------|-------|
 | Product | Plan Agent |
 | Vendor repo | `SimonBarnett/skills-visionary` |
-| Windows exe (product binary) | `PlanAgent.exe` (VIS-01) |
+| Windows exe (product binary) | `PlanAgent.exe` (launcher publish; embeds `plan-gantt.ico`, FR #281) |
 | Windows installer | `PlanAgent.msi` (VIS-07) |
 | Release tag prefix | `plan-v*` (example: `plan-v1.0.0`) |
-| Systray / docs icon | `apps/plan_agent/assets/plan-gantt.ico` (VIS-06) |
+| Systray / docs icon | `apps/plan_agent/assets/plan-gantt.ico` (derived from `plan-gantt-source.png`, FR #281) |
+| Docs / marketing PNG | `apps/plan_agent/assets/plan-gantt.png` (256 px); master `plan-gantt-source.png` (512 px) |
 
 ## URLs (canonical)
 

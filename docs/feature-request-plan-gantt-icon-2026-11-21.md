@@ -1,6 +1,7 @@
 # Feature request: Plan GANTT icon asset
 
 **Repo:** `SimonBarnett/skills-visionary`  
+**Issue:** [#281](https://github.com/SimonBarnett/skills-visionary/issues/281) (supersedes procedural VIS-06 art)  
 **ID:** `VIS-06`  
 **Phase:** `P4`  
 **Date:** 2026-11-21  

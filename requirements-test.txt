@@ -1,0 +1,3 @@
+# CI / local pytest helpers (launcher icon gate, icon rebuild)
+pefile>=2023.2.7
+Pillow>=10.0.0
